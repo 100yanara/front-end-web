@@ -19,15 +19,13 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     header_main: {
       display: 'flex',
-      height: '70px',
       alignItems: 'center',
-      padding: '15px',
+      padding: '10px',
       [theme.breakpoints.up('xs')]: {
         width: '100%',
       },
       [theme.breakpoints.up('lg')]: {
         width: '85%',
-        padding: '0',
       },
     },
     header_main_logocontainer: {
@@ -89,13 +87,12 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     header_nav: {
-      padding: '15px',
+      padding: '10px',
       [theme.breakpoints.up('xs')]: {
         width: '100%',
       },
       [theme.breakpoints.up('lg')]: {
         width: '85%',
-        padding: '0',
       },
     },
     header_nav_ul: {
@@ -106,7 +103,6 @@ const useStyles = makeStyles((theme: Theme) =>
     header_nav_li: {
       listStyleType: 'none',
       width: '70px',
-      height: '30px',
     },
   })
 );
