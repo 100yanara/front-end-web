@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import App from 'components/App';
 import * as serviceWorker from './serviceWorker';
+import './i18n';
 
 import { Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
@@ -39,8 +40,10 @@ theme = responsiveFontSizes(theme);
 ReactDOM.render(
   <Router history={history}>
     <ThemeProvider theme={theme}>
-      <App />
-      <CssBaseline />
+      <Suspense fallback={<div>Lodading</div>}>
+        <App />
+        <CssBaseline />
+      </Suspense>
     </ThemeProvider>
   </Router>,
   document.getElementById('root')

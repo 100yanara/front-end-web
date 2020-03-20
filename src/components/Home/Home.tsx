@@ -8,7 +8,9 @@ import Button from '@material-ui/core/Button';
 import { CarouselProvider, Slider, Slide } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import Footer from 'components/Footer';
-
+import yun from 'assets/images/yun.jpg';
+import event from 'assets/images/event.jpg';
+import attraction from 'assets/images/attraction1.jpg';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     home: {
@@ -121,6 +123,10 @@ const useStyles = makeStyles((theme: Theme) =>
       fontWeight: 'bold',
       marginBottom: '10px',
     },
+    img: {
+      width: '100%',
+      height: '100%',
+    },
   })
 );
 
@@ -140,7 +146,7 @@ const Home: React.FunctionComponent = () => {
         <SliderSlick {...EventSliderSetting} className={classes.home_caroucel}>
           {Array.from(Array(4)).map((arr, i) => (
             <Paper elevation={0} className={classes.caroucelPaper}>
-              {i + 1}
+              <img alt="#" src={event} className={classes.img} />
             </Paper>
           ))}
         </SliderSlick>
@@ -163,7 +169,7 @@ const Home: React.FunctionComponent = () => {
                 elevation={0}
                 className={classes.home_attractionContainer_attraction_item}
               >
-                {i + 1}
+                <img alt="#" src={attraction} className={classes.img} />
               </Paper>
             ))}
           </Box>
@@ -199,7 +205,7 @@ const Home: React.FunctionComponent = () => {
                     elevation={0}
                     className={classes.home_guideContainer_slider_item}
                   >
-                    {i + 1}
+                    <img alt="#" src={yun} className={classes.img} />
                   </Paper>
                 </Slide>
               ))}

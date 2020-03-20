@@ -7,12 +7,21 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Paper from '@material-ui/core/Paper';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Grow from '@material-ui/core/Grow';
+import Popper from '@material-ui/core/Popper';
+import MenuItem from '@material-ui/core/MenuItem';
+import MenuList from '@material-ui/core/MenuList';
+import { useTranslation } from 'react-i18next';
+
+import logo1 from 'assets/images/logo1.png';
+import logo2 from 'assets/images/logo2.png';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     header: {
       boxShadow: theme.shadows[0],
-      background: '#2b96ed',
+      background: '#ff7f11',
       display: 'flex',
       alignItems: 'center',
       borderBottom: '1px solid gray',
@@ -105,7 +114,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     header_nav_li: {
       listStyleType: 'none',
-      width: '80px',
+      width: '100px',
     },
     header_city: {
       padding: '25px',
@@ -119,7 +128,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       justifyContent: 'space-between',
       flexDirection: 'column',
-      background: '#2b96ed',
+      background: '#ff7f11',
       alignItems: 'center',
       width: '100%',
     },
@@ -155,43 +164,128 @@ const useStyles = makeStyles((theme: Theme) =>
     header_city_cities_city_name: {
       width: '100%',
     },
+    logo: {
+      width: '180px',
+    },
   })
 );
 
 const Header: React.FunctionComponent = () => {
   const classes = useStyles();
+  const { t, i18n } = useTranslation();
+  const [open, setOpen] = React.useState(false);
+  const anchorRef = React.useRef<HTMLButtonElement>(null);
+
+  const handleToggle = () => {
+    setOpen(prevOpen => !prevOpen);
+  };
+
+  const handleClose = (event: React.MouseEvent<EventTarget>, lang?: string) => {
+    if (
+      anchorRef.current &&
+      anchorRef.current.contains(event.target as HTMLElement)
+    ) {
+      return;
+    } else if (lang) {
+      i18n.changeLanguage(lang);
+      setOpen(false);
+    } else {
+      setOpen(false);
+    }
+  };
+
+  function handleListKeyDown(event: React.KeyboardEvent) {
+    if (event.key === 'Tab') {
+      event.preventDefault();
+      setOpen(false);
+    }
+  }
+
+  // return focus to the button when we transitioned from !open -> open
+  const prevOpen = React.useRef(open);
+  React.useEffect(() => {
+    if (prevOpen.current === true && open === false) {
+      anchorRef.current!.focus();
+    }
+
+    prevOpen.current = open;
+  }, [open]);
+
   return (
     <>
       <AppBar position="static" className={classes.header}>
         <Box component="div" className={classes.header_main}>
           <Box className={classes.header_main_logocontainer}>
-            <Typography
+            {/* <Typography
               variant="h4"
               className={classes.header_main_logocontainer_logo}
             >
               백야나라
-            </Typography>
+            </Typography> */}
+            <img src={logo2} alt="#" className={classes.logo} />
           </Box>
 
           <Box component="div" className={classes.header_main_list}>
             <Button className={classes.header_main_list_currencyButton}>
-              <Typography variant="button">Dollar</Typography>
+              <Typography variant="button">{t('currency')}</Typography>
             </Button>
-
-            <Button className={classes.header_main_list_languageButton}>
-              <Typography variant="button">English</Typography>
+            <Button
+              ref={anchorRef}
+              aria-controls={open ? 'menu-list-grow' : undefined}
+              aria-haspopup="true"
+              onClick={handleToggle}
+              className={classes.header_main_list_languageButton}
+            >
+              <Typography variant="button">{t('language')}</Typography>
             </Button>
-
+            <Popper
+              open={open}
+              anchorEl={anchorRef.current}
+              role={undefined}
+              transition
+              disablePortal
+            >
+              {({ TransitionProps, placement }) => (
+                <Grow
+                  {...TransitionProps}
+                  style={{
+                    transformOrigin:
+                      placement === 'bottom' ? 'center top' : 'center bottom',
+                  }}
+                >
+                  <Paper>
+                    <ClickAwayListener onClickAway={e => handleClose(e)}>
+                      <MenuList
+                        autoFocusItem={open}
+                        id="menu-list-grow"
+                        onKeyDown={handleListKeyDown}
+                      >
+                        <MenuItem onClick={e => handleClose(e, 'ko')}>
+                          Korean
+                        </MenuItem>
+                        <MenuItem onClick={e => handleClose(e, 'en')}>
+                          English
+                        </MenuItem>
+                        <MenuItem onClick={e => handleClose(e, 'ru')}>
+                          Russian
+                        </MenuItem>
+                      </MenuList>
+                    </ClickAwayListener>
+                  </Paper>
+                </Grow>
+              )}
+            </Popper>
             <Button className={classes.header_main_list_signInButton}>
-              <Typography variant="button">Sign in</Typography>
+              <Typography variant="button">{t('signin')}</Typography>
             </Button>
 
             <Button
               variant="outlined"
               className={classes.header_main_list_signUpButton}
             >
-              <Typography variant="button">Sign up</Typography>
+              <Typography variant="button">{t('signup')}</Typography>
             </Button>
+
             <IconButton
               edge="start"
               className={classes.menuButton}
@@ -207,7 +301,7 @@ const Header: React.FunctionComponent = () => {
           <ul className={classes.header_nav_ul}>
             {['Tour', 'Create Trip'].map(source => (
               <li key={source} className={classes.header_nav_li}>
-                <Typography variant="button">{source}</Typography>
+                <Typography variant="button">{t(source)}</Typography>
               </li>
             ))}
           </ul>
@@ -216,7 +310,7 @@ const Header: React.FunctionComponent = () => {
       <Box component="div" className={classes.header_city}>
         <Box component="div" className={classes.header_city_title}>
           <Typography variant="h3" component="h3" align="center">
-            What White night
+            What White nights
           </Typography>
           <Typography variant="h4" component="h4" align="center">
             Do you want?
