@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import { Typography } from '@material-ui/core';
@@ -8,62 +8,60 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import YouTubeIcon from '@material-ui/icons/YouTube';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    footer: {
-      [theme.breakpoints.up('xs')]: {
-        width: '100%',
-      },
-      height: '200px',
-      background: '#202020',
-      display: 'flex',
-      justifyContent: 'center',
+const useStyles = makeStyles((theme: Theme) => ({
+  footer: {
+    [theme.breakpoints.up('xs')]: {
+      width: '100%',
     },
-    footer_inner: {
-      [theme.breakpoints.up('xs')]: {
-        width: '70%',
-      },
-      // border: '1px solid white',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      padding: '15px 0',
-      // justifyContent: 'center',
+    height: '200px',
+    background: '#202020',
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  footer_inner: {
+    [theme.breakpoints.up('xs')]: {
+      width: '70%',
     },
-    footer_inner_site: {
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      [theme.breakpoints.up('xs')]: {
-        width: '40%',
-      },
-      marginBottom: '15px',
+    // border: '1px solid white',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: '15px 0',
+    // justifyContent: 'center',
+  },
+  footer_inner_site: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    [theme.breakpoints.up('xs')]: {
+      width: '40%',
     },
-    footer_inner_site_button: {
-      color: 'white',
-      width: '100px',
+    marginBottom: '15px',
+  },
+  footer_inner_site_button: {
+    color: 'white',
+    width: '100px',
+  },
+  footer_inner_icon: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    [theme.breakpoints.up('xs')]: {
+      width: '10%',
     },
-    footer_inner_icon: {
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      [theme.breakpoints.up('xs')]: {
-        width: '10%',
-      },
-      marginBottom: '20px',
+    marginBottom: '20px',
+  },
+  footer_inner_address: {
+    display: 'flex',
+    flexDirection: 'column',
+    [theme.breakpoints.up('xs')]: {
+      width: '70%',
     },
-    footer_inner_address: {
-      display: 'flex',
-      flexDirection: 'column',
-      [theme.breakpoints.up('xs')]: {
-        width: '70%',
-      },
-      // height: '130px',
-      // border: '1px solid white',
-      color: 'white',
-    },
-  })
-);
+    // height: '130px',
+    // border: '1px solid white',
+    color: 'white',
+  },
+}));
 
 const Footer: React.FunctionComponent = () => {
   const classes = useStyles();

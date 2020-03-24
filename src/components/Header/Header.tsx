@@ -1,5 +1,6 @@
 import React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, Theme } from '@material-ui/core/styles';
+import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
@@ -14,164 +15,118 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import { useTranslation } from 'react-i18next';
 
-import logo1 from 'assets/images/logo1.png';
-import logo2 from 'assets/images/logo2.png';
+import logo3 from 'assets/images/logo3.png';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    header: {
-      boxShadow: theme.shadows[0],
-      background: '#ff7f11',
-      display: 'flex',
-      alignItems: 'center',
-      borderBottom: '1px solid gray',
-      width: '100%',
-    },
-    header_main: {
-      display: 'flex',
-      alignItems: 'center',
-      [theme.breakpoints.up('xs')]: {
-        width: '100%',
-        padding: '10px 10px',
-      },
-      [theme.breakpoints.up('lg')]: {
-        width: '70%',
-        padding: '10px 0',
-      },
-    },
-    header_main_logocontainer: {
-      [theme.breakpoints.up('xs')]: {
-        width: '50%',
-      },
-      [theme.breakpoints.up('md')]: {
-        width: '15%',
-      },
-    },
-    header_main_logocontainer_logo: {
-      fontFamily: '"Gamja Flower", cursive',
-    },
-    header_main_list: {
-      [theme.breakpoints.up('xs')]: {
-        width: '50%',
-      },
-      [theme.breakpoints.up('md')]: {
-        width: '85%',
-      },
-      display: 'flex',
-      justifyContent: 'flex-end',
-    },
-    header_main_list_currencyButton: {
-      color: theme.palette.common.white,
-      width: '60px',
-      [theme.breakpoints.down('sm')]: {
-        display: 'none',
-      },
-    },
-    header_main_list_languageButton: {
-      color: theme.palette.common.white,
-      width: '60px',
-      marginLeft: '15px',
-      [theme.breakpoints.down('sm')]: {
-        display: 'none',
-      },
-    },
-    header_main_list_signInButton: {
-      color: theme.palette.common.white,
-      width: '60px',
-      marginLeft: '15px',
-      [theme.breakpoints.down('sm')]: {
-        display: 'none',
-      },
-    },
-    header_main_list_signUpButton: {
-      color: theme.palette.common.white,
-      width: '100px',
-      border: '1px solid white',
-      marginLeft: '15px',
-      [theme.breakpoints.down('sm')]: {
-        display: 'none',
-      },
-    },
-    menuButton: {
-      [theme.breakpoints.up('md')]: {
-        display: 'none',
-      },
-    },
-    header_nav: {
-      [theme.breakpoints.up('xs')]: {
-        width: '100%',
-        padding: '10px 10px',
-      },
-      [theme.breakpoints.up('lg')]: {
-        width: '70%',
-        padding: '10px 0',
-      },
-    },
-    header_nav_ul: {
-      display: 'flex',
-      margin: '0',
-      padding: '0',
-    },
-    header_nav_li: {
-      listStyleType: 'none',
-      width: '100px',
-    },
-    header_city: {
-      padding: '25px',
-      // border: '1px solid gray',
-      [theme.breakpoints.up('xs')]: {
-        height: '250px',
-      },
-      [theme.breakpoints.up('sm')]: {
-        height: '300px',
-      },
-      display: 'flex',
-      justifyContent: 'space-between',
-      flexDirection: 'column',
-      background: '#ff7f11',
-      alignItems: 'center',
-      width: '100%',
-    },
-    header_city_title: {
-      padding: '15px',
-      color: 'white',
-    },
+type HeaderProps = {
+  background?: string;
+};
 
-    header_city_cities: {
-      display: 'flex',
-      flexDirection: 'row',
-      [theme.breakpoints.up('xs')]: {
-        width: '100%',
-      },
-      [theme.breakpoints.up('sm')]: {
-        width: '80%',
-      },
-      [theme.breakpoints.up('md')]: {
-        width: '50%',
-      },
-      [theme.breakpoints.up('lg')]: {
-        width: '35%',
-      },
-      justifyContent: 'space-between',
-    },
-    header_city_cities_city: {
-      width: '110px',
-      height: '70px',
-      textAlign: 'center',
-      display: 'flex',
-      alignItems: 'center',
-    },
-    header_city_cities_city_name: {
+const useStyles = makeStyles((theme: Theme) => ({
+  logo: {
+    width: '130px',
+    marginLeft: '-10px',
+  },
+  header: (props: HeaderProps) => ({
+    boxShadow: theme.shadows[0],
+    background: props.background ? props.background : '#ff7f11',
+    display: 'flex',
+    alignItems: 'center',
+    borderBottom: '1px solid gray',
+    width: '100%',
+  }),
+  header_main: {
+    display: 'flex',
+    alignItems: 'center',
+    [theme.breakpoints.up('xs')]: {
       width: '100%',
+      padding: '10px 10px',
     },
-    logo: {
-      width: '180px',
+    [theme.breakpoints.up('lg')]: {
+      width: '70%',
+      padding: '10px 0',
     },
-  })
-);
+  },
+  header_main_logocontainer: {
+    [theme.breakpoints.up('xs')]: {
+      width: '50%',
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '15%',
+    },
+  },
+  header_main_logocontainer_logo: {
+    fontFamily: '"Gamja Flower", cursive',
+  },
+  header_main_list: {
+    [theme.breakpoints.up('xs')]: {
+      width: '50%',
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '85%',
+    },
+    display: 'flex',
+    justifyContent: 'flex-end',
+  },
+  header_main_list_currencyButton: {
+    color: theme.palette.common.white,
+    width: '60px',
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
+  },
+  header_main_list_languageButton: {
+    color: theme.palette.common.white,
+    width: '60px',
+    marginLeft: '15px',
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
+  },
+  header_main_list_signInButton: {
+    color: theme.palette.common.white,
+    width: '60px',
+    marginLeft: '15px',
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
+  },
+  header_main_list_signUpButton: {
+    color: theme.palette.common.white,
+    width: '100px',
+    border: '1px solid white',
+    marginLeft: '15px',
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
+  },
+  menuButton: {
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    },
+  },
+  header_nav: {
+    [theme.breakpoints.up('xs')]: {
+      width: '100%',
+      padding: '10px 10px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '70%',
+      padding: '10px 0',
+    },
+  },
+  header_nav_ul: {
+    display: 'flex',
+    margin: '0',
+    padding: '0',
+  },
+  header_nav_li: {
+    listStyleType: 'none',
+    width: '100px',
+  },
+}));
 
-const Header: React.FunctionComponent = () => {
-  const classes = useStyles();
+const Header = (props: HeaderProps) => {
+  const classes = useStyles(props);
   const { t, i18n } = useTranslation();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
@@ -194,13 +149,6 @@ const Header: React.FunctionComponent = () => {
     }
   };
 
-  function handleListKeyDown(event: React.KeyboardEvent) {
-    if (event.key === 'Tab') {
-      event.preventDefault();
-      setOpen(false);
-    }
-  }
-
   // return focus to the button when we transitioned from !open -> open
   const prevOpen = React.useRef(open);
   React.useEffect(() => {
@@ -216,13 +164,9 @@ const Header: React.FunctionComponent = () => {
       <AppBar position="static" className={classes.header}>
         <Box component="div" className={classes.header_main}>
           <Box className={classes.header_main_logocontainer}>
-            {/* <Typography
-              variant="h4"
-              className={classes.header_main_logocontainer_logo}
-            >
-              백야나라
-            </Typography> */}
-            <img src={logo2} alt="#" className={classes.logo} />
+            <Link href="/">
+              <img src={logo3} alt="#" className={classes.logo} />
+            </Link>
           </Box>
 
           <Box component="div" className={classes.header_main_list}>
@@ -255,11 +199,7 @@ const Header: React.FunctionComponent = () => {
                 >
                   <Paper>
                     <ClickAwayListener onClickAway={e => handleClose(e)}>
-                      <MenuList
-                        autoFocusItem={open}
-                        id="menu-list-grow"
-                        onKeyDown={handleListKeyDown}
-                      >
+                      <MenuList autoFocusItem={open} id="menu-list-grow">
                         <MenuItem onClick={e => handleClose(e, 'ko')}>
                           Korean
                         </MenuItem>
@@ -276,14 +216,18 @@ const Header: React.FunctionComponent = () => {
               )}
             </Popper>
             <Button className={classes.header_main_list_signInButton}>
-              <Typography variant="button">{t('signin')}</Typography>
+              <Typography variant="button">
+                <Link href="/user/signin">{t('signin')}</Link>
+              </Typography>
             </Button>
 
             <Button
               variant="outlined"
               className={classes.header_main_list_signUpButton}
             >
-              <Typography variant="button">{t('signup')}</Typography>
+              <Typography variant="button">
+                <Link href="/user/signup">{t('signup')}</Link>
+              </Typography>
             </Button>
 
             <IconButton
@@ -299,44 +243,19 @@ const Header: React.FunctionComponent = () => {
 
         <Box component="div" className={classes.header_nav}>
           <ul className={classes.header_nav_ul}>
-            {['Tour', 'Create Trip'].map(source => (
-              <li key={source} className={classes.header_nav_li}>
-                <Typography variant="button">{t(source)}</Typography>
+            {[
+              { name: 'Trip', route: 'daytour' },
+              { name: 'Create Trip', route: 'createtrip' },
+            ].map(source => (
+              <li key={source.name} className={classes.header_nav_li}>
+                <Typography variant="button">
+                  <Link href={`/${source.route}`}>{t(source.name)}</Link>
+                </Typography>
               </li>
             ))}
           </ul>
         </Box>
       </AppBar>
-      <Box component="div" className={classes.header_city}>
-        <Box component="div" className={classes.header_city_title}>
-          <Typography variant="h3" component="h3" align="center">
-            What White nights
-          </Typography>
-          <Typography variant="h4" component="h4" align="center">
-            Do you want?
-          </Typography>
-        </Box>
-        <Box component="div" className={classes.header_city_cities}>
-          {['Total', 'Saint Petersburg', 'Moscow', 'Tallin'].map(
-            (city, key) => {
-              return (
-                <Paper
-                  key={key}
-                  className={classes.header_city_cities_city}
-                  elevation={0}
-                >
-                  <Typography
-                    className={classes.header_city_cities_city_name}
-                    variant="body1"
-                  >
-                    {city}
-                  </Typography>
-                </Paper>
-              );
-            }
-          )}
-        </Box>
-      </Box>
     </>
   );
 };
