@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const SignUp: React.FunctionComponent = () => {
   const classes = useStyles();
-  const { t, i18n } = useTranslation();
+  // const { t, i18n } = useTranslation();
   return (
     <Box component="div" className={classes['sign-up-box']}>
       <Box component="div" className={classes['sign-up-box__sign-up']}>

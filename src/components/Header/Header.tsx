@@ -244,7 +244,7 @@ const Header = (props: HeaderProps) => {
         <Box component="div" className={classes.header_nav}>
           <ul className={classes.header_nav_ul}>
             {[
-              { name: 'Trip', route: 'daytour' },
+              { name: 'Tour', route: 'daytour' },
               { name: 'Create Trip', route: 'createtrip' },
             ].map(source => (
               <li key={source.name} className={classes.header_nav_li}>

@@ -5,6 +5,7 @@ import Header from 'components/Header';
 import Home from 'page/Home';
 import Footer from 'components/Footer';
 import SignUp from 'page/SignUp';
+import DayTour from 'page/DayTour';
 
 const App: React.FunctionComponent = () => {
   return (
@@ -27,7 +28,7 @@ const App: React.FunctionComponent = () => {
         </Route>
         <Route path="/daytour">
           <Header background="white" />
-          <div>day tours page</div>
+          <DayTour />
           <Footer />
         </Route>
         <Route path="/createtrip">
