@@ -17,7 +17,7 @@ const App: React.FunctionComponent = () => {
           <Footer />
         </Route>
         <Route exact path="/user/signup">
-          <Header background="white" />
+          <Header />
           <SignUp />
           <Footer />
         </Route>
@@ -27,7 +27,7 @@ const App: React.FunctionComponent = () => {
           <Footer />
         </Route>
         <Route path="/daytour">
-          <Header background="white" />
+          <Header />
           <DayTour />
           <Footer />
         </Route>

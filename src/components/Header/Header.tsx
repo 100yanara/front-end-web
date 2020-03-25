@@ -4,7 +4,6 @@ import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Paper from '@material-ui/core/Paper';
@@ -13,120 +12,44 @@ import Grow from '@material-ui/core/Grow';
 import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
+import Hidden from '@material-ui/core/Hidden';
 import { useTranslation } from 'react-i18next';
 
-import logo3 from 'assets/images/logo3.png';
-
-type HeaderProps = {
-  background?: string;
-};
+import logo4 from 'assets/images/logo4.png';
 
 const useStyles = makeStyles((theme: Theme) => ({
   logo: {
-    width: '130px',
-    marginLeft: '-10px',
+    width: '110px',
   },
-  header: (props: HeaderProps) => ({
+  header: () => ({
     boxShadow: theme.shadows[0],
-    background: props.background ? props.background : '#ff7f11',
+    background: 'transparent',
     display: 'flex',
     alignItems: 'center',
     borderBottom: '1px solid gray',
     width: '100%',
   }),
-  header_main: {
-    display: 'flex',
-    alignItems: 'center',
+  header__inner: {
     [theme.breakpoints.up('xs')]: {
       width: '100%',
-      padding: '10px 10px',
+      padding: '10px 0px',
     },
     [theme.breakpoints.up('lg')]: {
       width: '70%',
       padding: '10px 0',
     },
   },
-  header_main_logocontainer: {
-    [theme.breakpoints.up('xs')]: {
-      width: '50%',
+  header__menu_item_box: {},
+  header__menu_item_box__item: {
+    marginLeft: 30,
+    '&:hover': {
+      color: theme.palette.text.primary,
     },
-    [theme.breakpoints.up('md')]: {
-      width: '15%',
-    },
-  },
-  header_main_logocontainer_logo: {
-    fontFamily: '"Gamja Flower", cursive',
-  },
-  header_main_list: {
-    [theme.breakpoints.up('xs')]: {
-      width: '50%',
-    },
-    [theme.breakpoints.up('md')]: {
-      width: '85%',
-    },
-    display: 'flex',
-    justifyContent: 'flex-end',
-  },
-  header_main_list_currencyButton: {
-    color: theme.palette.common.white,
-    width: '60px',
-    [theme.breakpoints.down('sm')]: {
-      display: 'none',
-    },
-  },
-  header_main_list_languageButton: {
-    color: theme.palette.common.white,
-    width: '60px',
-    marginLeft: '15px',
-    [theme.breakpoints.down('sm')]: {
-      display: 'none',
-    },
-  },
-  header_main_list_signInButton: {
-    color: theme.palette.common.white,
-    width: '60px',
-    marginLeft: '15px',
-    [theme.breakpoints.down('sm')]: {
-      display: 'none',
-    },
-  },
-  header_main_list_signUpButton: {
-    color: theme.palette.common.white,
-    width: '100px',
-    border: '1px solid white',
-    marginLeft: '15px',
-    [theme.breakpoints.down('sm')]: {
-      display: 'none',
-    },
-  },
-  menuButton: {
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
-  },
-  header_nav: {
-    [theme.breakpoints.up('xs')]: {
-      width: '100%',
-      padding: '10px 10px',
-    },
-    [theme.breakpoints.up('lg')]: {
-      width: '70%',
-      padding: '10px 0',
-    },
-  },
-  header_nav_ul: {
-    display: 'flex',
-    margin: '0',
-    padding: '0',
-  },
-  header_nav_li: {
-    listStyleType: 'none',
-    width: '100px',
   },
 }));
 
-const Header = (props: HeaderProps) => {
-  const classes = useStyles(props);
+const Header = () => {
+  const classes = useStyles();
   const { t, i18n } = useTranslation();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
@@ -160,28 +83,42 @@ const Header = (props: HeaderProps) => {
   }, [open]);
 
   return (
-    <>
-      <AppBar position="static" className={classes.header}>
-        <Box component="div" className={classes.header_main}>
-          <Box className={classes.header_main_logocontainer}>
-            <Link href="/">
-              <img src={logo3} alt="#" className={classes.logo} />
-            </Link>
-          </Box>
-
-          <Box component="div" className={classes.header_main_list}>
-            <Button className={classes.header_main_list_currencyButton}>
-              <Typography variant="button">{t('currency')}</Typography>
-            </Button>
-            <Button
+    <AppBar position="static" className={classes.header}>
+      <Box
+        component="div"
+        display="flex"
+        justifyContent="space-between"
+        className={classes.header__inner}
+      >
+        <Link href="/">
+          <img src={logo4} alt="#" className={classes.logo} />
+        </Link>
+        <Box
+          component="div"
+          display="flex"
+          justifyContent="flex-end"
+          alignItems="center"
+          className={classes.header__menu_item_box}
+        >
+          <Hidden smDown>
+            <Typography
+              variant="button"
+              color="textSecondary"
+              className={classes.header__menu_item_box__item}
+            >
+              {t('currency')}
+            </Typography>
+            <Typography
+              variant="button"
+              color="textSecondary"
               ref={anchorRef}
               aria-controls={open ? 'menu-list-grow' : undefined}
               aria-haspopup="true"
               onClick={handleToggle}
-              className={classes.header_main_list_languageButton}
+              className={classes.header__menu_item_box__item}
             >
-              <Typography variant="button">{t('language')}</Typography>
-            </Button>
+              {t('language')}
+            </Typography>
             <Popper
               open={open}
               anchorEl={anchorRef.current}
@@ -215,48 +152,53 @@ const Header = (props: HeaderProps) => {
                 </Grow>
               )}
             </Popper>
-            <Button className={classes.header_main_list_signInButton}>
-              <Typography variant="button">
-                <Link href="/user/signin">{t('signin')}</Link>
-              </Typography>
-            </Button>
-
-            <Button
-              variant="outlined"
-              className={classes.header_main_list_signUpButton}
+            <Typography
+              variant="button"
+              color="textSecondary"
+              className={classes.header__menu_item_box__item}
             >
-              <Typography variant="button">
-                <Link href="/user/signup">{t('signup')}</Link>
-              </Typography>
-            </Button>
-
-            <IconButton
-              edge="start"
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="menu"
+              <Link href="/daytour" color="inherit" underline="none">
+                {t('Tour')}
+              </Link>
+            </Typography>
+            <Typography
+              variant="button"
+              color="textSecondary"
+              className={classes.header__menu_item_box__item}
             >
+              <Link href="/createtrip" color="inherit" underline="none">
+                {t('Create Trip')}
+              </Link>
+            </Typography>
+            <Typography
+              variant="button"
+              color="textSecondary"
+              className={classes.header__menu_item_box__item}
+            >
+              <Link href="/user/signin" color="inherit" underline="none">
+                {t('signin')}
+              </Link>
+            </Typography>
+
+            <Typography
+              variant="button"
+              color="textSecondary"
+              className={classes.header__menu_item_box__item}
+            >
+              <Link href="/user/signup" color="inherit" underline="none">
+                {t('signup')}
+              </Link>
+            </Typography>
+          </Hidden>
+
+          <Hidden mdUp>
+            <IconButton edge="start" color="default" aria-label="menu">
               <MenuIcon />
             </IconButton>
-          </Box>
+          </Hidden>
         </Box>
-
-        <Box component="div" className={classes.header_nav}>
-          <ul className={classes.header_nav_ul}>
-            {[
-              { name: 'Tour', route: 'daytour' },
-              { name: 'Create Trip', route: 'createtrip' },
-            ].map(source => (
-              <li key={source.name} className={classes.header_nav_li}>
-                <Typography variant="button">
-                  <Link href={`/${source.route}`}>{t(source.name)}</Link>
-                </Typography>
-              </li>
-            ))}
-          </ul>
-        </Box>
-      </AppBar>
-    </>
+      </Box>
+    </AppBar>
   );
 };
 
