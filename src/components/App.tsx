@@ -6,6 +6,7 @@ import Home from 'page/Home';
 import Footer from 'components/Footer';
 import SignUp from 'page/SignUp';
 import DayTour from 'page/DayTour';
+import Calendar from 'page/Calendar';
 
 const App: React.FunctionComponent = () => {
   return (
@@ -29,6 +30,11 @@ const App: React.FunctionComponent = () => {
         <Route path="/daytour">
           <Header />
           <DayTour />
+          <Footer />
+        </Route>
+        <Route path="/calendar">
+          <Header />
+          <Calendar />
           <Footer />
         </Route>
         <Route path="/createtrip">

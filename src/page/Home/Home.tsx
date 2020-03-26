@@ -7,111 +7,47 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { CarouselProvider, Slider, Slide } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
-
+import event from 'assets/images/event.jpg';
+import attraction from 'assets/images/attraction1.jpg';
 const useStyles = makeStyles((theme: Theme) => ({
-  home: {
+  home__caroucel: {
     width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    // border: '1px solid gray',
   },
-  home_city: {
-    padding: '25px',
-    // border: '1px solid gray',
+  home__caroucel__paper: {
+    height: '650px',
+    background: `url(${event})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+  },
+  home__attraction: {
     [theme.breakpoints.up('xs')]: {
-      height: '250px',
+      width: '100%',
     },
-    [theme.breakpoints.up('sm')]: {
-      height: '300px',
+    [theme.breakpoints.up('lg')]: {
+      width: '70%',
     },
-    display: 'flex',
-    justifyContent: 'space-between',
-    flexDirection: 'column',
-    background: '#ff7f11',
-    alignItems: 'center',
-    width: '100%',
+    margin: '60px 0',
   },
-  home_city_title: {
-    padding: '15px',
-    color: 'white',
+  home__attraction__title: {
+    marginBottom: 20,
+  },
+  home__attraction__box: {
+    marginBottom: 30,
+    margin: '-10px',
+  },
+  home__attraction__item: {
+    background: `url(${attraction})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    height: 250,
+    // width: 300,
+    marginBottom: '2%',
+    flex: '1 1 160px',
+    margin: 10,
   },
 
-  home_city_cities: {
-    display: 'flex',
-    flexDirection: 'row',
-    [theme.breakpoints.up('xs')]: {
-      width: '100%',
-    },
-    [theme.breakpoints.up('sm')]: {
-      width: '80%',
-    },
-    [theme.breakpoints.up('md')]: {
-      width: '50%',
-    },
-    [theme.breakpoints.up('lg')]: {
-      width: '35%',
-    },
-    justifyContent: 'space-between',
-  },
-  home_city_cities_city: {
-    width: '110px',
-    height: '70px',
-    textAlign: 'center',
-    display: 'flex',
-    alignItems: 'center',
-  },
-  home_city_cities_city_name: {
-    width: '100%',
-  },
-  home_caroucel: {
-    // border: '1px solid gray',
-    // padding: '10px',
-    [theme.breakpoints.up('xs')]: {
-      width: '100%',
-    },
-    [theme.breakpoints.up('lg')]: {
-      width: '70%',
-    },
-    marginTop: '50px',
-  },
-  caroucelPaper: {
-    height: '250px',
-    background: theme.palette.grey[200],
-  },
-  home_attractionContainer: {
-    [theme.breakpoints.up('xs')]: {
-      width: '100%',
-    },
-    [theme.breakpoints.up('lg')]: {
-      width: '70%',
-    },
-    // border: '1px solid gray',
-    margin: '60px 0 60px 0',
-  },
-  home_attractionContainer_title: {
-    marginBottom: '20px',
-    // border: '1px solid gray',
-  },
-  home_attractionContainer_attraction: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    margin: '-5px',
-    // border: '1px solid gray',
-    marginBottom: '30px',
-  },
-  home_attractionContainer_attraction_item: {
-    flex: '1 0 21%',
-    background: theme.palette.grey[200],
-    height: '200px',
-    margin: '5px',
-    // border: '1px solid gray',
-  },
-  home_attractionContainer_buttonContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-  },
   home_guideContainer: {
     [theme.breakpoints.up('xs')]: {
       width: '100%',
@@ -126,7 +62,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   home_guideContainer_slider: {
     margin: '-20px',
-    // border: '1px solid gray',
     height: '300px',
   },
   home_guideContainer_slider_item: {
@@ -134,8 +69,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     flex: '1 0 21%',
     margin: '20px',
     height: '250px',
-    // width: '250px',
-    // border: '1px solid gray',
   },
   home_tipsContainer: {
     [theme.breakpoints.up('xs')]: {
@@ -180,169 +113,136 @@ const Home: React.FunctionComponent = () => {
   };
 
   return (
-    <>
-      <Box component="div" className={classes.home}>
-        <Box component="div" className={classes.home_city}>
-          <Box component="div" className={classes.home_city_title}>
-            <Typography variant="h3" component="h3" align="center">
-              What White nights
-            </Typography>
-            <Typography variant="h4" component="h4" align="center">
-              Do you want?
-            </Typography>
-          </Box>
-          <Box component="div" className={classes.home_city_cities}>
-            {['Total', 'Saint Petersburg', 'Moscow', 'Tallin'].map(
-              (city, key) => {
-                return (
-                  <Paper
-                    key={key}
-                    className={classes.home_city_cities_city}
-                    elevation={0}
-                  >
-                    <Typography
-                      className={classes.home_city_cities_city_name}
-                      variant="body1"
-                    >
-                      {city}
-                    </Typography>
-                  </Paper>
-                );
-              }
-            )}
-          </Box>
-        </Box>
-        <SliderSlick {...EventSliderSetting} className={classes.home_caroucel}>
+    <Box
+      component="div"
+      width="100%"
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+    >
+      <SliderSlick {...EventSliderSetting} className={classes.home__caroucel}>
+        {Array.from(Array(4)).map((arr, i) => (
+          <Paper elevation={0} className={classes.home__caroucel__paper} />
+        ))}
+      </SliderSlick>
+
+      <Box component="div" className={classes.home__attraction}>
+        <Typography
+          variant="h5"
+          component="h5"
+          align="center"
+          className={classes.home__attraction__title}
+        >
+          Top Attractions
+        </Typography>
+        <Box
+          component="div"
+          display="flex"
+          flexWrap="wrap"
+          className={classes.home__attraction__box}
+        >
           {Array.from(Array(4)).map((arr, i) => (
-            <Paper elevation={0} className={classes.caroucelPaper}>
-              {/* <img alt="#" src={event} className={classes.img} /> */}
-              {i + 1}
+            <Paper elevation={0} className={classes.home__attraction__item}>
+              {/* <img alt="#" src={attraction} className={classes.img} /> */}
+              {/* {i + 1} */}
             </Paper>
           ))}
-        </SliderSlick>
-
-        <Box component="div" className={classes.home_attractionContainer}>
-          <Typography
-            variant="h5"
-            component="h5"
-            align="center"
-            className={classes.home_attractionContainer_title}
-          >
-            Top Attractions
-          </Typography>
-          <Box
-            component="div"
-            className={classes.home_attractionContainer_attraction}
-          >
+        </Box>
+        <Box component="div" display="flex" justifyContent="center">
+          <Button variant="contained" disableElevation color="primary">
+            <Typography variant="button">Show more attractions</Typography>
+          </Button>
+        </Box>
+      </Box>
+      <Box component="div" className={classes.home_guideContainer}>
+        <Typography
+          variant="h5"
+          component="h5"
+          align="center"
+          className={classes.home_guideContainer_title}
+        >
+          Guide
+        </Typography>
+        <CarouselProvider
+          naturalSlideWidth={250}
+          naturalSlideHeight={250}
+          totalSlides={8}
+          infinite={true}
+          visibleSlides={3}
+        >
+          <Slider className={classes.home_guideContainer_slider}>
             {Array.from(Array(8)).map((arr, i) => (
-              <Paper
-                elevation={0}
-                className={classes.home_attractionContainer_attraction_item}
-              >
-                {/* <img alt="#" src={attraction} className={classes.img} /> */}
-                {i + 1}
-              </Paper>
+              <Slide index={i}>
+                <Paper
+                  elevation={0}
+                  className={classes.home_guideContainer_slider_item}
+                >
+                  {/* <img alt="#" src={yun} className={classes.img} /> */}
+                  {i + 1}
+                </Paper>
+              </Slide>
             ))}
+          </Slider>
+        </CarouselProvider>
+      </Box>
+      <Box component="div" className={classes.home_tipsContainer}>
+        <Typography variant="h6" align="left">
+          Want more travel tips?
+        </Typography>
+        <Box component="div" className={classes.home_tipsContainer_box}>
+          <Box
+            component="div"
+            className={classes.home_tipsContainer_box_chanel}
+          >
+            <Typography
+              variant="subtitle2"
+              color="primary"
+              className={classes.home_tipsContainer_box_chanel_title}
+            >
+              100yanara FaceBook Page >
+            </Typography>
+            <Typography color="textSecondary">
+              Check out 100yanara Facebook page for useful information and tips
+              for each travel destination
+            </Typography>
           </Box>
           <Box
             component="div"
-            className={classes.home_attractionContainer_buttonContainer}
+            className={classes.home_tipsContainer_box_chanel}
           >
-            <Button variant="contained" disableElevation>
-              <Typography variant="button">Show more attractions</Typography>
-            </Button>
+            {' '}
+            <Typography
+              variant="subtitle2"
+              color="primary"
+              className={classes.home_tipsContainer_box_chanel_title}
+            >
+              100yanara Instagram >
+            </Typography>
+            <Typography color="textSecondary">
+              Enjoy beautiful pictures of different cities around the world,
+              shared by our guides and travelers on our Instagram page.
+            </Typography>
           </Box>
-        </Box>
-        <Box component="div" className={classes.home_guideContainer}>
-          <Typography
-            variant="h5"
-            component="h5"
-            align="center"
-            className={classes.home_guideContainer_title}
+          <Box
+            component="div"
+            className={classes.home_tipsContainer_box_chanel}
           >
-            Guide
-          </Typography>
-          <CarouselProvider
-            naturalSlideWidth={250}
-            naturalSlideHeight={250}
-            totalSlides={8}
-            infinite={true}
-            visibleSlides={3}
-          >
-            <Slider className={classes.home_guideContainer_slider}>
-              {Array.from(Array(8)).map((arr, i) => (
-                <Slide index={i}>
-                  <Paper
-                    elevation={0}
-                    className={classes.home_guideContainer_slider_item}
-                  >
-                    {/* <img alt="#" src={yun} className={classes.img} /> */}
-                    {i + 1}
-                  </Paper>
-                </Slide>
-              ))}
-            </Slider>
-          </CarouselProvider>
-        </Box>
-        <Box component="div" className={classes.home_tipsContainer}>
-          <Typography variant="h6" align="left">
-            Want more travel tips?
-          </Typography>
-          <Box component="div" className={classes.home_tipsContainer_box}>
-            <Box
-              component="div"
-              className={classes.home_tipsContainer_box_chanel}
+            {' '}
+            <Typography
+              variant="subtitle2"
+              color="primary"
+              className={classes.home_tipsContainer_box_chanel_title}
             >
-              <Typography
-                variant="subtitle2"
-                color="primary"
-                className={classes.home_tipsContainer_box_chanel_title}
-              >
-                100yanara FaceBook Page >
-              </Typography>
-              <Typography color="textSecondary">
-                Check out 100yanara Facebook page for useful information and
-                tips for each travel destination
-              </Typography>
-            </Box>
-            <Box
-              component="div"
-              className={classes.home_tipsContainer_box_chanel}
-            >
-              {' '}
-              <Typography
-                variant="subtitle2"
-                color="primary"
-                className={classes.home_tipsContainer_box_chanel_title}
-              >
-                100yanara Instagram >
-              </Typography>
-              <Typography color="textSecondary">
-                Enjoy beautiful pictures of different cities around the world,
-                shared by our guides and travelers on our Instagram page.
-              </Typography>
-            </Box>
-            <Box
-              component="div"
-              className={classes.home_tipsContainer_box_chanel}
-            >
-              {' '}
-              <Typography
-                variant="subtitle2"
-                color="primary"
-                className={classes.home_tipsContainer_box_chanel_title}
-              >
-                100yanara Naver Blog >
-              </Typography>
-              <Typography color="textSecondary">
-                View real-time travel information, reviews, and the list of
-                recommended guides on MyRealTrip’s blog.
-              </Typography>
-            </Box>
+              100yanara Naver Blog >
+            </Typography>
+            <Typography color="textSecondary">
+              View real-time travel information, reviews, and the list of
+              recommended guides on MyRealTrip’s blog.
+            </Typography>
           </Box>
         </Box>
       </Box>
-    </>
+    </Box>
   );
 };
 

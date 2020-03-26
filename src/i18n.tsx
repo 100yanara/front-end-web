@@ -12,6 +12,7 @@ const resources = {
       signup: 'Sign up',
       Tour: 'Tour',
       'Create Trip': 'Create Trip',
+      Calendar: 'Calendar',
     },
   },
   ko: {
@@ -22,6 +23,7 @@ const resources = {
       signup: '회원가입',
       Tour: '데이투어',
       'Create Trip': '여행 만들기',
+      Calendar: '달력',
     },
   },
   ru: {
@@ -32,6 +34,7 @@ const resources = {
       signup: 'Регистрация',
       Tour: 'деневный тур',
       'Create Trip': 'создавать тур',
+      Calendar: 'календарь',
     },
   },
 };

@@ -26,7 +26,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     background: 'transparent',
     display: 'flex',
     alignItems: 'center',
-    borderBottom: '1px solid gray',
     width: '100%',
   }),
   header__inner: {
@@ -152,6 +151,15 @@ const Header = () => {
                 </Grow>
               )}
             </Popper>
+            <Typography
+              variant="button"
+              color="textSecondary"
+              className={classes.header__menu_item_box__item}
+            >
+              <Link href="/calendar" color="inherit" underline="none">
+                {t('Calendar')}
+              </Link>
+            </Typography>
             <Typography
               variant="button"
               color="textSecondary"

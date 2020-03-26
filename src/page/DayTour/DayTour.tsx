@@ -1,22 +1,12 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-// import { useTranslation } from 'react-i18next';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import { FormControl } from '@material-ui/core';
+import Grow from '@material-ui/core/Grow';
+import Collapse from '@material-ui/core/Collapse';
 import TourCard from './TourCard';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  'daytour-box': {
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
   layout: {
     [theme.breakpoints.up('xs')]: {
       width: '100%',
@@ -27,67 +17,135 @@ const useStyles = makeStyles((theme: Theme) => ({
       padding: '10px 0',
     },
   },
-  'daytour-box__radio': {},
-  'daytour-box__title': {
+  daytour__title: {
     marginBottom: 15,
   },
-  'daytour-box__cities': {
-    display: 'flex',
-    justifyContent: 'space-between',
+  daytour__cities: {
     marginBottom: 30,
+  },
+  daytour__filter__typo: {
+    marginRight: 20,
   },
 }));
 
 const DayTour: React.FunctionComponent = () => {
   const classes = useStyles();
-  // const { t, i18n } = useTranslation();
-  const [cities, changeCity] = React.useState('');
-  const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    changeCity((event.target as HTMLInputElement).value);
+  const [state, setState] = React.useState({
+    filter: false,
+    city: false,
+  });
+  const handleClick = (anchor: string, open: boolean) => (
+    event: React.MouseEvent
+  ) => {
+    setState({ ...state, [anchor]: open });
   };
   return (
-    <Box component="div" className={classes['daytour-box']}>
-      <FormControl
-        className={`${classes['daytour-box__radio']} ${classes['layout']}`}
+    <Box
+      component="div"
+      display="flex"
+      width="100%"
+      flexDirection="column"
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Box
+        component="div"
+        display="flex"
+        flexDirection="row"
+        width="100%"
+        className={classes['layout']}
       >
-        <RadioGroup
-          aria-label="cities"
-          name="cities"
-          value={cities}
-          onChange={handleRadioChange}
-          row
+        <Typography
+          variant="subtitle1"
+          component="div"
+          onClick={handleClick('filter', !state.filter)}
+          className={classes.daytour__filter__typo}
         >
-          {['total', 'moscow', 'saint petersburg', 'tallin'].map(value => (
-            <FormControlLabel
-              value={value}
-              control={<Radio size="small" color="default" />}
-              label={<Typography variant="button">{value}</Typography>}
-            />
-          ))}
-        </RadioGroup>
-      </FormControl>
+          Filter
+        </Typography>
+        <Grow in={state.filter}>
+          <Typography
+            variant="overline"
+            component="div"
+            className={classes.daytour__filter__typo}
+            onClick={handleClick('city', !state.city)}
+          >
+            city
+          </Typography>
+        </Grow>
+        <Grow
+          in={state.filter}
+          style={{ transformOrigin: '0 0 0' }}
+          {...(state.filter ? { timeout: 1000 } : {})}
+        >
+          <Typography
+            variant="overline"
+            component="div"
+            className={classes.daytour__filter__typo}
+          >
+            date
+          </Typography>
+        </Grow>
+      </Box>
+      <Collapse in={state.city}>
+        <Box component="div" display="flex" flexDirection="row">
+          <Typography
+            component="div"
+            variant="overline"
+            className={classes.daytour__filter__typo}
+          >
+            moscow
+          </Typography>
+          <Typography
+            component="div"
+            variant="overline"
+            className={classes.daytour__filter__typo}
+          >
+            saint petersburg
+          </Typography>
+          <Typography
+            component="div"
+            variant="overline"
+            className={classes.daytour__filter__typo}
+          >
+            tallin
+          </Typography>
+        </Box>
+      </Collapse>
       <Box className={`${classes['layout']}`}>
-        <Typography variant="h6" className={classes['daytour-box__title']}>
+        <Typography variant="h6" className={classes['daytour__title']}>
           Moscow
         </Typography>
-        <Box className={classes['daytour-box__cities']}>
+        <Box
+          component="div"
+          display="flex"
+          justifyContent="space-between"
+          className={classes['daytour__cities']}
+        >
           {Array.from(Array(4)).map(val => (
             <TourCard />
           ))}
         </Box>
-        <Typography variant="h6" className={classes['daytour-box__title']}>
+        <Typography variant="h6" className={classes['daytour__title']}>
           Saint Petersburg
         </Typography>
-        <Box className={classes['daytour-box__cities']}>
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          className={classes['daytour__cities']}
+        >
           {Array.from(Array(4)).map(val => (
             <TourCard />
           ))}
         </Box>
-        <Typography variant="h6" className={classes['daytour-box__title']}>
+        <Typography variant="h6" className={classes['daytour__title']}>
           Tallin
         </Typography>
-        <Box className={classes['daytour-box__cities']}>
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          className={classes['daytour__cities']}
+        >
           {Array.from(Array(4)).map(val => (
             <TourCard />
           ))}
