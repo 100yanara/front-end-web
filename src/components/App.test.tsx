@@ -17,7 +17,7 @@ xtest('full app rendering/navigating', () => {
   expect(getByRole('heading')).toHaveTextContent('home page');
 });
 
-test('landing on a bad page shows 404 page', () => {
+xtest('landing on a bad page shows 404 page', () => {
   const history = createMemoryHistory();
   history.push('/some/bad/route');
   const { getByRole } = render(
