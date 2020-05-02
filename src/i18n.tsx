@@ -10,9 +10,10 @@ const resources = {
       language: 'English',
       signin: 'Sign in',
       signup: 'Sign up',
-      Tour: 'Tour',
-      'Create Trip': 'Create Trip',
-      Calendar: 'Calendar',
+      tour: 'Tour',
+      createTrip: 'Create Trip',
+      calendar: 'Calendar',
+      search: 'Search',
     },
   },
   ko: {
@@ -20,10 +21,11 @@ const resources = {
       currency: '달러',
       language: '한국어',
       signin: '로그인',
-      signup: '회원가입',
-      Tour: '데이투어',
-      'Create Trip': '여행 만들기',
-      Calendar: '달력',
+      signup: '회원 가입',
+      tour: '데이 투어',
+      createTrip: '여행 만들기',
+      calendar: '여행 달력',
+      search: '검색',
     },
   },
   ru: {
@@ -32,9 +34,10 @@ const resources = {
       language: 'Русский',
       signin: 'Вход',
       signup: 'Регистрация',
-      Tour: 'деневный тур',
-      'Create Trip': 'создавать тур',
-      Calendar: 'календарь',
+      tour: 'деневный тур',
+      createTrip: 'создавать тур',
+      calendar: 'календарь',
+      search: 'искать',
     },
   },
 };
@@ -45,7 +48,7 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: 'en',
+    lng: 'ko',
     keySeparator: false,
     interpolation: {
       escapeValue: false,

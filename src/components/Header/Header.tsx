@@ -1,39 +1,31 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
-import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import Paper from '@material-ui/core/Paper';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Grow from '@material-ui/core/Grow';
-import Popper from '@material-ui/core/Popper';
-import MenuItem from '@material-ui/core/MenuItem';
-import MenuList from '@material-ui/core/MenuList';
-import Hidden from '@material-ui/core/Hidden';
 import { useTranslation } from 'react-i18next';
-
 import logo4 from 'assets/images/logo4.png';
+
+import NavButton from 'components/Header/NavButton';
+import ElevationScroll from 'components/Header/ElevationScroll';
 
 const useStyles = makeStyles((theme: Theme) => ({
   logo: {
     width: '110px',
   },
-  header: () => ({
-    boxShadow: theme.shadows[0],
-    background: 'transparent',
-    display: 'flex',
-    alignItems: 'center',
+  header: {
+    background: theme.palette.background.default,
     width: '100%',
-  }),
-  header__menu_item_box__item: {
-    marginLeft: 30,
-    '&:hover': {
-      color: theme.palette.text.primary,
-    },
+    height: '80px',
+  },
+  navList: {
+    display: 'flex',
+    flexDirection: 'row',
+    listStyle: 'none',
+  },
+  signUp: {
+    boxShadow: theme.shadows[1],
   },
 }));
 
@@ -72,127 +64,41 @@ const Header = () => {
   }, [open]);
 
   return (
-    <AppBar position="static" className={classes.header}>
-      <Container maxWidth="lg">
-        <Box component="div" display="flex" justifyContent="space-between">
-          <Link href="/">
-            <img src={logo4} alt="#" className={classes.logo} />
-          </Link>
+    <ElevationScroll>
+      <AppBar className={classes.header} position="sticky">
+        <Container maxWidth="lg" component="div" style={{ height: '100%' }}>
           <Box
             component="div"
+            style={{ height: '100%' }}
             display="flex"
-            justifyContent="flex-end"
             alignItems="center"
+            justifyContent="space-between"
           >
-            <Hidden smDown>
-              <Typography
-                variant="button"
-                color="textSecondary"
-                className={classes.header__menu_item_box__item}
-              >
-                {t('currency')}
-              </Typography>
-              <Typography
-                variant="button"
-                color="textSecondary"
-                ref={anchorRef}
-                aria-controls={open ? 'menu-list-grow' : undefined}
-                aria-haspopup="true"
-                onClick={handleToggle}
-                className={classes.header__menu_item_box__item}
-              >
-                {t('language')}
-              </Typography>
-              <Popper
-                open={open}
-                anchorEl={anchorRef.current}
-                role={undefined}
-                transition
-                disablePortal
-              >
-                {({ TransitionProps, placement }) => (
-                  <Grow
-                    {...TransitionProps}
-                    style={{
-                      transformOrigin:
-                        placement === 'bottom' ? 'center top' : 'center bottom',
-                    }}
+            <Link href="/">
+              <img src={logo4} alt="#" className={classes.logo} />
+            </Link>
+            <ul className={classes.navList}>
+              <li>
+                <Link href="/user/signin" color="textPrimary" underline="none">
+                  <NavButton size="large">{t('signin')}</NavButton>
+                </Link>
+              </li>
+              <li>
+                <Link href="/user/signup" color="textPrimary" underline="none">
+                  <NavButton
+                    variant="outlined"
+                    size="large"
+                    className={classes.signUp}
                   >
-                    <Paper>
-                      <ClickAwayListener onClickAway={e => handleClose(e)}>
-                        <MenuList autoFocusItem={open} id="menu-list-grow">
-                          <MenuItem onClick={e => handleClose(e, 'ko')}>
-                            Korean
-                          </MenuItem>
-                          <MenuItem onClick={e => handleClose(e, 'en')}>
-                            English
-                          </MenuItem>
-                          <MenuItem onClick={e => handleClose(e, 'ru')}>
-                            Russian
-                          </MenuItem>
-                        </MenuList>
-                      </ClickAwayListener>
-                    </Paper>
-                  </Grow>
-                )}
-              </Popper>
-              <Typography
-                variant="button"
-                color="textSecondary"
-                className={classes.header__menu_item_box__item}
-              >
-                <Link href="/calendar" color="inherit" underline="none">
-                  {t('Calendar')}
+                    {t('signup')}
+                  </NavButton>
                 </Link>
-              </Typography>
-              <Typography
-                variant="button"
-                color="textSecondary"
-                className={classes.header__menu_item_box__item}
-              >
-                <Link href="/daytour" color="inherit" underline="none">
-                  {t('Tour')}
-                </Link>
-              </Typography>
-              <Typography
-                variant="button"
-                color="textSecondary"
-                className={classes.header__menu_item_box__item}
-              >
-                <Link href="/createtrip" color="inherit" underline="none">
-                  {t('Create Trip')}
-                </Link>
-              </Typography>
-              <Typography
-                variant="button"
-                color="textSecondary"
-                className={classes.header__menu_item_box__item}
-              >
-                <Link href="/user/signin" color="inherit" underline="none">
-                  {t('signin')}
-                </Link>
-              </Typography>
-
-              <Typography
-                variant="button"
-                color="textSecondary"
-                className={classes.header__menu_item_box__item}
-              >
-                <Link href="/user/signup" color="inherit" underline="none">
-                  {t('signup')}
-                </Link>
-              </Typography>
-            </Hidden>
-
-            <Hidden mdUp>
-              <IconButton edge="start" color="default" aria-label="menu">
-                <MenuIcon />
-              </IconButton>
-            </Hidden>
+              </li>
+            </ul>
           </Box>
-        </Box>
-      </Container>
-    </AppBar>
+        </Container>
+      </AppBar>
+    </ElevationScroll>
   );
 };
 

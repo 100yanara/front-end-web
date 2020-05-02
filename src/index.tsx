@@ -11,27 +11,36 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 
+import 'index.css';
+
 const history = createBrowserHistory();
 
 // customize default Material-UI theme
 let theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: '#ff9840',
+      main: '#FF7F11',
+      dark: '#b2580b',
+    },
+  },
   typography: {
     button: {
       textTransform: 'none',
-      fontFamily: '"Source Sans Pro"',
+      fontFamily: 'Source Sans Pro',
     },
     fontFamily: [
+      'Nanum Gothic',
       '-apple-system',
       'BlinkMacSystemFont',
-      '"Segoe UI"',
+      'Segoe UI',
       'Roboto',
-      '"Helvetica Neue"',
+      'Helvetica Neue',
       'Arial',
       'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-      '"Nanum Gothic"',
+      'Apple Color Emoji',
+      'Segoe UI Emoji',
+      'Segoe UI Symbol',
     ].join(','),
   },
 });

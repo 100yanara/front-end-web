@@ -13,9 +13,7 @@ const App: React.FunctionComponent = () => {
     <>
       <Switch>
         <Route exact path="/">
-          <Header />
           <Home />
-          <Footer />
         </Route>
         <Route exact path="/user/signup">
           <Header />
