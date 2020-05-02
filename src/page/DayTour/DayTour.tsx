@@ -37,7 +37,7 @@ const DayTour: React.FunctionComponent = () => {
     setState({ ...state, [anchor]: open });
   };
   return (
-    <Layout headerDefaultElevation={1}>
+    <Layout headerDefaultElevation={1} footerBorderTop={true}>
       <Container maxWidth="lg">
         <Box component="div">
           <Box component="div" paddingTop="50px">

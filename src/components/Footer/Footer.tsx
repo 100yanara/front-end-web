@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import YouTubeIcon from '@material-ui/icons/YouTube';
+import clsx from 'clsx';
 
 const useStyles = makeStyles((theme: Theme) => ({
   footer: {
@@ -27,38 +28,49 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: 4,
     },
   },
+  footer__border: {
+    borderTop: `1px solid ${theme.palette.grey[300]}`,
+  },
 }));
 
-const Footer: React.FunctionComponent = () => {
+interface Props {
+  footerBorderTop: boolean;
+}
+const Footer: React.FunctionComponent<Props> = ({ footerBorderTop }) => {
   const classes = useStyles();
   let dt: Date = new Date();
   return (
-    <Container maxWidth="lg">
-      <footer className={classes.footer}>
-        <Typography variant="caption" color="textPrimary">
-          <ul className={classes.footer__list}>
+    <Container
+      maxWidth={false}
+      className={clsx(footerBorderTop && classes.footer__border)}
+    >
+      <Container maxWidth="lg">
+        <footer className={classes.footer}>
+          <Typography variant="caption" color="textPrimary">
+            <ul className={classes.footer__list}>
+              <li>
+                &copy; {dt.getFullYear()} 백야나라, Inc. All rights reserved
+                &middot;
+              </li>
+              <li>&nbsp;개인정보 처리방침 &middot; </li>
+              <li>&nbsp;환불 정책</li>
+            </ul>
+          </Typography>
+          <ul
+            className={`${classes.footer__list} ${classes.footer__list__social}`}
+          >
             <li>
-              &copy; {dt.getFullYear()} 백야나라, Inc. All rights reserved
-              &middot;
+              <FacebookIcon />
             </li>
-            <li>&nbsp;개인정보 처리방침 &middot; </li>
-            <li>&nbsp;환불 정책</li>
+            <li>
+              <InstagramIcon />
+            </li>
+            <li>
+              <YouTubeIcon />
+            </li>
           </ul>
-        </Typography>
-        <ul
-          className={`${classes.footer__list} ${classes.footer__list__social}`}
-        >
-          <li>
-            <FacebookIcon />
-          </li>
-          <li>
-            <InstagramIcon />
-          </li>
-          <li>
-            <YouTubeIcon />
-          </li>
-        </ul>
-      </footer>
+        </footer>
+      </Container>
     </Container>
   );
 };

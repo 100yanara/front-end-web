@@ -1,10 +1,18 @@
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
-const NavButton = withStyles({
+// const NavButton = withStyles({
+//   root: {
+//     borderRadius: '20px',
+//   },
+// })(Button);
+
+// export default NavButton;
+
+const NavButton = (theme: Theme) => ({
   root: {
     borderRadius: '20px',
   },
-})(Button);
+});
 
-export default NavButton;
+export default withStyles(NavButton)(Button);

@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   home__search: {
     height: 70,
     borderRadius: '10px',
-    boxShadow: theme.shadows[2],
+    boxShadow: theme.shadows[1],
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
@@ -97,7 +97,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   home__cards: {
     borderRadius: '10px',
     maxWidth: 405,
-    boxShadow: theme.shadows[2],
+    boxShadow: theme.shadows[1],
   },
   home__banner: {
     marginTop: 80,
@@ -115,7 +115,7 @@ const Home: React.FunctionComponent = () => {
   const classes = useStyles();
   const { t, i18n } = useTranslation();
   return (
-    <Layout headerDefaultElevation={0}>
+    <Layout headerDefaultElevation={0} footerBorderTop={false}>
       <Container maxWidth="lg">
         <Box display="flex" flexDirection="column" marginBottom="50px">
           <Box
@@ -432,6 +432,7 @@ const Home: React.FunctionComponent = () => {
                         borderRadius: '10px',
                         maxHeight: '300px',
                         marginRight: 10,
+                        boxShadow: 'none',
                       }}
                     >
                       <CardActionArea>

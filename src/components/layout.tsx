@@ -20,11 +20,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 interface LayoutProps {
   children: React.ReactNode;
   headerDefaultElevation?: number;
+  footerBorderTop: boolean;
 }
 
 const Layout: React.SFC<LayoutProps> = ({
   children,
   headerDefaultElevation,
+  footerBorderTop,
 }) => {
   const classes = useStyles();
   return (
@@ -34,7 +36,7 @@ const Layout: React.SFC<LayoutProps> = ({
         <Box component="main" className={classes.content}>
           {children}
         </Box>
-        <Footer />
+        <Footer footerBorderTop={footerBorderTop} />
       </Box>
     </Container>
   );

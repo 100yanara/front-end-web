@@ -18,12 +18,10 @@ const App: React.FunctionComponent = () => {
         <Route exact path="/user/signup">
           <Header />
           <SignUp />
-          <Footer />
         </Route>
         <Route exact path="/user/signin">
           <Header />
           <div>sign in page</div>
-          <Footer />
         </Route>
         <Route path="/daytour">
           <DayTour />
@@ -31,12 +29,10 @@ const App: React.FunctionComponent = () => {
         <Route path="/calendar">
           <Header />
           <Calendar />
-          <Footer />
         </Route>
         <Route path="/createtrip">
           <Header />
           <div>create trip page</div>
-          <Footer />
         </Route>
         <Route>
           <Typography variant="h1">404 Not Found</Typography>

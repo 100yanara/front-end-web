@@ -44,6 +44,9 @@ let theme = createMuiTheme({
     ].join(','),
   },
 });
+theme.shadows[1] =
+  '0px 2px 1px -1px rgba(224,224,224,1),0px 1px 1px 0px rgba(224,224,224,1.12),0px 1px 3px 0px rgba(224,224,224,1.10)';
+
 theme = responsiveFontSizes(theme);
 
 ReactDOM.render(
