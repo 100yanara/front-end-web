@@ -19,14 +19,18 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface LayoutProps {
   children: React.ReactNode;
+  headerDefaultElevation?: number;
 }
 
-const Layout: React.SFC<LayoutProps> = ({ children }) => {
+const Layout: React.SFC<LayoutProps> = ({
+  children,
+  headerDefaultElevation,
+}) => {
   const classes = useStyles();
   return (
     <Container component="div" disableGutters={true} maxWidth={false}>
       <Box component="div" display="flex" className={classes.app}>
-        <Header />
+        <Header headerDefaultElevation={headerDefaultElevation} />
         <Box component="main" className={classes.content}>
           {children}
         </Box>

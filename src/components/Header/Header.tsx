@@ -29,7 +29,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const Header = () => {
+interface Props {
+  headerDefaultElevation?: number;
+}
+
+const Header = (props: Props) => {
+  const { headerDefaultElevation } = props;
   const classes = useStyles();
   const { t, i18n } = useTranslation();
   const [open, setOpen] = React.useState(false);
@@ -64,7 +69,7 @@ const Header = () => {
   }, [open]);
 
   return (
-    <ElevationScroll>
+    <ElevationScroll headerDefaultElevation={headerDefaultElevation}>
       <AppBar className={classes.header} position="sticky">
         <Container maxWidth="lg" component="div" style={{ height: '100%' }}>
           <Box

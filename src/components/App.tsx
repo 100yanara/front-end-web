@@ -26,9 +26,7 @@ const App: React.FunctionComponent = () => {
           <Footer />
         </Route>
         <Route path="/daytour">
-          <Header />
           <DayTour />
-          <Footer />
         </Route>
         <Route path="/calendar">
           <Header />
