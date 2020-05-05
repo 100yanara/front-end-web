@@ -1,0 +1,9 @@
+export const amberSum = require('./amberSum.jpg');
+export const amberWin = require('./amberWin.jpg');
+export const baroque = require('./baroque.jpg');
+export const cityPoint = require('./cityPoint.jpg');
+export const hermitage = require('./hermitage.jpg');
+export const romance = require('./romance.jpg');
+export const russianPainting = require('./russianPainting.jpg');
+export const troika = require('./troika.jpg');
+export const walking = require('./walking.jpg');
