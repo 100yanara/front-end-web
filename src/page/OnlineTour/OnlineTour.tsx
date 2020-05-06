@@ -12,18 +12,8 @@ import Chip from '@material-ui/core/Chip';
 import Layout from 'components/layout';
 import { FilterButton } from 'components/Buttons';
 
-import {
-  amberSum,
-  amberWin,
-  baroque,
-  cityPoint,
-  hermitage,
-  romance,
-  russianPainting,
-  troika,
-  walking,
-} from 'assets/images/daytour_saint';
-
+import { cityPoint, hermitage, troika } from 'assets/images/daytour_saint';
+import { orientation } from 'assets/images/onlineTour_saint';
 const useStyles = makeStyles((theme: Theme) => ({
   filter__list: {
     listStyle: 'none',
@@ -86,17 +76,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const DayTour: React.FunctionComponent = () => {
+const OnlineTour: React.FunctionComponent = () => {
   const classes = useStyles();
-  // const [state, setState] = React.useState({
-  //   filter: false,
-  //   city: false,
-  // });
-  // const handleClick = (anchor: string, open: boolean) => (
-  //   event: React.MouseEvent
-  // ) => {
-  //   setState({ ...state, [anchor]: open });
-  // };
   return (
     <Layout headerDefaultElevation={1} footerBorderTop={true}>
       <Container maxWidth="lg">
@@ -109,12 +90,12 @@ const DayTour: React.FunctionComponent = () => {
                 lineHeight="18px"
                 paddingBottom="8px"
               >
-                데이 투어 9개 &middot; 6월 17일 - 6월 30일
+                온라인 체험 4개 &middot; 5월 20일 - 5월 25일
               </Box>
               <Box component="div">
                 <Typography variant="h4" component="h1">
                   <Box fontSize="32px" fontWeight={800}>
-                    상트페테르부르크 데이 투어
+                    온라인 체험
                   </Box>
                 </Typography>
               </Box>
@@ -137,10 +118,10 @@ const DayTour: React.FunctionComponent = () => {
         <Box component="div" paddingBottom="50px">
           <Box component="div" paddingTop="40px" marginBottom="8px" width="50%">
             <Typography component="h3" variant="h6">
-              <Box component="div">데이 투어 소개</Box>
+              <Box component="div">온라인 체험 소개</Box>
             </Typography>
             <Box component="div" marginTop="4px">
-              지식과 감동을 전하는 백야나라 데이 투어
+              지식과 감동을 전하는 백야나라 온라인 체험
             </Box>
           </Box>
           <Box
@@ -150,99 +131,46 @@ const DayTour: React.FunctionComponent = () => {
           >
             {[
               {
-                title: '황제의 마을(성수기)',
-                image: amberSum,
-                minimum: 2,
-                duration: 4,
+                location: '상트페테르부르크',
+                title: '이현희 가이드와 함께하는 서양 미술사',
+                image: hermitage,
+                minimum: 1,
+                duration: 1.5,
                 character: '단체여행',
-                transport: '도보',
-                course: '예카테리나 궁전',
-                price: '58,500',
+                course: '에르미타쥐 박물관 본관 + 신관',
+                price: '15,500',
               },
               {
-                title: '황제의 마을(비수기)',
-                image: amberWin,
-                minimum: 2,
-                duration: 4,
-                character: '단체여행',
-                transport: '도보',
-                course: '파블롭스크 궁전+예카테리나 궁전',
-                price: '58,500',
-              },
-              {
-                title: '러시안 바로크',
-                image: baroque,
-                minimum: 2,
-                duration: 4,
-                character: '단체여행',
-                transport: '도보',
-                course:
-                  '여름분수공원 : 삼손분수+대폭포+마를리궁전+에르미타쥐 정자+몽플뢰지르+로마분수+체스산분수',
-                price: '58,500',
-              },
-              {
+                location: '상트페테르부르크',
                 title: '상트페테르부르크 시내핵심투어',
                 image: cityPoint,
-                minimum: 2,
-                duration: 4,
+                minimum: 1,
+                duration: 3,
                 character: '단체여행',
-                transport: '도보',
                 course:
                   '성 이삭성당+청동 기마상+표트르 대제 배 만드는 동상+궁전 광장+넵스키 대로+카잔 성당+피의 구세주 성당',
-                price: '58,500',
+                price: '15,500',
               },
               {
-                title: '에르미타쥐 서양미술사',
-                image: hermitage,
-                minimum: 2,
-                duration: 4,
-                character: '단체여행',
-                transport: '도보',
-                course: '에르미타쥐 박물관 본관+신관',
-                price: '58,500',
-              },
-              {
-                title: '백야 로망스',
-                image: romance,
-                minimum: 2,
-                duration: 4,
-                character: '단체여행',
-                transport: '도보',
-                course:
-                  '성이삭성당+스핑크스+로스트랄 등대+피의성당+궁전광장+카잔성당',
-                price: '58,500',
-              },
-              {
-                title: '러시아 미술사 3시간 투어',
-                image: russianPainting,
-                minimum: 2,
-                duration: 4,
-                character: '단체여행',
-                transport: '도보',
-                course: '러시아 박물관',
-                price: '58,500',
-              },
-              {
+                location: '상트페테르부르크',
                 title: '트로이카 문학과 혁명투어',
                 image: troika,
-                minimum: 2,
-                duration: 4,
+                minimum: 1,
+                duration: 3,
                 character: '단체여행',
-                transport: '도보',
                 course:
                   '센나야 광장+라스콜리니코프의 집+소냐의 집+노파의 집+마르스 광장+레닌 광장+핀란드 역',
-                price: '58,500',
+                price: '15,500',
               },
               {
-                title: '걸어서 상트페테르부르크',
-                image: walking,
-                minimum: 2,
-                duration: 4,
+                location: '러시아',
+                title: '여행 준비 오리엔테이션',
+                image: orientation,
+                minimum: 1,
+                duration: 1.5,
                 character: '단체여행',
-                transport: '도보',
-                course:
-                  '성 이삭성당+청동 기마상+표트르 대제 배 만드는 동상+궁전 광장+넵스키 대로+카잔 성당+피의 구세주 성당',
-                price: '58,500',
+                course: '',
+                price: '10,500',
               },
             ].map((a, i) => (
               <Card key={i} className={classes.card}>
@@ -259,7 +187,7 @@ const DayTour: React.FunctionComponent = () => {
                   >
                     <Chip
                       size="small"
-                      label="데이 투어"
+                      label="온라인"
                       style={{
                         position: 'absolute',
                         top: 10,
@@ -276,24 +204,27 @@ const DayTour: React.FunctionComponent = () => {
                         gutterBottom
                         variant="subtitle1"
                         component="h2"
-                        style={{ height: '20%' }}
+                        style={{ height: '30%' }}
                       >
+                        <Typography variant="caption" component="div">
+                          <Box fontWeight={700}>{a.location}</Box>
+                        </Typography>
                         {a.title}
                       </Typography>
                       <Typography
                         variant="body2"
                         color="textSecondary"
                         component="p"
-                        style={{ height: '18%' }}
+                        style={{ height: '15%' }}
                       >
                         {`최소인원 ${a.minimum}명`} &middot; {a.duration}시간
-                        &middot; {a.character} &middot; {a.transport}
+                        &middot; {a.character}
                       </Typography>
                       <Typography
                         variant="body2"
                         color="textSecondary"
                         component="p"
-                        style={{ height: '50%' }}
+                        style={{ height: '43%' }}
                       >
                         {a.course}
                       </Typography>
@@ -321,4 +252,4 @@ const DayTour: React.FunctionComponent = () => {
   );
 };
 
-export default DayTour;
+export default OnlineTour;

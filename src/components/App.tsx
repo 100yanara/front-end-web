@@ -5,6 +5,7 @@ import Home from 'page/Home';
 import SignUp from 'page/SignUp';
 import DayTour from 'page/DayTour';
 import Calendar from 'page/Calendar';
+import OnlineTour from 'page/OnlineTour';
 
 const App: React.FunctionComponent = () => {
   return (
@@ -22,11 +23,14 @@ const App: React.FunctionComponent = () => {
         <Route path="/daytour">
           <DayTour />
         </Route>
-        <Route path="/calendar">
-          <Calendar />
+        <Route path="/onlineexperience">
+          <OnlineTour />
         </Route>
         <Route path="/createtrip">
           <div>create trip page</div>
+        </Route>
+        <Route path="/calendar">
+          <Calendar />
         </Route>
         <Route>404 Not Found</Route>
       </Switch>
