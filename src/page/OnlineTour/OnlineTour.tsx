@@ -163,7 +163,7 @@ const OnlineTour: React.FunctionComponent = () => {
                 price: '15,500',
               },
               {
-                location: '러시아',
+                location: '상트페테르부르크',
                 title: '여행 준비 오리엔테이션',
                 image: orientation,
                 minimum: 1,

@@ -208,60 +208,74 @@ const Home: React.FunctionComponent = () => {
           러시아 여행의 든든한 동반자, 백야나라와 함께.
         </Box>
         <Box component="div" className={classes.home__cards__container}>
-          <Card className={classes.home__cards}>
-            <CardActionArea>
-              <CardMedia
-                image={museum}
-                title="Contemplative Reptile"
-                style={{ height: 250, backgroundColor: '#a5b77f' }}
-              />
-              <CardContent>
-                <Typography gutterBottom variant="subtitle1" component="h2">
-                  {t('tour')}
-                </Typography>
-                <Typography variant="body2" color="textSecondary">
-                  모스크바, 상트페테르부르크 그리고 탈린에 있는 다양한 백야나라
-                  데이 투어 상품을 즐겨보세요.
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-          </Card>
-          <Card className={classes.home__cards}>
-            <CardActionArea>
-              <CardMedia
-                image={saint}
-                title="Contemplative Reptile"
-                style={{ height: 250, backgroundColor: '#788193' }}
-              />
-              <CardContent>
-                <Typography gutterBottom variant="subtitle1" component="h2">
-                  {t('createTrip')}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  여행을 계획하고, 견적을 작성하는게 힘드셨죠? 백야나라가
-                  도와드립니다. 원하는 여행을 계획하고, 견적을 받아보세요.
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-          </Card>
-          <Card className={classes.home__cards}>
-            <CardActionArea>
-              <CardMedia
-                image={hermitage}
-                title="Contemplative Reptile"
-                style={{ height: 250, backgroundColor: '#bfa386' }}
-              />
-              <CardContent>
-                <Typography gutterBottom variant="subtitle1" component="h2">
-                  {t('calendar')}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  백야나라 여행 달력에서 원하는 날짜의 여행을 확인하고,
-                  예약하세요.
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-          </Card>
+          <Link href="/daytour" color="textPrimary" underline="none">
+            <Card className={classes.home__cards}>
+              <CardActionArea>
+                <CardMedia
+                  image={museum}
+                  title="Contemplative Reptile"
+                  style={{ height: 250, backgroundColor: '#a5b77f' }}
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="subtitle1" component="h2">
+                    {t('tour')}
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary">
+                    모스크바, 상트페테르부르크 그리고 탈린에 있는 다양한
+                    백야나라 데이 투어 상품을 즐겨보세요.
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </Link>
+          <Link href="/createtrip" color="textPrimary" underline="none">
+            <Card className={classes.home__cards}>
+              <CardActionArea>
+                <CardMedia
+                  image={saint}
+                  title="Contemplative Reptile"
+                  style={{ height: 250, backgroundColor: '#788193' }}
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="subtitle1" component="h2">
+                    {t('createTrip')}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    여행을 계획하고, 견적을 작성하는게 힘드셨죠? 백야나라가
+                    도와드립니다. 원하는 여행을 계획하고, 견적을 받아보세요.
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </Link>
+          <Link href="/calendar" color="textPrimary" underline="none">
+            <Card className={classes.home__cards}>
+              <CardActionArea>
+                <CardMedia
+                  image={hermitage}
+                  title="Contemplative Reptile"
+                  style={{ height: 250, backgroundColor: '#bfa386' }}
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="subtitle1" component="h2">
+                    {t('calendar')}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    백야나라 여행 달력에서 원하는 날짜의 여행을 확인하고,
+                    예약하세요.
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </Link>
         </Box>
         <CarouselProvider
           totalSlides={3}
