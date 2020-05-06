@@ -88,15 +88,15 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const DayTour: React.FunctionComponent = () => {
   const classes = useStyles();
-  const [state, setState] = React.useState({
-    filter: false,
-    city: false,
-  });
-  const handleClick = (anchor: string, open: boolean) => (
-    event: React.MouseEvent
-  ) => {
-    setState({ ...state, [anchor]: open });
-  };
+  // const [state, setState] = React.useState({
+  //   filter: false,
+  //   city: false,
+  // });
+  // const handleClick = (anchor: string, open: boolean) => (
+  //   event: React.MouseEvent
+  // ) => {
+  //   setState({ ...state, [anchor]: open });
+  // };
   return (
     <Layout headerDefaultElevation={1} footerBorderTop={true}>
       <Container maxWidth="lg">

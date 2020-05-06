@@ -1,3 +1,4 @@
+// guides
 export const yung = require('./yung.jpg');
 export const yun = require('./yun.jpg');
 export const shin = require('./shin.jpg');
@@ -12,6 +13,3 @@ export const ha = require('./ha.jpg');
 export const darya = require('./darya.jpg');
 export const ana = require('./ana.jpg');
 export const al = require('./al.jpg');
-export const museum = require('./museum.jpg');
-export const saint = require('./saint.jpg');
-export const hermitage = require('./hermitage.jpg');

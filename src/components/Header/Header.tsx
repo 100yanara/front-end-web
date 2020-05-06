@@ -5,7 +5,8 @@ import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
 import { useTranslation } from 'react-i18next';
-import logo4 from 'assets/images/logo4.png';
+
+import { logo4 } from 'assets/images/logo';
 
 import NavButton from 'components/Header/NavButton';
 import ElevationScroll from 'components/Header/ElevationScroll';

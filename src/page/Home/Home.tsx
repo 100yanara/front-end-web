@@ -20,6 +20,7 @@ import { CarouselProvider, Slider, Slide, DotGroup } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 
 import Layout from 'components/layout';
+import { museum, saint, hermitage } from 'assets/images/services';
 import {
   al,
   ana,
@@ -35,10 +36,7 @@ import {
   shin,
   yun,
   yung,
-  museum,
-  saint,
-  hermitage,
-} from 'assets/images';
+} from 'assets/images/guides';
 
 const useStyles = makeStyles((theme: Theme) => ({
   home__services: {

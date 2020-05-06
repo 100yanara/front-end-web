@@ -55,11 +55,11 @@ const Calendar = () => {
     city: false,
     moment: new Moment('en'),
   });
-  const handleClick = (anchor: string, open: boolean) => (
-    event: React.MouseEvent
-  ) => {
-    setState({ ...state, [anchor]: open });
-  };
+  // const handleClick = (anchor: string, open: boolean) => (
+  //   event: React.MouseEvent
+  // ) => {
+  //   setState({ ...state, [anchor]: open });
+  // };
   return (
     <Container component="main" maxWidth="lg">
       <Box

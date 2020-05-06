@@ -1,4 +1,4 @@
-import { withStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { withStyles, Theme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
 // const NavButton = withStyles({
