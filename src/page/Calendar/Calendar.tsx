@@ -3,12 +3,12 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
 
 import Moment from 'utils/Moment';
 import Layout from 'components/layout';
 import { FilterButton } from 'components/Buttons';
 import { randomInt } from 'utils/random';
+import Event from 'page/Calendar/Event';
 
 const useStyles = makeStyles((theme: Theme) => ({
   filter__list: {
@@ -123,12 +123,7 @@ const Calendar = () => {
                 </Box>
               </Typography>
               {[...new Array(randomInt(1, 10))].map((a, i) => (
-                <Paper
-                  variant="outlined"
-                  className={classes.calendar__item}
-                  square={true}
-                  key={i + 1}
-                />
+                <Event key={i + 1} />
               ))}
             </Box>
           ))}
