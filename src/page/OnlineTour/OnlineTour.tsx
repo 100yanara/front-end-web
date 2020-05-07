@@ -13,7 +13,7 @@ import Layout from 'components/layout';
 import { FilterButton } from 'components/Buttons';
 
 import { cityPoint, hermitage, troika } from 'assets/images/daytour_saint';
-import { orientation } from 'assets/images/onlineTour_saint';
+import { orientation, dvor } from 'assets/images/onlineTour_saint';
 const useStyles = makeStyles((theme: Theme) => ({
   filter__list: {
     listStyle: 'none',
@@ -143,6 +143,16 @@ const OnlineTour: React.FunctionComponent = () => {
                 character: '단체여행',
                 course: '에르미타쥐 박물관 본관 + 신관',
                 price: '15,500',
+              },
+              {
+                location: '상트페테르부르크',
+                title: '이현희 가이드와 함께하는 건축 여행',
+                image: dvor,
+                minimum: 1,
+                duration: 1.5,
+                character: '단체여행',
+                course: '',
+                price: '20,500',
               },
               {
                 location: '상트페테르부르크',
