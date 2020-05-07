@@ -8,6 +8,7 @@ import Paper from '@material-ui/core/Paper';
 import Moment from 'utils/Moment';
 import Layout from 'components/layout';
 import { FilterButton } from 'components/Buttons';
+import { randomInt } from 'utils/random';
 
 const useStyles = makeStyles((theme: Theme) => ({
   filter__list: {
@@ -26,8 +27,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   calendar__container: {
     gridTemplateColumns: 'repeat(4, 1fr)',
     gridColumnGap: 10,
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       gridTemplateColumns: 'repeat(3, 1fr)',
+    },
+    [theme.breakpoints.down('sm')]: {
+      gridTemplateColumns: 'repeat(2, 1fr)',
+    },
+    [theme.breakpoints.down('xs')]: {
+      gridTemplateColumns: 'repeat(1, 1fr)',
     },
   },
   calendar__day: {
@@ -43,7 +50,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     background: '#fafafa',
   },
   calendar__item: {
-    height: '5vw',
+    height: '80px',
   },
 }));
 
@@ -105,7 +112,7 @@ const Calendar = () => {
           className={classes.calendar__container}
         >
           {[...new Array(30)].map((a, i) => (
-            <Box display="grid" className={classes.calendar__day}>
+            <Box display="grid" className={classes.calendar__day} key={i}>
               <Typography
                 component="h3"
                 variant="h6"
@@ -115,22 +122,14 @@ const Calendar = () => {
                   5월 {i + 1}일 <strong>목요일</strong>
                 </Box>
               </Typography>
-
-              <Paper
-                variant="outlined"
-                className={classes.calendar__item}
-                square={true}
-              />
-              <Paper
-                variant="outlined"
-                className={classes.calendar__item}
-                square={true}
-              />
-              <Paper
-                variant="outlined"
-                className={classes.calendar__item}
-                square={true}
-              />
+              {[...new Array(randomInt(1, 10))].map((a, i) => (
+                <Paper
+                  variant="outlined"
+                  className={classes.calendar__item}
+                  square={true}
+                  key={i + 1}
+                />
+              ))}
             </Box>
           ))}
         </Box>
