@@ -3,48 +3,47 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
-import Moment from 'utils/Moment';
+import Paper from '@material-ui/core/Paper';
 
-import EventList from './EventsList';
+import Moment from 'utils/Moment';
+import Layout from 'components/layout';
+import { FilterButton } from 'components/Buttons';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  'calendar-container': {
-    height: '100vh',
-    gridTemplateColumns: '1fr',
-    gridTemplateRows: '2fr 2fr 20fr',
-    gridTemplateAreas: `
-      "filter"
-      "month"
-      "arrangementer"
-    `,
-    // gridRowGap: '10px',
-  },
-  'calendar-filter': {
-    gridArea: 'filter',
-    gridTemplateColumns: '1fr 1fr 1fr',
-    gridTemplateRows: '1fr',
-    gridTemplateAreas: `"filter1 filter2 filter3"`,
-    borderTop: '5px solid #ffb400',
-    borderBottom: '5px solid #ffb400',
-  },
-  'calendar-month': {
-    gridArea: 'month',
-    gridTemplateColumns: '2fr 4fr',
-    gridTemplateRows: '1fr',
-    gridTemplateAreas: `"space1 space2"`,
-  },
-  padding: {
-    paddingTop: theme.spacing(1.2),
-  },
-  section: {
+  filter__list: {
+    listStyle: 'none',
     display: 'flex',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    flexDirection: 'row',
+    margin: 0,
+    padding: 0,
+    '& li': {
+      display: 'inline-blick',
+      paddingRight: '8px',
+      paddingTop: '4px',
+      paddingBottom: '4px',
+    },
   },
-  section2: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+  calendar__container: {
+    gridTemplateColumns: 'repeat(4, 1fr)',
+    gridColumnGap: 10,
+    [theme.breakpoints.down('sm')]: {
+      gridTemplateColumns: 'repeat(3, 1fr)',
+    },
+  },
+  calendar__day: {
+    gridRowGap: theme.spacing(1),
+    gridTemplateRows: 'repeat(auto-fit), minmax(80px, 1fr)',
+    alignContent: 'start',
+  },
+  calendar__dayOfTheWeek: {
+    padding: '30px 0 10px',
+    borderBottom: '3px solid black',
+    position: 'sticky',
+    top: 0,
+    background: '#fafafa',
+  },
+  calendar__item: {
+    height: '5vw',
   },
 }));
 
@@ -61,49 +60,82 @@ const Calendar = () => {
   //   setState({ ...state, [anchor]: open });
   // };
   return (
-    <Container component="main" maxWidth="lg">
-      <Box
-        component="div"
-        display="grid"
-        className={classes['calendar-container']}
-      >
-        <Box
-          component="div"
-          display="grid"
-          className={classes['calendar-filter']}
-        >
-          <Typography variant="overline" className={`${classes['section']}`}>
-            City
-          </Typography>
-          <Typography variant="overline" className={`${classes['section']}`}>
-            Price
-          </Typography>
-          <Typography variant="overline" className={`${classes['section']}`}>
-            Status
-          </Typography>
-        </Box>
-        <Box
-          display="grid"
-          className={classes['calendar-month']}
-          component="div"
-        >
-          <Typography
-            variant="h5"
-            className={`${classes['section']}`}
-          >{`${state.moment.getMonth()} ${state.moment.getYear()}`}</Typography>
-          <Typography
-            variant="subtitle2"
-            className={`${classes['section2']}`}
-            color="textSecondary"
-          >
-            20 EVENTS
-          </Typography>
-        </Box>
+    <Layout
+      headerDefaultElevation={1}
+      footerBorderTop={true}
+      navPosition="static"
+    >
+      <Container maxWidth="lg">
         <Box component="div">
-          <EventList />
+          <Box component="div" paddingTop="50px">
+            <Box component="section">
+              <Box component="div">
+                <Typography variant="h4" component="h1">
+                  <Box fontSize="32px" fontWeight={800}>
+                    여행 달력
+                  </Box>
+                </Typography>
+              </Box>
+            </Box>
+          </Box>
+          <Box component="div" paddingTop="20px">
+            <ul className={classes.filter__list}>
+              <li>
+                <FilterButton variant="outlined">도시</FilterButton>
+              </li>
+              <li>
+                <FilterButton variant="outlined">날짜</FilterButton>
+              </li>
+              <li>
+                <FilterButton variant="outlined">가격</FilterButton>
+              </li>
+              <li>
+                <FilterButton variant="outlined">상태</FilterButton>
+              </li>
+              <li>
+                <FilterButton variant="outlined">온/오프라인</FilterButton>
+              </li>
+            </ul>
+          </Box>
         </Box>
-      </Box>
-    </Container>
+        <Box
+          component="div"
+          paddingBottom="50px"
+          display="grid"
+          className={classes.calendar__container}
+        >
+          {[...new Array(30)].map((a, i) => (
+            <Box display="grid" className={classes.calendar__day}>
+              <Typography
+                component="h3"
+                variant="h6"
+                className={classes.calendar__dayOfTheWeek}
+              >
+                <Box component="div">
+                  5월 {i + 1}일 <strong>목요일</strong>
+                </Box>
+              </Typography>
+
+              <Paper
+                variant="outlined"
+                className={classes.calendar__item}
+                square={true}
+              />
+              <Paper
+                variant="outlined"
+                className={classes.calendar__item}
+                square={true}
+              />
+              <Paper
+                variant="outlined"
+                className={classes.calendar__item}
+                square={true}
+              />
+            </Box>
+          ))}
+        </Box>
+      </Container>
+    </Layout>
   );
 };
 

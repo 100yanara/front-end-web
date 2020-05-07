@@ -79,7 +79,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 const OnlineTour: React.FunctionComponent = () => {
   const classes = useStyles();
   return (
-    <Layout headerDefaultElevation={1} footerBorderTop={true}>
+    <Layout
+      headerDefaultElevation={1}
+      footerBorderTop={true}
+      navPosition="sticky"
+    >
       <Container maxWidth="lg">
         <Box component="div">
           <Box component="div" paddingTop="50px">

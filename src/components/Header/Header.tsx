@@ -32,15 +32,15 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface Props {
   headerDefaultElevation?: number;
+  navPosition: string;
 }
 
-const Header = (props: Props) => {
-  const { headerDefaultElevation } = props;
+const Header: React.FunctionComponent<Props> = props => {
+  const { headerDefaultElevation, navPosition } = props;
   const classes = useStyles();
   const { t, i18n } = useTranslation();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
-
   const handleToggle = () => {
     setOpen(prevOpen => !prevOpen);
   };
@@ -71,7 +71,7 @@ const Header = (props: Props) => {
 
   return (
     <ElevationScroll headerDefaultElevation={headerDefaultElevation}>
-      <AppBar className={classes.header} position="sticky">
+      <AppBar className={classes.header} position="static">
         <Container maxWidth="lg" component="div" style={{ height: '100%' }}>
           <Box
             component="div"

@@ -113,7 +113,11 @@ const Home: React.FunctionComponent = () => {
   const classes = useStyles();
   const { t, i18n } = useTranslation();
   return (
-    <Layout headerDefaultElevation={0} footerBorderTop={false}>
+    <Layout
+      headerDefaultElevation={0}
+      footerBorderTop={false}
+      navPosition="sticky"
+    >
       <Container maxWidth="lg">
         <Box display="flex" flexDirection="column" marginBottom="50px">
           <Box

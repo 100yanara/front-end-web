@@ -21,18 +21,23 @@ interface LayoutProps {
   children: React.ReactNode;
   headerDefaultElevation?: number;
   footerBorderTop: boolean;
+  navPosition: string;
 }
 
 const Layout: React.SFC<LayoutProps> = ({
   children,
   headerDefaultElevation,
   footerBorderTop,
+  navPosition,
 }) => {
   const classes = useStyles();
   return (
     <Container component="div" disableGutters={true} maxWidth={false}>
       <Box component="div" display="flex" className={classes.app}>
-        <Header headerDefaultElevation={headerDefaultElevation} />
+        <Header
+          headerDefaultElevation={headerDefaultElevation}
+          navPosition={navPosition}
+        />
         <Box component="main" className={classes.content}>
           {children}
         </Box>
