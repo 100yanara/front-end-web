@@ -4,7 +4,6 @@ import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 
-import Moment from 'utils/Moment';
 import Layout from 'components/layout';
 import { FilterButton } from 'components/Buttons';
 import { randomInt } from 'utils/random';
@@ -49,23 +48,27 @@ const useStyles = makeStyles((theme: Theme) => ({
     top: 0,
     background: '#fafafa',
   },
-  calendar__item: {
-    height: '80px',
-  },
 }));
 
 const Calendar = () => {
   const classes = useStyles();
   const [state, setState] = React.useState({
-    filter: false,
-    city: false,
-    moment: new Moment('en'),
+    city: ['모스크바', '상트페테르부르크'],
+    date: {
+      start: 'yyyy-mm-dd',
+      end: 'yyyy-mm-dd',
+    },
+    price: {
+      0: '0-15000',
+      1: '15000-30000',
+      2: '30000-60000',
+    },
   });
-  // const handleClick = (anchor: string, open: boolean) => (
-  //   event: React.MouseEvent
-  // ) => {
-  //   setState({ ...state, [anchor]: open });
-  // };
+  const handleClick = (property: string, value: any) => (
+    event: React.MouseEvent | React.ChangeEvent
+  ) => {
+    setState({ ...state, [property]: value });
+  };
   return (
     <Layout
       headerDefaultElevation={1}
