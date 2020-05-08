@@ -97,9 +97,6 @@ const Calendar = () => {
                 <FilterButton variant="outlined">가격</FilterButton>
               </li>
               <li>
-                <FilterButton variant="outlined">상태</FilterButton>
-              </li>
-              <li>
                 <FilterButton variant="outlined">온/오프라인</FilterButton>
               </li>
             </ul>
