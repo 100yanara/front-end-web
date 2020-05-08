@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 
 import { logo4 } from 'assets/images/logo';
 
-import NavButton from 'components/Header/NavButton';
+import NavButton from 'components/Buttons/NavButton';
 import ElevationScroll from 'components/Header/ElevationScroll';
 
 const useStyles = makeStyles((theme: Theme) => ({
