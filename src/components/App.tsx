@@ -1,12 +1,15 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
+// Page
 import Home from 'page/Home';
 import SignUp from 'page/SignUp';
 import DayTour from 'page/DayTour';
 import Calendar from 'page/Calendar';
 import OnlineTour from 'page/OnlineTour';
 
+// Template
+import { TourDetail } from 'template';
 const App: React.FunctionComponent = () => {
   return (
     <>
@@ -25,6 +28,9 @@ const App: React.FunctionComponent = () => {
         </Route>
         <Route path="/onlineexperience">
           <OnlineTour />
+        </Route>
+        <Route path="/detail/:id">
+          <TourDetail />
         </Route>
         <Route path="/createtrip">
           <div>create trip page</div>
