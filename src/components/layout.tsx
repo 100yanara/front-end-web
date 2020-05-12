@@ -7,6 +7,8 @@ import Box from '@material-ui/core/Box';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 
+import { Position } from 'components/Header/type';
+
 const useStyles = makeStyles((theme: Theme) => ({
   app: {
     minHeight: '100vh',
@@ -21,7 +23,7 @@ interface LayoutProps {
   children: React.ReactNode;
   headerDefaultElevation?: number;
   footerBorderTop: boolean;
-  navPosition: string;
+  navPosition: Position;
 }
 
 const Layout: React.SFC<LayoutProps> = ({

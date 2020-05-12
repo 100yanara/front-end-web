@@ -14,6 +14,10 @@ import { FilterButton } from 'components/Buttons';
 
 import { cityPoint, hermitage, troika } from 'assets/images/daytour_saint';
 import { orientation, dvor } from 'assets/images/onlineTour_saint';
+
+//TYPE
+import { Position } from 'components/Header/type';
+
 const useStyles = makeStyles((theme: Theme) => ({
   filter__list: {
     listStyle: 'none',
@@ -82,7 +86,7 @@ const OnlineTour: React.FunctionComponent = () => {
     <Layout
       headerDefaultElevation={1}
       footerBorderTop={true}
-      navPosition="sticky"
+      navPosition={Position.sticty}
     >
       <Container maxWidth="lg">
         <Box component="div">
@@ -99,7 +103,7 @@ const OnlineTour: React.FunctionComponent = () => {
               <Box component="div">
                 <Typography variant="h4" component="h1">
                   <Box fontSize="32px" fontWeight={800}>
-                    온라인 체험
+                    상트페테르부르크 온라인 체험
                   </Box>
                 </Typography>
               </Box>
@@ -167,13 +171,12 @@ const OnlineTour: React.FunctionComponent = () => {
               },
               {
                 location: '상트페테르부르크',
-                title: '트로이카 문학과 혁명투어',
+                title: '이현희 가이드와 함께하는 죄와 벌 투어',
                 image: troika,
                 minimum: 1,
                 duration: 3,
                 character: '단체여행',
-                course:
-                  '센나야 광장+라스콜리니코프의 집+소냐의 집+노파의 집+마르스 광장+레닌 광장+핀란드 역',
+                course: '센나야 광장+라스콜리니코프의 집+소냐의 집+노파의 집',
                 price: '15,500',
               },
               {
@@ -218,18 +221,15 @@ const OnlineTour: React.FunctionComponent = () => {
                         gutterBottom
                         variant="subtitle1"
                         component="h2"
-                        style={{ height: '30%' }}
+                        style={{ height: '20%' }}
                       >
-                        <Typography variant="caption" component="div">
-                          <Box fontWeight={700}>{a.location}</Box>
-                        </Typography>
                         {a.title}
                       </Typography>
                       <Typography
                         variant="body2"
                         color="textSecondary"
                         component="p"
-                        style={{ height: '15%' }}
+                        style={{ height: '18%' }}
                       >
                         {`최소인원 ${a.minimum}명`} &middot; {a.duration}시간
                         &middot; {a.character}
@@ -238,7 +238,7 @@ const OnlineTour: React.FunctionComponent = () => {
                         variant="body2"
                         color="textSecondary"
                         component="p"
-                        style={{ height: '43%' }}
+                        style={{ height: '50%' }}
                       >
                         {a.course}
                       </Typography>

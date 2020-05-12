@@ -12,6 +12,8 @@ import Chip from '@material-ui/core/Chip';
 import Layout from 'components/layout';
 import { FilterButton } from 'components/Buttons';
 
+//TYPE
+import { Position } from 'components/Header/type';
 import {
   amberSum,
   amberWin,
@@ -101,7 +103,7 @@ const DayTour: React.FunctionComponent = () => {
     <Layout
       headerDefaultElevation={1}
       footerBorderTop={true}
-      navPosition="sticky"
+      navPosition={Position.sticty}
     >
       <Container maxWidth="lg">
         <Box component="div">

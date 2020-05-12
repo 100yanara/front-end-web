@@ -38,6 +38,9 @@ import {
   yung,
 } from 'assets/images/guides';
 
+//TYPE
+import { Position } from 'components/Header/type';
+
 const useStyles = makeStyles((theme: Theme) => ({
   home__services: {
     '& span': {
@@ -107,6 +110,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     bottom: 5,
     left: '47%',
   },
+  home__guide_description: {
+    width: '36%',
+    marginTop: '5px',
+  },
 }));
 
 const Home: React.FunctionComponent = () => {
@@ -116,7 +123,7 @@ const Home: React.FunctionComponent = () => {
     <Layout
       headerDefaultElevation={0}
       footerBorderTop={false}
-      navPosition="sticky"
+      navPosition={Position.sticty}
     >
       <Container maxWidth="lg">
         <Box display="flex" flexDirection="column" marginBottom="50px">
@@ -402,70 +409,74 @@ const Home: React.FunctionComponent = () => {
         }}
       >
         <Container maxWidth="lg">
-          <Box textAlign="left">
+          <Box textAlign="left" color="white">
             <Typography variant="h4">
               <Box color="white" fontWeight="bold">
                 백야나라 가이드
               </Box>
             </Typography>
-            <Typography variant="body1">
-              <Box color="white" width="35%" marginTop="5px">
-                백야나라의 가이드를 살펴보세요. 러시아 여행동안 지식과 감동을
-                선사해 줄 백야나라 가이드를 소개합니다.
-              </Box>
-            </Typography>
-            <Box component="div" marginTop="30px" color="white"></Box>
-            <CarouselProvider
-              naturalSlideWidth={100}
-              naturalSlideHeight={100}
-              totalSlides={14}
-              visibleSlides={4}
-              infinite={true}
-              dragStep={4}
-              isPlaying={true}
-              step={2}
+            <Typography
+              variant="body1"
+              color="inherit"
+              component="div"
+              className={classes.home__guide_description}
             >
-              <Slider>
-                {[
-                  al,
-                  ana,
-                  darya,
-                  ha,
-                  hyun,
-                  keum,
-                  lu,
-                  marett,
-                  mina,
-                  peter,
-                  sena,
-                  shin,
-                  yun,
-                  yung,
-                ].map((a, i) => (
-                  <Slide index={i} key={i}>
-                    <Card
-                      style={{
-                        borderRadius: '10px',
-                        maxHeight: '300px',
-                        marginRight: 10,
-                        boxShadow: 'none',
-                      }}
-                    >
-                      <CardActionArea>
-                        <CardMedia
-                          image={a}
-                          title="Contemplative Reptile"
-                          style={{
-                            height: '20rem',
-                            backgroundColor: '#a5b77f',
-                          }}
-                        />
-                      </CardActionArea>
-                    </Card>
-                  </Slide>
-                ))}
-              </Slider>
-            </CarouselProvider>
+              백야나라의 가이드를 살펴보세요. 러시아 여행동안 지식과 감동을
+              선사해 줄 백야나라 가이드를 소개합니다.
+            </Typography>
+            <Box component="div" marginTop="30px" color="white">
+              <CarouselProvider
+                naturalSlideWidth={100}
+                naturalSlideHeight={100}
+                totalSlides={14}
+                visibleSlides={4}
+                infinite={true}
+                dragStep={4}
+                isPlaying={true}
+                step={2}
+              >
+                <Slider>
+                  {[
+                    al,
+                    ana,
+                    darya,
+                    ha,
+                    hyun,
+                    keum,
+                    lu,
+                    marett,
+                    mina,
+                    peter,
+                    sena,
+                    shin,
+                    yun,
+                    yung,
+                  ].map((a, i) => (
+                    <Slide index={i} key={i}>
+                      <Card
+                        style={{
+                          borderRadius: '10px',
+                          maxHeight: '300px',
+                          marginRight: 10,
+                          boxShadow: 'none',
+                        }}
+                      >
+                        <CardActionArea>
+                          <CardMedia
+                            image={a}
+                            title="Contemplative Reptile"
+                            style={{
+                              height: '20rem',
+                              backgroundColor: '#a5b77f',
+                            }}
+                          />
+                        </CardActionArea>
+                      </Card>
+                    </Slide>
+                  ))}
+                </Slider>
+              </CarouselProvider>
+            </Box>
           </Box>
         </Container>
       </Container>

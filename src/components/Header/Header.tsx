@@ -10,6 +10,7 @@ import { logo4 } from 'assets/images/logo';
 
 import NavButton from 'components/Buttons/NavButton';
 import ElevationScroll from 'components/Header/ElevationScroll';
+import { Position } from './type';
 
 const useStyles = makeStyles((theme: Theme) => ({
   logo: {
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface Props {
   headerDefaultElevation?: number;
-  navPosition: string;
+  navPosition: Position;
 }
 
 const Header: React.FunctionComponent<Props> = props => {
