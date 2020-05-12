@@ -5,6 +5,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { getRandomColor } from 'utils/random';
 
+import { dvor } from 'assets/images/onlineTour_saint';
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -53,11 +55,7 @@ export default function Event() {
   const classes = useStyles();
   return (
     <Card className={classes.root} elevation={0} square={true}>
-      <CardMedia
-        className={classes.cover}
-        style={{ background: getRandomColor() }}
-        image=""
-      />
+      {/* <CardMedia className={classes.cover} image={dvor} /> */}
       <div className={classes.details}>
         <Typography variant="caption">09:30</Typography>
         <Typography variant="caption">

@@ -1,13 +1,20 @@
 import React from 'react';
+import moment from 'moment';
+import 'moment/locale/ko';
+//Material UI
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 
+//Custom UI
 import Layout from 'components/layout';
 import { FilterButton } from 'components/Buttons';
 import { randomInt } from 'utils/random';
 import Event from 'page/Calendar/Event';
+
+//Type
+import { Position } from 'components/Header/type';
 
 const useStyles = makeStyles((theme: Theme) => ({
   filter__list: {
@@ -52,11 +59,21 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const Calendar = () => {
   const classes = useStyles();
+  moment.locale('ko');
   const [state, setState] = React.useState({
     city: ['모스크바', '상트페테르부르크'],
     date: {
       start: 'yyyy-mm-dd',
       end: 'yyyy-mm-dd',
+      weekdaysort: moment.weekdaysShort(),
+      dateObject: moment(),
+      firstDayOfMonth: () => {
+        let firstDay = moment(state.date.dateObject)
+          .startOf('month')
+          .format('d');
+        return firstDay;
+      },
+      month: [],
     },
     price: {
       0: '0-15000',
@@ -73,7 +90,7 @@ const Calendar = () => {
     <Layout
       headerDefaultElevation={1}
       footerBorderTop={true}
-      navPosition="static"
+      navPosition={Position.static}
     >
       <Container maxWidth="lg">
         <Box component="div">
@@ -105,29 +122,38 @@ const Calendar = () => {
             </ul>
           </Box>
         </Box>
-        <Box
-          component="div"
-          paddingBottom="50px"
-          display="grid"
-          className={classes.calendar__container}
-        >
-          {[...new Array(30)].map((a, i) => (
-            <Box display="grid" className={classes.calendar__day} key={i}>
-              <Typography
-                component="h3"
-                variant="h6"
-                className={classes.calendar__dayOfTheWeek}
-              >
-                <Box component="div">
-                  5월 {i + 1}일 <strong>목요일</strong>
+        {['5월', '6월', '7월', '8월'].map(month => (
+          <Box
+            paddingBottom="50px"
+            component="div"
+            display="flex"
+            flexDirection="column"
+            key={month}
+          >
+            <Box
+              component="div"
+              display="grid"
+              className={classes.calendar__container}
+            >
+              {[...new Array(30)].map((a, i) => (
+                <Box display="grid" className={classes.calendar__day} key={i}>
+                  <Typography
+                    component="h3"
+                    variant="h6"
+                    className={classes.calendar__dayOfTheWeek}
+                  >
+                    <Box component="div">
+                      {month} {i + 1}일 <strong>목요일</strong>
+                    </Box>
+                  </Typography>
+                  {[...new Array(randomInt(1, 10))].map((a, i) => (
+                    <Event key={i + 1} />
+                  ))}
                 </Box>
-              </Typography>
-              {[...new Array(randomInt(1, 10))].map((a, i) => (
-                <Event key={i + 1} />
               ))}
             </Box>
-          ))}
-        </Box>
+          </Box>
+        ))}
       </Container>
     </Layout>
   );
