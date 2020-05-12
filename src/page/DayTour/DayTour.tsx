@@ -8,6 +8,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Chip from '@material-ui/core/Chip';
+import Link from '@material-ui/core/Link';
 
 import Layout from 'components/layout';
 import { FilterButton } from 'components/Buttons';
@@ -90,15 +91,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const DayTour: React.FunctionComponent = () => {
   const classes = useStyles();
-  // const [state, setState] = React.useState({
-  //   filter: false,
-  //   city: false,
-  // });
-  // const handleClick = (anchor: string, open: boolean) => (
-  //   event: React.MouseEvent
-  // ) => {
-  //   setState({ ...state, [anchor]: open });
-  // };
   return (
     <Layout
       headerDefaultElevation={1}
@@ -156,6 +148,7 @@ const DayTour: React.FunctionComponent = () => {
           >
             {[
               {
+                id: 1,
                 title: '황제의 마을(성수기)',
                 image: amberSum,
                 minimum: 2,
@@ -166,6 +159,7 @@ const DayTour: React.FunctionComponent = () => {
                 price: '58,500',
               },
               {
+                id: 2,
                 title: '황제의 마을(비수기)',
                 image: amberWin,
                 minimum: 2,
@@ -176,6 +170,7 @@ const DayTour: React.FunctionComponent = () => {
                 price: '58,500',
               },
               {
+                id: 3,
                 title: '러시안 바로크',
                 image: baroque,
                 minimum: 2,
@@ -187,6 +182,7 @@ const DayTour: React.FunctionComponent = () => {
                 price: '58,500',
               },
               {
+                id: 4,
                 title: '상트페테르부르크 시내핵심투어',
                 image: cityPoint,
                 minimum: 2,
@@ -198,6 +194,7 @@ const DayTour: React.FunctionComponent = () => {
                 price: '58,500',
               },
               {
+                id: 5,
                 title: '에르미타쥐 서양미술사',
                 image: hermitage,
                 minimum: 2,
@@ -208,6 +205,7 @@ const DayTour: React.FunctionComponent = () => {
                 price: '58,500',
               },
               {
+                id: 6,
                 title: '백야 로망스',
                 image: romance,
                 minimum: 2,
@@ -219,6 +217,7 @@ const DayTour: React.FunctionComponent = () => {
                 price: '58,500',
               },
               {
+                id: 7,
                 title: '러시아 미술사 3시간 투어',
                 image: russianPainting,
                 minimum: 2,
@@ -229,6 +228,7 @@ const DayTour: React.FunctionComponent = () => {
                 price: '58,500',
               },
               {
+                id: 8,
                 title: '트로이카 문학과 혁명투어',
                 image: troika,
                 minimum: 2,
@@ -240,6 +240,7 @@ const DayTour: React.FunctionComponent = () => {
                 price: '58,500',
               },
               {
+                id: 9,
                 title: '걸어서 상트페테르부르크',
                 image: walking,
                 minimum: 2,
@@ -251,74 +252,80 @@ const DayTour: React.FunctionComponent = () => {
                 price: '58,500',
               },
             ].map((a, i) => (
-              <Card key={i} className={classes.card}>
-                <CardActionArea
-                  classes={{
-                    root: classes.cardAction,
-                    focusHighlight: classes.focusHighlight,
-                  }}
-                >
-                  <CardMedia
-                    className={classes.media}
-                    image={a.image}
-                    title={a.title}
+              <Link href={`/detail/${a.id}`} target="_blank">
+                <Card key={i} className={classes.card}>
+                  <CardActionArea
+                    classes={{
+                      root: classes.cardAction,
+                      focusHighlight: classes.focusHighlight,
+                    }}
                   >
-                    <Chip
-                      size="small"
-                      label="데이 투어"
-                      style={{
-                        position: 'absolute',
-                        top: 10,
-                        left: 10,
-                        fontSize: 10,
-                        color: 'white',
-                        background: 'black',
-                      }}
-                    />
-                  </CardMedia>
-                  <CardContent className={classes.cardContent}>
-                    <Box component="div" style={{ height: '100%' }}>
-                      <Typography
-                        gutterBottom
-                        variant="subtitle1"
-                        component="h2"
-                        style={{ height: '20%' }}
-                      >
-                        {a.title}
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        component="p"
-                        style={{ height: '18%' }}
-                      >
-                        {`최소인원 ${a.minimum}명`} &middot; {a.duration}시간
-                        &middot; {a.character} &middot; {a.transport}
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        component="p"
-                        style={{ height: '50%' }}
-                      >
-                        {a.course}
-                      </Typography>
-                      <Typography
-                        variant="subtitle1"
-                        color="textSecondary"
-                        component="p"
-                        align="right"
-                        style={{ height: '12%' }}
-                      >
-                        1인
-                        <Box component="span" fontWeight={800} color="#EE4116">
-                          &nbsp; ₩ {a.price}
-                        </Box>
-                      </Typography>
-                    </Box>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
+                    <CardMedia
+                      className={classes.media}
+                      image={a.image}
+                      title={a.title}
+                    >
+                      <Chip
+                        size="small"
+                        label="데이 투어"
+                        style={{
+                          position: 'absolute',
+                          top: 10,
+                          left: 10,
+                          fontSize: 10,
+                          color: 'white',
+                          background: 'black',
+                        }}
+                      />
+                    </CardMedia>
+                    <CardContent className={classes.cardContent}>
+                      <Box component="div" style={{ height: '100%' }}>
+                        <Typography
+                          gutterBottom
+                          variant="subtitle1"
+                          component="h2"
+                          style={{ height: '20%' }}
+                        >
+                          {a.title}
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          color="textSecondary"
+                          component="p"
+                          style={{ height: '18%' }}
+                        >
+                          {`최소인원 ${a.minimum}명`} &middot; {a.duration}시간
+                          &middot; {a.character} &middot; {a.transport}
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          color="textSecondary"
+                          component="p"
+                          style={{ height: '50%' }}
+                        >
+                          {a.course}
+                        </Typography>
+                        <Typography
+                          variant="subtitle1"
+                          color="textSecondary"
+                          component="p"
+                          align="right"
+                          style={{ height: '12%' }}
+                        >
+                          1인
+                          <Box
+                            component="span"
+                            fontWeight={800}
+                            color="#EE4116"
+                          >
+                            &nbsp; ₩ {a.price}
+                          </Box>
+                        </Typography>
+                      </Box>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              </Link>
             ))}
           </Box>
         </Box>
