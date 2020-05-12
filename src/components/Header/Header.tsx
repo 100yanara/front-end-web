@@ -10,17 +10,20 @@ import { logo4 } from 'assets/images/logo';
 
 import NavButton from 'components/Buttons/NavButton';
 import ElevationScroll from 'components/Header/ElevationScroll';
-import { Position } from './type';
+import { Position, StyleProps } from './type';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   logo: {
     width: '110px',
   },
-  header: {
-    background: theme.palette.background.default,
+  header: props => ({
+    // background: theme.palette.background.default,
+    background: props.background
+      ? props.background
+      : theme.palette.background.default,
     width: '100%',
     height: '80px',
-  },
+  }),
   navList: {
     display: 'flex',
     flexDirection: 'row',
@@ -34,41 +37,14 @@ const useStyles = makeStyles((theme: Theme) => ({
 interface Props {
   headerDefaultElevation?: number;
   navPosition: Position;
+  backgroundColor?: string;
 }
 
 const Header: React.FunctionComponent<Props> = props => {
-  const { headerDefaultElevation, navPosition } = props;
-  const classes = useStyles();
+  const { headerDefaultElevation, navPosition, backgroundColor } = props;
+  const styleProps: StyleProps = { background: backgroundColor };
+  const classes = useStyles(styleProps);
   const { t, i18n } = useTranslation();
-  const [open, setOpen] = React.useState(false);
-  const anchorRef = React.useRef<HTMLButtonElement>(null);
-  const handleToggle = () => {
-    setOpen(prevOpen => !prevOpen);
-  };
-
-  const handleClose = (event: React.MouseEvent<EventTarget>, lang?: string) => {
-    if (
-      anchorRef.current &&
-      anchorRef.current.contains(event.target as HTMLElement)
-    ) {
-      return;
-    } else if (lang) {
-      i18n.changeLanguage(lang);
-      setOpen(false);
-    } else {
-      setOpen(false);
-    }
-  };
-
-  // return focus to the button when we transitioned from !open -> open
-  const prevOpen = React.useRef(open);
-  React.useEffect(() => {
-    if (prevOpen.current === true && open === false) {
-      anchorRef.current!.focus();
-    }
-
-    prevOpen.current = open;
-  }, [open]);
 
   return (
     <ElevationScroll headerDefaultElevation={headerDefaultElevation}>

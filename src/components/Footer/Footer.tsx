@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 interface Props {
   footerBorderTop: boolean;
 }
+
 const Footer: React.FunctionComponent<Props> = ({ footerBorderTop }) => {
   const classes = useStyles();
   let dt: Date = new Date();
