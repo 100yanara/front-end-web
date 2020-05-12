@@ -5,7 +5,8 @@ import Layout from 'components/layout';
 
 //type
 import { Position } from 'components/Header/type';
-const OnlineTourDetail: React.FunctionComponent = () => {
+
+const TourDetail: React.FunctionComponent = () => {
   return (
     <Layout footerBorderTop={true} navPosition={Position.static}>
       a
@@ -13,4 +14,4 @@ const OnlineTourDetail: React.FunctionComponent = () => {
   );
 };
 
-export default OnlineTourDetail;
+export default TourDetail;

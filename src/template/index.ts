@@ -1,1 +1,1 @@
-export { default as OnlineTourDetail } from './onlineTourDetail';
+export { default as TourDetail } from './TourDetail';
