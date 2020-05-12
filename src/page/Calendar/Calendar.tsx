@@ -81,11 +81,6 @@ const Calendar = () => {
       2: '30000-60000',
     },
   });
-  const handleClick = (property: string, value: any) => (
-    event: React.MouseEvent | React.ChangeEvent
-  ) => {
-    setState({ ...state, [property]: value });
-  };
   return (
     <Layout
       headerDefaultElevation={1}
