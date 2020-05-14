@@ -16,7 +16,8 @@ import Layout from 'components/layout';
 import Review from 'components/Review';
 //type
 import { Position } from 'components/Header/type';
-
+//map
+import GoogleMapReact from 'google-map-react';
 //images
 import {
   amber1,
@@ -25,6 +26,22 @@ import {
   amber4,
   amber5,
 } from 'assets/images/daytour_saint/amber';
+
+const AnyReactComponent = ({ text }: any) => <div>{text}</div>;
+
+const Map = (props: any) => {
+  const [center, setCenter] = React.useState({ lat: 59.92026, lng: 30.328752 });
+  const [zoom, setZoom] = React.useState(15);
+  return (
+    <GoogleMapReact
+      bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAP }}
+      defaultCenter={center}
+      defaultZoom={zoom}
+    >
+      <AnyReactComponent lat={59.92026} lng={30.328752} text="미팅장소" />
+    </GoogleMapReact>
+  );
+};
 
 const useStyles = makeStyles((theme: Theme) => ({
   thumnailsContainer: {
@@ -343,12 +360,9 @@ const TourDetail: React.FunctionComponent = () => {
               </Typography>
             </Box>
           </Box>
-          <Box
-            component="div"
-            height="45vw"
-            maxHeight="570px"
-            bgcolor="#fa9191"
-          ></Box>
+          <Box component="div" height="45vw" maxHeight="570px">
+            <Map />
+          </Box>
         </Container>
       </Container>
     </Layout>
