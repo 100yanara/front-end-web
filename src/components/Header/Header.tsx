@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
 import Container from '@material-ui/core/Container';
@@ -6,7 +7,7 @@ import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
 import { useTranslation } from 'react-i18next';
 
-import { logo4 } from 'assets/images/logo';
+import { logo4, logo5 } from 'assets/images/logo';
 
 import NavButton from 'components/Buttons/NavButton';
 import ElevationScroll from 'components/Header/ElevationScroll';
@@ -17,7 +18,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     width: '110px',
   },
   header: props => ({
-    // background: theme.palette.background.default,
     background: props.background
       ? props.background
       : theme.palette.background.default,
@@ -28,9 +28,18 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'row',
     listStyle: 'none',
+    color: 'white',
   },
   signUp: {
     boxShadow: theme.shadows[1],
+  },
+  signUpDark: {
+    boxShadow: theme.shadows[0],
+    background: 'rgba(100, 100, 100, 0.5)',
+    color: 'white',
+  },
+  darkThemeNavButton: {
+    color: 'white',
   },
 }));
 
@@ -38,10 +47,11 @@ interface Props {
   headerDefaultElevation?: number;
   navPosition: Position;
   backgroundColor?: string;
+  theme?: number;
 }
 
 const Header: React.FunctionComponent<Props> = props => {
-  const { headerDefaultElevation, navPosition, backgroundColor } = props;
+  const { headerDefaultElevation, navPosition, backgroundColor, theme } = props;
   const styleProps: StyleProps = { background: backgroundColor };
   const classes = useStyles(styleProps);
   const { t, i18n } = useTranslation();
@@ -58,20 +68,31 @@ const Header: React.FunctionComponent<Props> = props => {
             justifyContent="space-between"
           >
             <Link href="/">
-              <img src={logo4} alt="#" className={classes.logo} />
+              {theme === 1 ? (
+                <img src={logo5} alt="#" className={classes.logo} />
+              ) : (
+                <img src={logo4} alt="#" className={classes.logo} />
+              )}
             </Link>
             <ul className={classes.navList}>
               <li>
                 <Link href="/user/signin" color="textPrimary" underline="none">
-                  <NavButton size="large">{t('signin')}</NavButton>
+                  <NavButton
+                    size="large"
+                    className={clsx(theme && classes.darkThemeNavButton)}
+                  >
+                    {t('signin')}
+                  </NavButton>
                 </Link>
               </li>
               <li>
                 <Link href="/user/signup" color="textPrimary" underline="none">
                   <NavButton
-                    variant="outlined"
+                    variant={theme === 1 ? 'contained' : 'outlined'}
                     size="large"
-                    className={classes.signUp}
+                    className={
+                      theme === 1 ? classes.signUpDark : classes.signUp
+                    }
                   >
                     {t('signup')}
                   </NavButton>

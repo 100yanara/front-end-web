@@ -9,6 +9,10 @@ import Button from '@material-ui/core/Button';
 
 // export default NavButton;
 
+export interface StyleProps {
+  background?: string;
+}
+
 const NavButton = (theme: Theme) => ({
   root: {
     borderRadius: '20px',

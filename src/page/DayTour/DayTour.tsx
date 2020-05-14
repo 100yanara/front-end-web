@@ -252,7 +252,12 @@ const DayTour: React.FunctionComponent = () => {
                 price: '58,500',
               },
             ].map((a, i) => (
-              <Link href={`/detail/${a.id}`} target="_blank">
+              <Link
+                href={`/detail/${a.id}`}
+                target="_blank"
+                rel="noopener"
+                underline="none"
+              >
                 <Card key={i} className={classes.card}>
                   <CardActionArea
                     classes={{

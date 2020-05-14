@@ -25,6 +25,7 @@ interface LayoutProps {
   footerBorderTop: boolean;
   navPosition: Position;
   navBackground?: string;
+  navTheme?: number;
 }
 
 const Layout: React.SFC<LayoutProps> = ({
@@ -33,6 +34,7 @@ const Layout: React.SFC<LayoutProps> = ({
   footerBorderTop,
   navPosition,
   navBackground,
+  navTheme,
 }) => {
   const classes = useStyles();
   return (
@@ -42,6 +44,7 @@ const Layout: React.SFC<LayoutProps> = ({
           headerDefaultElevation={headerDefaultElevation}
           navPosition={navPosition}
           backgroundColor={navBackground}
+          theme={navTheme}
         />
         <Box component="main" className={classes.content}>
           {children}
