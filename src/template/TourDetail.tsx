@@ -346,7 +346,7 @@ const TourDetail: React.FunctionComponent = () => {
           <Box
             component="div"
             height="45vw"
-            maxHeight="600px"
+            maxHeight="570px"
             bgcolor="#fa9191"
           ></Box>
         </Container>
