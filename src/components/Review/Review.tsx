@@ -3,14 +3,14 @@ import { makeStyles, Theme, Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Avatar from '@material-ui/core/Avatar';
 import GradeIcon from '@material-ui/icons/Grade';
-
+import { avatar1 } from 'assets/images/avatar';
 const useStyles = makeStyles((theme: Theme) => ({}));
 
 const Review: React.FunctionComponent = () => {
   return (
     <Box component="div" display="flex" flexDirection="column" pb={1}>
       <Box component="div" display="flex" flexDirection="row">
-        <Avatar />
+        <Avatar alt="hun" src={avatar1} />
         <Box component="div" ml={2}>
           <Box component="div">
             <Typography component="span" variant="button">

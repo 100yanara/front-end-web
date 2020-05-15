@@ -7,10 +7,15 @@ import Typography from '@material-ui/core/Typography';
 import GradeIcon from '@material-ui/icons/Grade';
 import AirportShuttleOutlinedIcon from '@material-ui/icons/AirportShuttleOutlined';
 import FastfoodOutlinedIcon from '@material-ui/icons/FastfoodOutlined';
+import Button from '@material-ui/core/Button';
 import HeadsetOutlinedIcon from '@material-ui/icons/HeadsetOutlined';
 import Avatar from '@material-ui/core/Avatar';
 import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
+import CardMedia from '@material-ui/core/CardMedia';
+import AppBar from '@material-ui/core/AppBar';
+import RootRef from '@material-ui/core/RootRef';
+import Link from '@material-ui/core/Link';
 //Custom UI
 import Layout from 'components/layout';
 import Review from 'components/Review';
@@ -19,14 +24,9 @@ import { Position } from 'components/Header/type';
 //map
 import GoogleMapReact from 'google-map-react';
 //images
-import {
-  amber1,
-  amber2,
-  amber3,
-  amber4,
-  amber5,
-} from 'assets/images/daytour_saint/amber';
-
+import { amber1, amber2, amber3, map } from 'assets/images/daytour_saint/amber';
+import { amberSum, amberWin } from 'assets/images/daytour_saint';
+import { avatar1 } from 'assets/images/avatar';
 const AnyReactComponent = ({ text }: any) => <div>{text}</div>;
 
 const Map = (props: any) => {
@@ -39,6 +39,20 @@ const Map = (props: any) => {
       defaultZoom={zoom}
     >
       <AnyReactComponent lat={59.92026} lng={30.328752} text="미팅장소" />
+      <Box
+        component="div"
+        position="absolute"
+        width="400px"
+        height="80px"
+        borderRadius="10px"
+        bgcolor="white"
+        top="8%"
+        left="-5%"
+        padding="13px"
+      >
+        <Typography variant="subtitle1">만나는 장소:</Typography>
+        <Typography variant="body2">비텝스키 기차역 입구 앞</Typography>
+      </Box>
     </GoogleMapReact>
   );
 };
@@ -56,8 +70,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   mainDescription: {
     padding: '32px 0 64px',
   },
+  thumnails_card_media: {
+    height: '100%',
+  },
   boxLayout: {
-    gridTemplateColumns: '30% 70%',
+    gridTemplateColumns: '35% 65%',
   },
   avatar: {
     width: theme.spacing(13),
@@ -73,6 +90,28 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: '18vw',
     maxHeight: '250px',
     padding: '40px 28px',
+  },
+  categories_nav: {
+    boxShadow: theme.shadows[0],
+    borderBottom: `1px solid ${theme.palette.grey[300]}`,
+    height: '52px',
+    display: 'none',
+  },
+  reservation_menu: {
+    top: 'auto',
+    bottom: 0,
+    height: '69px',
+    padding: '10px 0',
+    background: '#FFFFFF',
+    boxShadow: theme.shadows[0],
+    borderTop: `.5px solid ${theme.palette.grey[200]}`,
+  },
+  reservation_avatar: {
+    width: theme.spacing(6),
+    height: theme.spacing(6),
+  },
+  primaryColor: {
+    color: theme.palette.primary.main,
   },
 }));
 
@@ -91,6 +130,14 @@ const Tag = withStyles({
 
 const TourDetail: React.FunctionComponent = () => {
   const classes = useStyles();
+  const thumnailBottom = React.useRef<HTMLDivElement>(null);
+  React.useEffect(() => {
+    let win = window.pageYOffset;
+    let bot = thumnailBottom.current?.getBoundingClientRect().bottom;
+    console.log(bot && win + bot);
+  }, []);
+  const preventDefault = (event: React.SyntheticEvent) =>
+    event.preventDefault();
   return (
     <Layout
       footerBorderTop={true}
@@ -100,50 +147,176 @@ const TourDetail: React.FunctionComponent = () => {
       navTheme={1}
     >
       <Container maxWidth={false} style={{ background: '#000000' }}>
-        <Container maxWidth="lg" style={{ padding: '0 50px' }}>
-          <Box
-            color="white"
-            display="grid"
-            className={classes.thumnailsContainer}
-          >
-            <Box gridArea="1/1/3/3" bgcolor="#eb6383" />
-            <Box gridArea="1/3/3/5" bgcolor="#fa9191" />
-            <Box gridArea="1/5/2/6" bgcolor="#ffe9c5" />
-            <Box gridArea="2/5/3/6" bgcolor="#b4f2e1" />
-            <Box gridArea="1/6/3/8" bgcolor="#eb6383" />
-          </Box>
-          <Box
-            color="white"
-            display="grid"
-            className={`${classes.mainDescription} ${classes.boxLayout}`}
-          >
-            <Box textAlign="left">
-              <Typography variant="overline">데이 투어</Typography>
-              <Typography variant="h5">
-                <Box fontWeight={600}>황제의 마을(성수기)</Box>
-              </Typography>
-              <Typography variant="subtitle2">
-                <Box mt={1}>상트페테르부르크, 러시아</Box>
-              </Typography>
-              <Typography variant="subtitle2">
-                <Box mt={1} display="flex" alignItems="center">
-                  <span style={{ paddingTop: '1px', fontWeight: 'bold' }}>
-                    4.98
-                  </span>
-                  &nbsp; <GradeIcon style={{ fontSize: '15px' }} />
-                  <span>(124)</span>
-                </Box>
-              </Typography>
-              <Box display="flex" flexDirection="row" mt={1}>
-                <Tag>투어</Tag>
-                <Tag>역사</Tag>
+        <RootRef rootRef={thumnailBottom}>
+          <Container maxWidth="lg" style={{ padding: '0 50px' }}>
+            <Box
+              color="white"
+              display="grid"
+              className={classes.thumnailsContainer}
+            >
+              <Box gridArea="1/1/3/3" height="100%" bgcolor="#fa9191">
+                <CardMedia
+                  className={classes.thumnails_card_media}
+                  title="spac"
+                  image={amber1}
+                />
+              </Box>
+              <Box gridArea="1/3/3/5" bgcolor="#fa9191" height="100%">
+                <CardMedia
+                  className={classes.thumnails_card_media}
+                  title="spac"
+                  image={amber2}
+                />
+              </Box>
+              <Box gridArea="1/5/2/6" bgcolor="#ffe9c5" height="100%">
+                <CardMedia
+                  className={classes.thumnails_card_media}
+                  title="spac"
+                  image={amber3}
+                />
+              </Box>
+              <Box gridArea="2/5/3/6" bgcolor="#b4f2e1" height="100%">
+                <CardMedia
+                  className={classes.thumnails_card_media}
+                  title="spac"
+                  image={amberWin}
+                />
+              </Box>
+              <Box gridArea="1/6/3/8" bgcolor="#eb6383" height="100%">
+                <CardMedia
+                  className={classes.thumnails_card_media}
+                  title="spac"
+                  image={amberSum}
+                />
               </Box>
             </Box>
-            {/* 이건 그룹 이원, 시간 등을 표시하는 박스 */}
-            <Box></Box>
-          </Box>
-        </Container>
+            <Box
+              color="white"
+              display="grid"
+              className={`${classes.mainDescription} ${classes.boxLayout}`}
+            >
+              <Box textAlign="left">
+                <Typography variant="overline">데이 투어</Typography>
+                <Typography variant="h5">
+                  <Box fontWeight={600}>황제의 마을(성수기)</Box>
+                </Typography>
+                <Typography variant="subtitle2">
+                  <Box mt={1}>상트페테르부르크, 러시아</Box>
+                </Typography>
+                <Typography variant="subtitle2">
+                  <Box mt={1} display="flex" alignItems="center">
+                    <span style={{ paddingTop: '1px', fontWeight: 'bold' }}>
+                      4.98
+                    </span>
+                    &nbsp; <GradeIcon style={{ fontSize: '15px' }} />
+                    <span>(124)</span>
+                  </Box>
+                </Typography>
+                <Box display="flex" flexDirection="row" mt={1}>
+                  <Tag>투어</Tag>
+                  <Tag>역사</Tag>
+                </Box>
+              </Box>
+              {/* 이건 그룹 이원, 시간 등을 표시하는 박스 */}
+              <Box></Box>
+            </Box>
+          </Container>
+        </RootRef>
       </Container>
+      <AppBar
+        color="transparent"
+        position="fixed"
+        className={classes.categories_nav}
+      >
+        <Container maxWidth="lg" style={{ padding: '0 50px', height: '100%' }}>
+          <Typography variant="subtitle2" style={{ height: '100%' }}>
+            <Box
+              component="ul"
+              display="flex"
+              alignItems="center"
+              flexDirection="row"
+              height="100%"
+              margin="0"
+              padding="0"
+            >
+              <li
+                style={{
+                  listStyle: 'none',
+                  marginRight: '6px',
+                  color: '#ff7f11',
+                }}
+              >
+                <Link href="#program" onClick={preventDefault}>
+                  프로그램
+                </Link>
+              </li>
+              &middot;
+              <li
+                style={{
+                  listStyle: 'none',
+                  marginRight: '6px',
+                  marginLeft: '6px',
+                  color: '#ff7f11',
+                }}
+              >
+                <Link href="#guide" onClick={preventDefault}>
+                  가이드
+                </Link>
+              </li>
+              <li
+                style={{
+                  listStyle: 'none',
+                  marginRight: '6px',
+                  marginLeft: '6px',
+                  color: '#ff7f11',
+                }}
+              >
+                <Link href="#include" onClick={preventDefault}>
+                  제공 항목
+                </Link>
+              </li>
+              &middot;
+              <li
+                style={{
+                  listStyle: 'none',
+                  marginRight: '6px',
+                  marginLeft: '6px',
+                  color: '#ff7f11',
+                }}
+              >
+                <Link href="#review" onClick={preventDefault}>
+                  후기
+                </Link>
+              </li>
+              &middot;
+              <li
+                style={{
+                  listStyle: 'none',
+                  marginRight: '6px',
+                  marginLeft: '6px',
+                  color: '#ff7f11',
+                }}
+              >
+                <Link href="#visit" onClick={preventDefault}>
+                  방문 장소
+                </Link>
+              </li>
+              &middot;
+              <li
+                style={{
+                  listStyle: 'none',
+                  color: '#ff7f11',
+                  marginLeft: '6px',
+                }}
+              >
+                <Link href="precaution" onClick={preventDefault}>
+                  유의 사항
+                </Link>
+              </li>
+            </Box>
+          </Typography>
+        </Container>
+      </AppBar>
       <Container maxWidth={false} style={{ paddingBottom: '5rem' }}>
         <Container maxWidth="lg" style={{ padding: '0 50px' }}>
           <Box
@@ -153,7 +326,7 @@ const TourDetail: React.FunctionComponent = () => {
             mt={6}
           >
             <Typography variant="h5">
-              <Box fontWeight={800} position="sticky" top={30}>
+              <Box fontWeight={800} position="sticky" top={30} id="programm">
                 프로그램
               </Box>
             </Typography>
@@ -185,7 +358,7 @@ const TourDetail: React.FunctionComponent = () => {
             mt={6}
           >
             <Typography variant="h5">
-              <Box fontWeight={800} position="sticky" top={30}>
+              <Box fontWeight={800} position="sticky" top={30} id="guide">
                 가이드
               </Box>
             </Typography>
@@ -240,7 +413,7 @@ const TourDetail: React.FunctionComponent = () => {
             mt={6}
           >
             <Typography variant="h5">
-              <Box fontWeight={800} position="sticky" top={30}>
+              <Box fontWeight={800} position="sticky" top={30} id="include">
                 제공 항목
               </Box>
             </Typography>
@@ -256,7 +429,7 @@ const TourDetail: React.FunctionComponent = () => {
                 </Typography>
                 <Typography variant="caption">
                   <ul style={{ margin: 0, padding: 0 }}>
-                    <li>
+                    <li style={{ listStyle: 'none' }}>
                       인원 수에 따라 7인승 메르세데스 스프린터 또는 18인승
                       메르세데스 스프린터가 제공됩니다.
                     </li>
@@ -270,7 +443,7 @@ const TourDetail: React.FunctionComponent = () => {
                 </Typography>
                 <Typography variant="caption">
                   <ul style={{ margin: 0, padding: 0 }}>
-                    <li>
+                    <li style={{ listStyle: 'none' }}>
                       빵, 음료수, 과일, 샌드위치, 초코파이가 포함되어 있습니다
                     </li>
                   </ul>
@@ -283,7 +456,9 @@ const TourDetail: React.FunctionComponent = () => {
                 </Typography>
                 <Typography variant="caption">
                   <ul style={{ margin: 0, padding: 0 }}>
-                    <li>10명 이상일 경우 제공됩니다</li>
+                    <li style={{ listStyle: 'none' }}>
+                      10명 이상일 경우 제공됩니다
+                    </li>
                   </ul>
                 </Typography>
               </Paper>
@@ -297,7 +472,7 @@ const TourDetail: React.FunctionComponent = () => {
           >
             <Box component="div">
               <Typography variant="h5">
-                <Box fontWeight={800} position="sticky" top={30}>
+                <Box fontWeight={800} position="sticky" top={30} id="review">
                   후기
                 </Box>
               </Typography>
@@ -348,7 +523,7 @@ const TourDetail: React.FunctionComponent = () => {
           >
             <Box component="div">
               <Typography variant="h5">
-                <Box fontWeight={800} position="sticky" top={30}>
+                <Box fontWeight={800} position="sticky" top={30} id="visit">
                   방문 장소
                 </Box>
               </Typography>
@@ -363,8 +538,136 @@ const TourDetail: React.FunctionComponent = () => {
           <Box component="div" height="45vw" maxHeight="570px">
             <Map />
           </Box>
+          <Box
+            component="div"
+            display="grid"
+            className={`${classes.boxLayout}`}
+            mt={10}
+            pb={6}
+          >
+            <Box component="div">
+              <Typography variant="h5">
+                <Box
+                  fontWeight={800}
+                  position="sticky"
+                  top={30}
+                  id="precaution"
+                >
+                  유의 사항
+                </Box>
+              </Typography>
+            </Box>
+            <Box component="div">
+              <Box
+                component="div"
+                display="grid"
+                flexDirection="row"
+                gridTemplateColumns="35% 65%"
+                width="100%"
+              >
+                <Typography variant="h6" component="div">
+                  <Box>환불 정책</Box>
+                </Typography>
+                <Typography component="div" variant="body1">
+                  모든 여행은 예약 후 24시간 이내 또는 여행 시작 7일 전까지 취소
+                  및 전액 환불이 가능합니다.
+                </Typography>
+              </Box>
+              <Divider
+                light={true}
+                style={{ marginTop: '3rem', marginBottom: '3rem' }}
+              />
+              <Box
+                component="div"
+                display="grid"
+                gridTemplateColumns="35% 65%"
+                width="100%"
+              >
+                <Typography variant="h6" component="div">
+                  <Box>기타 참고사항</Box>
+                </Typography>
+                <Typography component="div" variant="body1">
+                  <Box component="div" lineHeight="1.6rem">
+                    1. 투어 시작 시간은 오전 7시입니다.
+                    <br />
+                    2. 미팅 시간과 장소에 대해 메시지를 따로 드리지 않습니다.
+                    <br />
+                    3. 여행용 배낭과 캐리어 소지시 박물관 입장이 제한됩니다. 큰
+                    짐은 숙소에 맡긴 후 투어 참여 부탁드리겠습니다.
+                    <br />
+                    4. 수신기 사용은 10명 이상시 사용합니다.
+                    <br />
+                    5. 입장 대기시간이 길기 때문에 예카테리나 공원 유로 화장실로
+                    안내하고 있습니다. 궁전 내부의 화장실은 무료로 이용할 수
+                    있습니다.
+                    <br />
+                    6. 예카테리나 궁전이 위차한 푸쉬킨시는 일교차가 매우 크기
+                    때문에 바람막이 점퍼 등 가벼운 겉옷을 챙겨주시고 도보 이동이
+                    많아 발이 편한 신발을 착용해주시기 바랍니다.
+                    <br />
+                    7. 상트페테르부르크의 갑작스런 날씨 변화에 대비하여 작은
+                    우산을 늘 소지하시기를 권합니다.
+                    <br />
+                    8. 개인소지품 보관에 주의해주시기 바랍니다.
+                    <br />
+                    9. 여행자 보험은 선택이 아닌 필수입니다. 여행자 보험에
+                    가입하고 투어에 참여하실 것을 권합니다.
+                  </Box>
+                </Typography>
+              </Box>
+            </Box>
+          </Box>
         </Container>
       </Container>
+      <AppBar position="fixed" className={classes.reservation_menu}>
+        <Container maxWidth="lg" style={{ padding: '0 50px', height: '100%' }}>
+          <Box
+            component="div"
+            display="flex"
+            alignItems="center"
+            flexDirection="row"
+            height="100%"
+            justifyContent="space-between"
+          >
+            <Box
+              component="div"
+              display="flex"
+              alignItems="center"
+              height="100%"
+            >
+              <Avatar
+                alt="Remy Sharp"
+                src={avatar1}
+                className={classes.reservation_avatar}
+              />
+              <Typography variant="button">
+                <Box component="div" ml={2}>
+                  황제의 마을(성수기)
+                  <Box component="span" ml={1} className={classes.primaryColor}>
+                    4.98
+                    <GradeIcon style={{ fontSize: '12px', paddingTop: 3 }} />
+                  </Box>
+                  <Box component="span">(2)</Box>
+                </Box>
+              </Typography>
+            </Box>
+            <Box display="flex" alignItems="center">
+              <Typography component="div" variant="button">
+                58,500&nbsp; ₩<Box component="span">/인부터</Box>
+              </Typography>
+              <Button
+                variant="contained"
+                color="primary"
+                disableElevation
+                size="large"
+                style={{ color: '#FFFFFF', marginLeft: '1rem', width: '170px' }}
+              >
+                날짜 보기
+              </Button>
+            </Box>
+          </Box>
+        </Container>
+      </AppBar>
     </Layout>
   );
 };
