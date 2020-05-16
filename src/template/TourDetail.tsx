@@ -7,6 +7,10 @@ import Typography from '@material-ui/core/Typography';
 import GradeIcon from '@material-ui/icons/Grade';
 import AirportShuttleOutlinedIcon from '@material-ui/icons/AirportShuttleOutlined';
 import FastfoodOutlinedIcon from '@material-ui/icons/FastfoodOutlined';
+import WatchLaterIcon from '@material-ui/icons/WatchLater';
+import GroupIcon from '@material-ui/icons/Group';
+import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
+import CommuteIcon from '@material-ui/icons/Commute';
 import Button from '@material-ui/core/Button';
 import HeadsetOutlinedIcon from '@material-ui/icons/HeadsetOutlined';
 import Avatar from '@material-ui/core/Avatar';
@@ -15,7 +19,8 @@ import Divider from '@material-ui/core/Divider';
 import CardMedia from '@material-ui/core/CardMedia';
 import AppBar from '@material-ui/core/AppBar';
 import RootRef from '@material-ui/core/RootRef';
-import Link from '@material-ui/core/Link';
+import Collapse from '@material-ui/core/Collapse';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 //Custom UI
 import Layout from 'components/layout';
 import Review from 'components/Review';
@@ -24,9 +29,9 @@ import { Position } from 'components/Header/type';
 //map
 import GoogleMapReact from 'google-map-react';
 //images
-import { amber1, amber2, amber3, map } from 'assets/images/daytour_saint/amber';
+import { amber1, amber2, amber3 } from 'assets/images/daytour_saint/amber';
 import { amberSum, amberWin } from 'assets/images/daytour_saint';
-import { avatar1 } from 'assets/images/avatar';
+import { avatar1, team6 } from 'assets/images/avatar';
 const AnyReactComponent = ({ text }: any) => <div>{text}</div>;
 
 const Map = (props: any) => {
@@ -95,7 +100,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     boxShadow: theme.shadows[0],
     borderBottom: `1px solid ${theme.palette.grey[300]}`,
     height: '52px',
-    display: 'none',
+    background: 'white',
   },
   reservation_menu: {
     top: 'auto',
@@ -130,14 +135,38 @@ const Tag = withStyles({
 
 const TourDetail: React.FunctionComponent = () => {
   const classes = useStyles();
-  const thumnailBottom = React.useRef<HTMLDivElement>(null);
+  const thumnailRef = React.useRef<HTMLDivElement>(null);
+  const [state, setState] = React.useState({
+    categoryShow: 0,
+  });
   React.useEffect(() => {
     let win = window.pageYOffset;
-    let bot = thumnailBottom.current?.getBoundingClientRect().bottom;
-    console.log(bot && win + bot);
+    let bot = thumnailRef.current?.getBoundingClientRect().bottom;
+    if (bot) {
+      setState({
+        ...state,
+        categoryShow: win + bot,
+      });
+    }
   }, []);
-  const preventDefault = (event: React.SyntheticEvent) =>
-    event.preventDefault();
+  const trigger = useScrollTrigger({
+    target: window ? window : undefined,
+    disableHysteresis: true,
+    threshold: 800,
+  });
+  const handleClick = (
+    event: React.MouseEvent<HTMLDivElement>,
+    value: string
+  ) => {
+    const anchor = (
+      (event.target as HTMLDivElement).ownerDocument || document
+    ).querySelector(`#${value}`);
+
+    if (anchor) {
+      anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
+
   return (
     <Layout
       footerBorderTop={true}
@@ -147,7 +176,7 @@ const TourDetail: React.FunctionComponent = () => {
       navTheme={1}
     >
       <Container maxWidth={false} style={{ background: '#000000' }}>
-        <RootRef rootRef={thumnailBottom}>
+        <RootRef rootRef={thumnailRef}>
           <Container maxWidth="lg" style={{ padding: '0 50px' }}>
             <Box
               color="white"
@@ -217,106 +246,200 @@ const TourDetail: React.FunctionComponent = () => {
                   <Tag>역사</Tag>
                 </Box>
               </Box>
-              {/* 이건 그룹 이원, 시간 등을 표시하는 박스 */}
-              <Box></Box>
+
+              <Box display="grid" gridTemplateColumns="repeat(4, 1fr)">
+                <Box>
+                  <WatchLaterIcon
+                    style={{ fontSize: 15, marginBottom: 2, color: '#A7A7A7' }}
+                  />
+                  <Typography variant="body2">
+                    <Box component="div" color="#A7A7A7">
+                      진행시간
+                    </Box>
+                  </Typography>
+                  <Typography variant="body2">
+                    <Box>7.5시간</Box>
+                  </Typography>
+                </Box>
+                <Box>
+                  <GroupIcon
+                    style={{ fontSize: 15, marginBottom: 2, color: '#A7A7A7' }}
+                  />
+                  <Typography variant="body2">
+                    <Box component="div" color="#A7A7A7">
+                      그룹당 인원
+                    </Box>
+                  </Typography>
+                  <Typography variant="body2">
+                    <Box>최소2명</Box>
+                  </Typography>
+                </Box>
+                <Box>
+                  <PlaylistAddCheckIcon
+                    style={{ fontSize: 15, marginBottom: 2, color: '#A7A7A7' }}
+                  />
+                  <Typography variant="body2">
+                    <Box component="div" color="#A7A7A7">
+                      포함사항
+                    </Box>
+                  </Typography>
+                  <Typography variant="body2">
+                    <Box>반일차량,간식,수신기</Box>
+                  </Typography>
+                </Box>
+                <Box>
+                  <CommuteIcon
+                    style={{ fontSize: 15, marginBottom: 2, color: '#A7A7A7' }}
+                  />
+                  <Typography variant="body2">
+                    <Box component="div" color="#A7A7A7">
+                      이동수단
+                    </Box>
+                  </Typography>
+                  <Typography variant="body2">
+                    <Box>도보</Box>
+                  </Typography>
+                </Box>
+              </Box>
             </Box>
           </Container>
         </RootRef>
       </Container>
-      <AppBar
-        color="transparent"
-        position="fixed"
-        className={classes.categories_nav}
-      >
-        <Container maxWidth="lg" style={{ padding: '0 50px', height: '100%' }}>
-          <Typography variant="subtitle2" style={{ height: '100%' }}>
-            <Box
-              component="ul"
-              display="flex"
-              alignItems="center"
-              flexDirection="row"
-              height="100%"
-              margin="0"
-              padding="0"
-            >
-              <li
-                style={{
-                  listStyle: 'none',
-                  marginRight: '6px',
-                  color: '#ff7f11',
-                }}
+      <Collapse in={trigger}>
+        <AppBar
+          position="fixed"
+          component="div"
+          className={`${classes.categories_nav}`}
+        >
+          <Container
+            maxWidth="lg"
+            style={{ padding: '0 50px', height: '100%' }}
+          >
+            <Typography variant="subtitle2" style={{ height: '100%' }}>
+              <Box
+                component="ul"
+                display="flex"
+                alignItems="center"
+                flexDirection="row"
+                height="100%"
+                margin="0"
+                padding="0"
               >
-                <Link href="#program" onClick={preventDefault}>
-                  프로그램
-                </Link>
-              </li>
-              &middot;
-              <li
-                style={{
-                  listStyle: 'none',
-                  marginRight: '6px',
-                  marginLeft: '6px',
-                  color: '#ff7f11',
-                }}
-              >
-                <Link href="#guide" onClick={preventDefault}>
-                  가이드
-                </Link>
-              </li>
-              <li
-                style={{
-                  listStyle: 'none',
-                  marginRight: '6px',
-                  marginLeft: '6px',
-                  color: '#ff7f11',
-                }}
-              >
-                <Link href="#include" onClick={preventDefault}>
-                  제공 항목
-                </Link>
-              </li>
-              &middot;
-              <li
-                style={{
-                  listStyle: 'none',
-                  marginRight: '6px',
-                  marginLeft: '6px',
-                  color: '#ff7f11',
-                }}
-              >
-                <Link href="#review" onClick={preventDefault}>
-                  후기
-                </Link>
-              </li>
-              &middot;
-              <li
-                style={{
-                  listStyle: 'none',
-                  marginRight: '6px',
-                  marginLeft: '6px',
-                  color: '#ff7f11',
-                }}
-              >
-                <Link href="#visit" onClick={preventDefault}>
-                  방문 장소
-                </Link>
-              </li>
-              &middot;
-              <li
-                style={{
-                  listStyle: 'none',
-                  color: '#ff7f11',
-                  marginLeft: '6px',
-                }}
-              >
-                <Link href="precaution" onClick={preventDefault}>
-                  유의 사항
-                </Link>
-              </li>
-            </Box>
-          </Typography>
-        </Container>
-      </AppBar>
+                <li
+                  style={{
+                    listStyle: 'none',
+                    marginRight: '6px',
+                    color: '#ff7f11',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <Box
+                    component="div"
+                    onClick={(e: React.MouseEvent<HTMLDivElement>) =>
+                      handleClick(e, 'program')
+                    }
+                  >
+                    프로그램
+                  </Box>
+                </li>
+                &middot;
+                <li
+                  style={{
+                    listStyle: 'none',
+                    marginRight: '6px',
+                    marginLeft: '6px',
+                    color: '#ff7f11',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <Box
+                    component="div"
+                    onClick={(e: React.MouseEvent<HTMLDivElement>) =>
+                      handleClick(e, 'guide')
+                    }
+                  >
+                    가이드
+                  </Box>
+                </li>
+                <li
+                  style={{
+                    listStyle: 'none',
+                    marginRight: '6px',
+                    marginLeft: '6px',
+                    color: '#ff7f11',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <Box
+                    component="div"
+                    onClick={(e: React.MouseEvent<HTMLDivElement>) =>
+                      handleClick(e, 'include')
+                    }
+                  >
+                    제공 항목
+                  </Box>
+                </li>
+                &middot;
+                <li
+                  style={{
+                    listStyle: 'none',
+                    marginRight: '6px',
+                    marginLeft: '6px',
+                    color: '#ff7f11',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <Box
+                    component="div"
+                    onClick={(e: React.MouseEvent<HTMLDivElement>) =>
+                      handleClick(e, 'review')
+                    }
+                  >
+                    후기
+                  </Box>
+                </li>
+                &middot;
+                <li
+                  style={{
+                    listStyle: 'none',
+                    marginRight: '6px',
+                    marginLeft: '6px',
+                    color: '#ff7f11',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <Box
+                    component="div"
+                    onClick={(e: React.MouseEvent<HTMLDivElement>) =>
+                      handleClick(e, 'visit')
+                    }
+                  >
+                    방문 장소
+                  </Box>
+                </li>
+                &middot;
+                <li
+                  style={{
+                    listStyle: 'none',
+                    color: '#ff7f11',
+                    marginLeft: '6px',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <Box
+                    component="div"
+                    onClick={(e: React.MouseEvent<HTMLDivElement>) =>
+                      handleClick(e, 'precaution')
+                    }
+                  >
+                    유의 사항
+                  </Box>
+                </li>
+              </Box>
+            </Typography>
+          </Container>
+        </AppBar>
+      </Collapse>
       <Container maxWidth={false} style={{ paddingBottom: '5rem' }}>
         <Container maxWidth="lg" style={{ padding: '0 50px' }}>
           <Box
@@ -326,7 +449,7 @@ const TourDetail: React.FunctionComponent = () => {
             mt={6}
           >
             <Typography variant="h5">
-              <Box fontWeight={800} position="sticky" top={30} id="programm">
+              <Box fontWeight={800} position="sticky" top={65} id="program">
                 프로그램
               </Box>
             </Typography>
@@ -358,12 +481,14 @@ const TourDetail: React.FunctionComponent = () => {
             mt={6}
           >
             <Typography variant="h5">
-              <Box fontWeight={800} position="sticky" top={30} id="guide">
+              <Box fontWeight={800} position="sticky" top={65} id="guide">
                 가이드
               </Box>
             </Typography>
             <Box component="div">
-              <Avatar className={classes.avatar}>백야나라</Avatar>
+              <Avatar className={classes.avatar} alt="team" src={team6}>
+                백야나라
+              </Avatar>
               <Typography variant="h6">
                 <Box fontWeight="bold" mt={4}>
                   백야나라 팀
@@ -413,7 +538,7 @@ const TourDetail: React.FunctionComponent = () => {
             mt={6}
           >
             <Typography variant="h5">
-              <Box fontWeight={800} position="sticky" top={30} id="include">
+              <Box fontWeight={800} position="sticky" top={65} id="include">
                 제공 항목
               </Box>
             </Typography>
@@ -470,13 +595,18 @@ const TourDetail: React.FunctionComponent = () => {
             className={`${classes.boxLayout}`}
             mt={6}
           >
-            <Box component="div">
+            <Typography variant="h5">
+              <Box fontWeight={800} id="review" position="sticky" top={65}>
+                후기
+              </Box>
+            </Typography>
+            {/* <Box component="div">
               <Typography variant="h5">
-                <Box fontWeight={800} position="sticky" top={30} id="review">
+                <Box fontWeight={800} id="review" position="sticky" top={65}>
                   후기
                 </Box>
               </Typography>
-              <Box
+               <Box
                 component="div"
                 display="flex"
                 flexDirection="row"
@@ -499,7 +629,7 @@ const TourDetail: React.FunctionComponent = () => {
                   ))}
                 </Box>
               </Box>
-            </Box>
+            </Box> */}
             <Box component="div" display="flex" flexDirection="column">
               <Review />
               <Divider
@@ -523,7 +653,7 @@ const TourDetail: React.FunctionComponent = () => {
           >
             <Box component="div">
               <Typography variant="h5">
-                <Box fontWeight={800} position="sticky" top={30} id="visit">
+                <Box fontWeight={800} position="sticky" top={65} id="visit">
                   방문 장소
                 </Box>
               </Typography>
@@ -545,18 +675,11 @@ const TourDetail: React.FunctionComponent = () => {
             mt={10}
             pb={6}
           >
-            <Box component="div">
-              <Typography variant="h5">
-                <Box
-                  fontWeight={800}
-                  position="sticky"
-                  top={30}
-                  id="precaution"
-                >
-                  유의 사항
-                </Box>
-              </Typography>
-            </Box>
+            <Typography variant="h5">
+              <Box fontWeight={800} position="sticky" top={65} id="precaution">
+                유의 사항
+              </Box>
+            </Typography>
             <Box component="div">
               <Box
                 component="div"
