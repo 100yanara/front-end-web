@@ -13,7 +13,11 @@ import Layout from 'components/layout';
 import { FilterButton } from 'components/Buttons';
 
 import { cityPoint, hermitage, troika } from 'assets/images/daytour_saint';
-import { orientation, dvor } from 'assets/images/onlineTour_saint';
+import {
+  orientation,
+  dvor,
+  hermitageOnline,
+} from 'assets/images/onlineTour_saint';
 
 //TYPE
 import { Position } from 'components/Header/type';
@@ -141,7 +145,7 @@ const OnlineTour: React.FunctionComponent = () => {
               {
                 location: '상트페테르부르크',
                 title: '이현희 가이드와 함께하는 서양 미술사',
-                image: hermitage,
+                image: hermitageOnline,
                 minimum: 1,
                 duration: 1.5,
                 character: '단체여행',

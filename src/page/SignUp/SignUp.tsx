@@ -6,23 +6,31 @@ import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 import TextField from '@material-ui/core/TextField';
-
+import FacebookIcon from '@material-ui/icons/Facebook';
+import EmailIcon from '@material-ui/icons/Email';
+import Link from '@material-ui/core/Link';
+// custom UI
+import Layout from 'components/layout';
+//TYPE
+import { Position } from 'components/Header/type';
 const useStyles = makeStyles((theme: Theme) => ({
   'sign-up-box': {
     display: 'flex',
     justifyContent: 'center',
-    padding: '2rem',
+    paddingTop: theme.spacing(10),
     width: '100%',
   },
   'sign-up-box__sign-up': {
-    padding: '1rem',
+    padding: '0 1rem',
     color: 'grey',
-    border: '1px solid gray',
-    borderRadius: '3px',
-    width: '350px',
+    border: `1px solid ${theme.palette.grey[300]}`,
+    width: '430px',
     display: 'flex',
     flexDirection: 'column',
-    marginBottom: '150px',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '416px',
+    borderRadius: '4px',
   },
   'sign-up-box--margin-bottom': {
     marginBottom: '10px',
@@ -30,76 +38,103 @@ const useStyles = makeStyles((theme: Theme) => ({
   'sign-up-box--margin-top': {
     marginTop: '10px',
   },
+  'wave-hand': {
+    animation: `$waveAnimation`,
+    animationDuration: '2.5s',
+    animationIterationCount: 'infinite',
+    transformOrigin: '70% 70%',
+    display: 'block',
+  },
+  '@keyframes waveAnimation': {
+    '0%': { transform: 'rotate(  0.0deg)' },
+    '10%': { transform: 'rotate(-10.0deg)' },
+    '20%': { transform: 'rotate( 12.0deg)' },
+    '30%': { transform: 'rotate(-10.0deg)' },
+    '40%': { transform: 'rotate(  9.0deg)' },
+    '50%': { transform: 'rotate(  0.0deg)' },
+    '100%': { transform: 'rotate(  0.0deg)' },
+  },
+  googleButton: {
+    width: '332px',
+    height: '48px',
+    '&:hover': {
+      boxShadow: theme.shadows[1],
+      background: '#f9f9f9',
+    },
+  },
+  medium: {
+    cursor: 'pointer',
+    '&:hover': {
+      color: 'black',
+    },
+  },
 }));
 
 const SignUp: React.FunctionComponent = () => {
   const classes = useStyles();
   // const { t, i18n } = useTranslation();
   return (
-    <Box component="div" className={classes['sign-up-box']}>
-      <Box component="div" className={classes['sign-up-box__sign-up']}>
-        <Button
-          variant="contained"
-          disableElevation
-          className={classes['sign-up-box--margin-bottom']}
-        >
-          Facebook sign up
-        </Button>
-        <Button
-          variant="contained"
-          disableElevation
-          className={classes['sign-up-box--margin-bottom']}
-        >
-          Google sign up
-        </Button>
-        <Divider className={classes['sign-up-box--margin-bottom']} />
-        <TextField
-          id="outlined-basic"
-          label="name"
-          variant="outlined"
-          className={classes['sign-up-box--margin-bottom']}
-          size="small"
-        />
-        <TextField
-          id="outlined-basic"
-          label="email"
-          variant="outlined"
-          className={classes['sign-up-box--margin-bottom']}
-          size="small"
-        />
-        <TextField
-          id="outlined-basic"
-          label="password"
-          variant="outlined"
-          className={classes['sign-up-box--margin-bottom']}
-          size="small"
-        />
-        <Typography
-          component="p"
-          variant="body2"
-          className={classes['sign-up-box--margin-bottom']}
-        >
-          회원가입을 하면 백야나라의 개인정보 취급방침, 이용약관에
-          동의하게됩니다
-        </Typography>
-        <Button
-          variant="contained"
-          className={classes['sign-up-box--margin-bottom']}
-          disableElevation
-        >
-          Sign up
-        </Button>
-        <Divider className={classes['sign-up-box--margin-bottom']} />
-        <Typography
-          component="p"
-          variant="body2"
-          align="center"
-          className={classes['sign-up-box--margin-bottom']}
-        >
-          이미 백야나라 회원인가요? 로그인
-        </Typography>
+    <Layout footerBorderTop={true} navPosition={Position.static}>
+      <Box component="div" className={classes['sign-up-box']}>
+        <Box component="div" className={classes['sign-up-box__sign-up']}>
+          <Typography variant="h3" align="center">
+            <Box component="span" className={classes['wave-hand']}>
+              👋
+            </Box>
+          </Typography>
+          <Typography variant="h5">
+            <Box fontWeight="bold" color="black" mt={2}>
+              반갑습니다!
+            </Box>
+          </Typography>
+          <Typography variant="subtitle1">
+            <Box mt={1} color="#fe7224">
+              러시아 여행의 동반자, 백야나라
+            </Box>
+          </Typography>
+          <Box mt={3}>
+            <Button
+              variant="outlined"
+              disableElevation
+              className={classes.googleButton}
+            >
+              <img
+                src="https://img.icons8.com/color/48/000000/google-logo.png"
+                style={{ width: '18px', height: '18px' }}
+              />
+              <Typography variant="subtitle2">
+                <Box ml={1}>Google 로 회원가입</Box>
+              </Typography>
+            </Button>
+          </Box>
+          <Box display="flex" flexDirection="row" mt={3}>
+            <Box display="flex" alignItems="center" className={classes.medium}>
+              <FacebookIcon fontSize="small" />
+              <Box component="span" pt="1px" ml={1}>
+                페이스북
+              </Box>
+            </Box>
+            <Divider orientation="vertical" flexItem variant="middle" />
+            <Box display="flex" alignItems="center" className={classes.medium}>
+              <EmailIcon fontSize="small" />
+              <Box component="span" pt="1px" ml={1}>
+                이메일
+              </Box>
+            </Box>
+          </Box>
+          <Typography variant="button">
+            <Box component="div" fontWeight="bold" mt={4}>
+              이미 아이디가 있으신가요?
+              <Box component="span" ml={1}>
+                <Link href="/user/signin" color="inherit">
+                  로그인
+                </Link>
+              </Box>
+            </Box>
+          </Typography>
+        </Box>
       </Box>
-    </Box>
+    </Layout>
   );
 };
 
