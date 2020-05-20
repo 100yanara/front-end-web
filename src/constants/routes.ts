@@ -1,0 +1,13 @@
+export const HOME = '/';
+export const SIGN_UP = '/user/sign_up'; //회원가입
+export const SIGN_UP_EMAIL = '/user/sign_up_email';
+export const SIGN_IN = '/user/sign_in'; //로그인
+export const SIGN_IN_EMAIL = '/user/sign_in_email';
+export const DAY_TOUR = '/day_tour';
+export const ONLINE_EXPERIENCE = '/online_experience';
+export const TOUR_DETAIL = '/detail/:id';
+export const CREATE_TRIP = '/create_trip';
+export const CALENDAR = '/calendar';
+export const ACCOUNT = '/account';
+export const ADMIN = '/admin';
+export const PASSWORD_FORGET = '/pw-forget';
