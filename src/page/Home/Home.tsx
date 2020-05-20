@@ -41,6 +41,9 @@ import {
 //TYPE
 import { Position } from 'components/Header/type';
 
+//ROUTES
+import * as ROUTES from 'constants/routes';
+
 const useStyles = makeStyles((theme: Theme) => ({
   home__services: {
     '& span': {
@@ -135,13 +138,17 @@ const Home: React.FunctionComponent = () => {
           >
             <Typography variant="subtitle2">
               <Box component="span">
-                <Link href="/daytour" color="textPrimary" underline="none">
+                <Link
+                  href={ROUTES.DAY_TOUR}
+                  color="textPrimary"
+                  underline="none"
+                >
                   {t('tour')}
                 </Link>
               </Box>
               <Box component="span">
                 <Link
-                  href="/onlineexperience"
+                  href={ROUTES.ONLINE_EXPERIENCE}
                   color="textPrimary"
                   underline="none"
                 >
@@ -149,12 +156,20 @@ const Home: React.FunctionComponent = () => {
                 </Link>
               </Box>
               <Box component="span">
-                <Link href="/createtrip" color="textPrimary" underline="none">
+                <Link
+                  href={ROUTES.CREATE_TRIP}
+                  color="textPrimary"
+                  underline="none"
+                >
                   {t('createTrip')}
                 </Link>
               </Box>
               <Box component="span">
-                <Link href="/calendar" color="textPrimary" underline="none">
+                <Link
+                  href={ROUTES.CALENDAR}
+                  color="textPrimary"
+                  underline="none"
+                >
                   {t('calendar')}
                 </Link>
               </Box>
@@ -219,7 +234,7 @@ const Home: React.FunctionComponent = () => {
           러시아 여행의 든든한 동반자, 백야나라와 함께.
         </Box>
         <Box component="div" className={classes.home__cards__container}>
-          <Link href="/daytour" color="textPrimary" underline="none">
+          <Link href={ROUTES.DAY_TOUR} color="textPrimary" underline="none">
             <Card className={classes.home__cards}>
               <CardActionArea>
                 <CardMedia
@@ -239,7 +254,7 @@ const Home: React.FunctionComponent = () => {
               </CardActionArea>
             </Card>
           </Link>
-          <Link href="/createtrip" color="textPrimary" underline="none">
+          <Link href={ROUTES.CREATE_TRIP} color="textPrimary" underline="none">
             <Card className={classes.home__cards}>
               <CardActionArea>
                 <CardMedia
@@ -263,7 +278,7 @@ const Home: React.FunctionComponent = () => {
               </CardActionArea>
             </Card>
           </Link>
-          <Link href="/calendar" color="textPrimary" underline="none">
+          <Link href={ROUTES.CALENDAR} color="textPrimary" underline="none">
             <Card className={classes.home__cards}>
               <CardActionArea>
                 <CardMedia
