@@ -7,7 +7,7 @@ import SignUp from 'page/SignUp';
 import DayTour from 'page/DayTour';
 import Calendar from 'page/Calendar';
 import OnlineTour from 'page/OnlineTour';
-
+import SignIn from 'page/SignIn';
 // Template
 import { TourDetail } from 'template';
 const App: React.FunctionComponent = () => {
@@ -21,7 +21,7 @@ const App: React.FunctionComponent = () => {
           <SignUp />
         </Route>
         <Route exact path="/user/signin">
-          <div>sign in page</div>
+          <SignIn />
         </Route>
         <Route path="/daytour">
           <DayTour />

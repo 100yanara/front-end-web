@@ -12,14 +12,15 @@ import Link from '@material-ui/core/Link';
 import Layout from 'components/layout';
 //TYPE
 import { Position } from 'components/Header/type';
+
 const useStyles = makeStyles((theme: Theme) => ({
-  'sign-up-box': {
+  'sign-in-box': {
     display: 'flex',
     justifyContent: 'center',
     paddingTop: theme.spacing(10),
     width: '100%',
   },
-  'sign-up-box__sign-up': {
+  'sign-in-box__sign-in': {
     padding: '0 1rem',
     color: 'grey',
     border: `1px solid ${theme.palette.grey[300]}`,
@@ -30,12 +31,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'center',
     height: '416px',
     borderRadius: '4px',
-  },
-  'sign-up-box--margin-bottom': {
-    marginBottom: '10px',
-  },
-  'sign-up-box--margin-top': {
-    marginTop: '10px',
   },
   'wave-hand': {
     animation: `$waveAnimation`,
@@ -69,13 +64,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const SignUp: React.FunctionComponent = () => {
+const SignIn: React.FunctionComponent = () => {
   const classes = useStyles();
   // const { t, i18n } = useTranslation();
   return (
     <Layout footerBorderTop={true} navPosition={Position.static}>
-      <Box component="div" className={classes['sign-up-box']}>
-        <Box component="div" className={classes['sign-up-box__sign-up']}>
+      <Box component="div" className={classes['sign-in-box']}>
+        <Box component="div" className={classes['sign-in-box__sign-in']}>
           <Typography variant="h3" align="center">
             <Box component="span" className={classes['wave-hand']}>
               👋
@@ -83,7 +78,7 @@ const SignUp: React.FunctionComponent = () => {
           </Typography>
           <Typography variant="h5">
             <Box fontWeight="bold" color="black" mt={2}>
-              반갑습니다!
+              Welcome Back!
             </Box>
           </Typography>
           <Typography variant="subtitle1">
@@ -102,7 +97,7 @@ const SignUp: React.FunctionComponent = () => {
                 style={{ width: '18px', height: '18px' }}
               />
               <Typography variant="subtitle2">
-                <Box ml={1}>Google 로 회원가입</Box>
+                <Box ml={1}>Google 로 로그인</Box>
               </Typography>
             </Button>
           </Box>
@@ -123,10 +118,10 @@ const SignUp: React.FunctionComponent = () => {
           </Box>
           <Typography variant="button">
             <Box component="div" fontWeight="bold" mt={4}>
-              이미 아이디가 있으신가요?
+              아직 회원이 아니신가요?
               <Box component="span" ml={1}>
-                <Link href="/user/signin" color="inherit">
-                  로그인
+                <Link href="/user/signup" color="inherit">
+                  회원가입
                 </Link>
               </Box>
             </Box>
@@ -137,4 +132,4 @@ const SignUp: React.FunctionComponent = () => {
   );
 };
 
-export default SignUp;
+export default SignIn;

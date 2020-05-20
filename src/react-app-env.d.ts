@@ -4,5 +4,13 @@ declare namespace NodeJS {
     NODE_ENV: 'development' | 'production' | 'test';
     PUBLIC_URL: string;
     REACT_APP_GOOGLE_MAP: string;
+    REACT_APP_FIREBASE_APIKEY: string;
+    REACT_APP_FIREBASE_AUTHDOMAIN: string;
+    REACT_APP_FIREBASE_DATABASEURL: string;
+    REACT_APP_FIREBASE_PROJECTID: string;
+    REACT_APP_FIREBASE_STORAGEBUCKET: string;
+    REACT_APP_FIREBASE_MESSAGINGSENDERID: string;
+    REACT_APP_FIREBASE_APPID: string;
+    REACT_APP_FIREBASE_MEASUREMENTID: string;
   }
 }
