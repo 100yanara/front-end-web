@@ -17,22 +17,22 @@ const App: React.FunctionComponent = () => {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route exact path="/user/signup">
+        <Route exact path="/user/sign_up">
           <SignUp />
         </Route>
-        <Route exact path="/user/signin">
+        <Route exact path="/user/sign_in">
           <SignIn />
         </Route>
-        <Route path="/daytour">
+        <Route path="/day_tour">
           <DayTour />
         </Route>
-        <Route path="/onlineexperience">
+        <Route path="/online_experience">
           <OnlineTour />
         </Route>
         <Route path="/detail/:id">
           <TourDetail />
         </Route>
-        <Route path="/createtrip">
+        <Route path="/create_trip">
           <div>create trip page</div>
         </Route>
         <Route path="/calendar">
