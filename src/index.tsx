@@ -11,6 +11,9 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 
+import Firebase from 'components/Firebase/firebase';
+import FirebaseContext from 'components/Firebase/context';
+
 import 'index.css';
 
 const history = createBrowserHistory();
@@ -53,8 +56,10 @@ ReactDOM.render(
   <Router history={history}>
     <ThemeProvider theme={theme}>
       <Suspense fallback={<div>Lodading</div>}>
-        <App />
-        <CssBaseline />
+        <FirebaseContext.Provider value={new Firebase()}>
+          <App />
+          <CssBaseline />
+        </FirebaseContext.Provider>
       </Suspense>
     </ThemeProvider>
   </Router>,

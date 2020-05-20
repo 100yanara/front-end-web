@@ -12,6 +12,8 @@ import Link from '@material-ui/core/Link';
 import Layout from 'components/layout';
 //TYPE
 import { Position } from 'components/Header/type';
+//routes
+import * as ROUTES from 'constants/routes';
 
 const useStyles = makeStyles((theme: Theme) => ({
   'sign-in-box': {
@@ -120,7 +122,7 @@ const SignIn: React.FunctionComponent = () => {
             <Box component="div" fontWeight="bold" mt={4}>
               아직 회원이 아니신가요?
               <Box component="span" ml={1}>
-                <Link href="/user/signup" color="inherit">
+                <Link href={ROUTES.SIGN_UP} color="inherit">
                   회원가입
                 </Link>
               </Box>

@@ -12,6 +12,9 @@ import Link from '@material-ui/core/Link';
 import Layout from 'components/layout';
 //TYPE
 import { Position } from 'components/Header/type';
+//routes
+import * as ROUTES from 'constants/routes';
+
 const useStyles = makeStyles((theme: Theme) => ({
   'sign-up-box': {
     display: 'flex',
@@ -30,12 +33,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'center',
     height: '416px',
     borderRadius: '4px',
-  },
-  'sign-up-box--margin-bottom': {
-    marginBottom: '10px',
-  },
-  'sign-up-box--margin-top': {
-    marginTop: '10px',
   },
   'wave-hand': {
     animation: `$waveAnimation`,
@@ -117,7 +114,13 @@ const SignUp: React.FunctionComponent = () => {
             <Box display="flex" alignItems="center" className={classes.medium}>
               <EmailIcon fontSize="small" />
               <Box component="span" pt="1px" ml={1}>
-                이메일
+                <Link
+                  color="inherit"
+                  underline="none"
+                  href={ROUTES.SIGN_UP_EMAIL}
+                >
+                  이메일
+                </Link>
               </Box>
             </Box>
           </Box>
@@ -125,7 +128,7 @@ const SignUp: React.FunctionComponent = () => {
             <Box component="div" fontWeight="bold" mt={4}>
               이미 아이디가 있으신가요?
               <Box component="span" ml={1}>
-                <Link href="/user/signin" color="inherit">
+                <Link href={ROUTES.SIGN_IN} color="inherit">
                   로그인
                 </Link>
               </Box>

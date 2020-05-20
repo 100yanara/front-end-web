@@ -13,6 +13,9 @@ import NavButton from 'components/Buttons/NavButton';
 import ElevationScroll from 'components/Header/ElevationScroll';
 import { Position, StyleProps } from './type';
 
+//routes
+import * as ROUTES from 'constants/routes';
+
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   logo: {
     width: '110px',
@@ -76,7 +79,11 @@ const Header: React.FunctionComponent<Props> = props => {
             </Link>
             <ul className={classes.navList}>
               <li>
-                <Link href="/user/signin" color="textPrimary" underline="none">
+                <Link
+                  href={ROUTES.SIGN_IN}
+                  color="textPrimary"
+                  underline="none"
+                >
                   <NavButton
                     size="large"
                     className={clsx(theme && classes.darkThemeNavButton)}
@@ -86,7 +93,11 @@ const Header: React.FunctionComponent<Props> = props => {
                 </Link>
               </li>
               <li>
-                <Link href="/user/signup" color="textPrimary" underline="none">
+                <Link
+                  href={ROUTES.SIGN_UP}
+                  color="textPrimary"
+                  underline="none"
+                >
                   <NavButton
                     variant={theme === 1 ? 'contained' : 'outlined'}
                     size="large"
