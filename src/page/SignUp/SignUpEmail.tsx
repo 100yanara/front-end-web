@@ -3,8 +3,12 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 // import { useTranslation } from 'react-i18next';
 import FormControl from '@material-ui/core/FormControl';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
+import FormHelperText from '@material-ui/core/FormHelperText';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
+//validation
+import { Formik } from 'formik';
+import { validationSchemaSignUpEmail } from 'utils/validations';
 // custom UI
 import Layout from 'components/layout';
 //TYPE
@@ -18,15 +22,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '100%',
   },
   'sign-up-email-box__sign-up': {
-    padding: '0 1rem',
+    padding: '1rem 1rem 3rem 1rem',
     color: 'grey',
     border: `1px solid ${theme.palette.grey[300]}`,
     width: '430px',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
-    height: '490px',
     borderRadius: '4px',
   },
   formControl: {
@@ -34,6 +36,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   inputBox: {
     height: '40px',
+    fontSize: '.9em',
   },
   label: {
     color: 'black',
@@ -52,103 +55,166 @@ const useStyles = makeStyles((theme: Theme) => ({
       boxShadow: theme.shadows[1],
     },
   },
+  formHelper: {
+    color: '#fe8e4f',
+  },
 }));
 
 const SignUpEmail: React.FunctionComponent = () => {
   const classes = useStyles();
   // const { t, i18n } = useTranslation();
-  const [name, setName] = React.useState('');
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState(
-    '영문,숫자,특수문자 2가지 조합 6~15자'
-  );
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setName(event.target.value);
-  };
+  // const [state, setState] = React.useState({
+  //   name: '',
+  //   email: '',
+  //   password: '',
+  //   confirm: '',
+  // });
+  // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setState({ ...state, [event.target.name]: event.target.value });
+  // };
 
   return (
     <Layout footerBorderTop={true} navPosition={Position.static}>
       <Box component="div" className={classes['sign-up-email-box']}>
-        <form
-          noValidate
-          autoComplete="off"
-          className={classes['sign-up-email-box__sign-up']}
+        <Formik
+          initialValues={{ name: '', email: '', password: '', confirm: '' }}
+          onSubmit={(values, { setSubmitting }) => {
+            setSubmitting(true);
+          }}
+          validationSchema={validationSchemaSignUpEmail}
         >
-          <FormControl
-            variant="outlined"
-            className={classes.formControl}
-            component="div"
-            margin="normal"
-          >
-            <label className={classes.label}>이름 *</label>
-            <OutlinedInput
-              required={true}
-              id="component-outlined"
-              value={name}
-              type="text"
-              onChange={handleChange}
-              className={classes.inputBox}
-              placeholder="이름을 입력해주세요."
-            />
-          </FormControl>
-          <FormControl
-            variant="outlined"
-            className={classes.formControl}
-            component="div"
-            margin="normal"
-          >
-            <label className={classes.label}>이메일 *</label>
-            <OutlinedInput
-              required={true}
-              id="component-outlined"
-              value={email}
-              type="email"
-              placeholder="ID@example.com"
-              onChange={handleChange}
-              className={classes.inputBox}
-            />
-          </FormControl>
-          <FormControl
-            variant="outlined"
-            className={classes.formControl}
-            component="div"
-            margin="normal"
-          >
-            <label className={classes.label}>비밀번호 *</label>
-            <OutlinedInput
-              required={true}
-              id="component-outlined"
-              placeholder="영문,숫자,특수문자 2가지 조합 6~15자"
-              type="password"
-              onChange={handleChange}
-              className={classes.inputBox}
-            />
-          </FormControl>
-          <FormControl
-            variant="outlined"
-            className={classes.formControl}
-            component="div"
-            margin="normal"
-          >
-            <label className={classes.label}>비밀번호 확인 *</label>
-            <OutlinedInput
-              required={true}
-              id="component-outlined"
-              placeholder="비밀번호를 한번 더 입력해주세요."
-              type="password"
-              onChange={handleChange}
-              className={classes.inputBox}
-            />
-          </FormControl>
-          <Button
-            variant="contained"
-            disableElevation
-            className={classes.SignUpButton}
-            disabled={true}
-          >
-            회원가입
-          </Button>
-        </form>
+          {props => {
+            const {
+              values,
+              touched,
+              errors,
+              dirty,
+              isSubmitting,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              handleReset,
+            } = props;
+            return (
+              <form
+                noValidate
+                autoComplete="off"
+                onSubmit={handleSubmit}
+                className={classes['sign-up-email-box__sign-up']}
+              >
+                <FormControl
+                  variant="outlined"
+                  className={classes.formControl}
+                  component="div"
+                  margin="normal"
+                >
+                  <label className={classes.label} htmlFor="sign-up-email-name">
+                    이름 *
+                  </label>
+                  <OutlinedInput
+                    required={true}
+                    id="sign-up-email-name"
+                    value={values.name}
+                    name="name"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={classes.inputBox}
+                    placeholder="이름을 입력해주세요."
+                  />
+                  <FormHelperText margin="dense" className={classes.formHelper}>
+                    {errors.name && touched.name && errors.name}
+                  </FormHelperText>
+                </FormControl>
+                <FormControl
+                  variant="outlined"
+                  className={classes.formControl}
+                  component="div"
+                  margin="normal"
+                >
+                  <label
+                    className={classes.label}
+                    htmlFor="sign-up-email-email"
+                  >
+                    이메일 *
+                  </label>
+                  <OutlinedInput
+                    required={true}
+                    id="sign-up-email-email"
+                    value={values.email}
+                    name="email"
+                    placeholder="ID@example.com"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={classes.inputBox}
+                  />
+                  <FormHelperText margin="dense" className={classes.formHelper}>
+                    {errors.email && touched.email && errors.email}
+                  </FormHelperText>
+                </FormControl>
+                <FormControl
+                  variant="outlined"
+                  className={classes.formControl}
+                  component="div"
+                  margin="normal"
+                >
+                  <label
+                    className={classes.label}
+                    htmlFor="sign-up-email-password"
+                  >
+                    비밀번호 *
+                  </label>
+                  <OutlinedInput
+                    required={true}
+                    id="sign-up-email-password"
+                    placeholder="영문,숫자,특수문자 2가지 조합 6~15자"
+                    name="password"
+                    value={values.password}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={classes.inputBox}
+                  />
+                  <FormHelperText margin="dense" className={classes.formHelper}>
+                    {errors.password && touched.password && errors.password}
+                  </FormHelperText>
+                </FormControl>
+                <FormControl
+                  variant="outlined"
+                  className={classes.formControl}
+                  component="div"
+                  margin="normal"
+                >
+                  <label
+                    className={classes.label}
+                    htmlFor="sign-up-email-password-confirm"
+                  >
+                    비밀번호 확인 *
+                  </label>
+                  <OutlinedInput
+                    required={true}
+                    id="sign-up-email-password-confirm"
+                    placeholder="비밀번호를 한번 더 입력해주세요."
+                    name="confirm"
+                    value={values.confirm}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={classes.inputBox}
+                  />
+                  <FormHelperText margin="dense" className={classes.formHelper}>
+                    {errors.confirm && touched.confirm && errors.confirm}
+                  </FormHelperText>
+                </FormControl>
+                <Button
+                  variant="contained"
+                  disableElevation
+                  className={classes.SignUpButton}
+                  disabled={!isSubmitting}
+                >
+                  회원가입
+                </Button>
+              </form>
+            );
+          }}
+        </Formik>
       </Box>
     </Layout>
   );

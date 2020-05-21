@@ -7,7 +7,8 @@ import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import EmailIcon from '@material-ui/icons/Email';
-import Link from '@material-ui/core/Link';
+// import Link from '@material-ui/core/Link';
+import { Link } from 'react-router-dom';
 // custom UI
 import Layout from 'components/layout';
 //TYPE
@@ -69,6 +70,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 const SignUp: React.FunctionComponent = () => {
   const classes = useStyles();
   // const { t, i18n } = useTranslation();
+  const preventDefault = (event: React.SyntheticEvent) =>
+    event.preventDefault();
   return (
     <Layout footerBorderTop={true} navPosition={Position.static}>
       <Box component="div" className={classes['sign-up-box']}>
@@ -115,9 +118,8 @@ const SignUp: React.FunctionComponent = () => {
               <EmailIcon fontSize="small" />
               <Box component="span" pt="1px" ml={1}>
                 <Link
-                  color="inherit"
-                  underline="none"
-                  href={ROUTES.SIGN_UP_EMAIL}
+                  to={ROUTES.SIGN_UP_EMAIL}
+                  style={{ textDecoration: 'none', color: 'inherit' }}
                 >
                   이메일
                 </Link>
@@ -128,7 +130,10 @@ const SignUp: React.FunctionComponent = () => {
             <Box component="div" fontWeight="bold" mt={4}>
               이미 아이디가 있으신가요?
               <Box component="span" ml={1}>
-                <Link href={ROUTES.SIGN_IN} color="inherit">
+                <Link
+                  to={ROUTES.SIGN_IN}
+                  style={{ textDecoration: 'none', color: 'inherit' }}
+                >
                   로그인
                 </Link>
               </Box>

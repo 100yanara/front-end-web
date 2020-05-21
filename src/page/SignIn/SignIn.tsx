@@ -7,7 +7,7 @@ import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import EmailIcon from '@material-ui/icons/Email';
-import Link from '@material-ui/core/Link';
+import { Link } from 'react-router-dom';
 // custom UI
 import Layout from 'components/layout';
 //TYPE
@@ -122,7 +122,10 @@ const SignIn: React.FunctionComponent = () => {
             <Box component="div" fontWeight="bold" mt={4}>
               아직 회원이 아니신가요?
               <Box component="span" ml={1}>
-                <Link href={ROUTES.SIGN_UP} color="inherit">
+                <Link
+                  to={ROUTES.SIGN_UP}
+                  style={{ textDecoration: 'none', color: 'inherit' }}
+                >
                   회원가입
                 </Link>
               </Box>

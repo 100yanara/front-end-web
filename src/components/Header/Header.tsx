@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import Link from '@material-ui/core/Link';
+import { Link } from 'react-router-dom';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
@@ -70,7 +70,7 @@ const Header: React.FunctionComponent<Props> = props => {
             alignItems="center"
             justifyContent="space-between"
           >
-            <Link href="/">
+            <Link to="/">
               {theme === 1 ? (
                 <img src={logo5} alt="#" className={classes.logo} />
               ) : (
@@ -80,9 +80,8 @@ const Header: React.FunctionComponent<Props> = props => {
             <ul className={classes.navList}>
               <li>
                 <Link
-                  href={ROUTES.SIGN_IN}
-                  color="textPrimary"
-                  underline="none"
+                  to={ROUTES.SIGN_IN}
+                  style={{ textDecoration: 'none', color: 'inherit' }}
                 >
                   <NavButton
                     size="large"
@@ -94,9 +93,8 @@ const Header: React.FunctionComponent<Props> = props => {
               </li>
               <li>
                 <Link
-                  href={ROUTES.SIGN_UP}
-                  color="textPrimary"
-                  underline="none"
+                  to={ROUTES.SIGN_UP}
+                  style={{ textDecoration: 'none', color: 'inherit' }}
                 >
                   <NavButton
                     variant={theme === 1 ? 'contained' : 'outlined'}

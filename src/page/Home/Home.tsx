@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
-import Link from '@material-ui/core/Link';
+import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
@@ -139,36 +139,32 @@ const Home: React.FunctionComponent = () => {
             <Typography variant="subtitle2">
               <Box component="span">
                 <Link
-                  href={ROUTES.DAY_TOUR}
-                  color="textPrimary"
-                  underline="none"
+                  to={ROUTES.DAY_TOUR}
+                  style={{ textDecoration: 'none', color: 'inherit' }}
                 >
                   {t('tour')}
                 </Link>
               </Box>
               <Box component="span">
                 <Link
-                  href={ROUTES.ONLINE_EXPERIENCE}
-                  color="textPrimary"
-                  underline="none"
+                  to={ROUTES.ONLINE_EXPERIENCE}
+                  style={{ textDecoration: 'none', color: 'inherit' }}
                 >
                   온라인 체험
                 </Link>
               </Box>
               <Box component="span">
                 <Link
-                  href={ROUTES.CREATE_TRIP}
-                  color="textPrimary"
-                  underline="none"
+                  to={ROUTES.CREATE_TRIP}
+                  style={{ textDecoration: 'none', color: 'inherit' }}
                 >
                   {t('createTrip')}
                 </Link>
               </Box>
               <Box component="span">
                 <Link
-                  href={ROUTES.CALENDAR}
-                  color="textPrimary"
-                  underline="none"
+                  to={ROUTES.CALENDAR}
+                  style={{ textDecoration: 'none', color: 'inherit' }}
                 >
                   {t('calendar')}
                 </Link>
@@ -234,7 +230,10 @@ const Home: React.FunctionComponent = () => {
           러시아 여행의 든든한 동반자, 백야나라와 함께.
         </Box>
         <Box component="div" className={classes.home__cards__container}>
-          <Link href={ROUTES.DAY_TOUR} color="textPrimary" underline="none">
+          <Link
+            to={ROUTES.DAY_TOUR}
+            style={{ textDecoration: 'none', color: 'inherit' }}
+          >
             <Card className={classes.home__cards}>
               <CardActionArea>
                 <CardMedia
@@ -254,7 +253,10 @@ const Home: React.FunctionComponent = () => {
               </CardActionArea>
             </Card>
           </Link>
-          <Link href={ROUTES.CREATE_TRIP} color="textPrimary" underline="none">
+          <Link
+            to={ROUTES.CREATE_TRIP}
+            style={{ textDecoration: 'none', color: 'inherit' }}
+          >
             <Card className={classes.home__cards}>
               <CardActionArea>
                 <CardMedia
@@ -278,7 +280,10 @@ const Home: React.FunctionComponent = () => {
               </CardActionArea>
             </Card>
           </Link>
-          <Link href={ROUTES.CALENDAR} color="textPrimary" underline="none">
+          <Link
+            to={ROUTES.CALENDAR}
+            style={{ textDecoration: 'none', color: 'inherit' }}
+          >
             <Card className={classes.home__cards}>
               <CardActionArea>
                 <CardMedia
