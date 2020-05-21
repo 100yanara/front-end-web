@@ -1,4 +1,4 @@
-import app from 'firebase/app';
+import * as firebase from 'firebase/app';
 import 'firebase/auth';
 
 const firebaseConfigProd = {
@@ -29,21 +29,21 @@ const config =
     : firebaseConfigDev;
 
 class Firebase {
-  auth: any;
+  auth: firebase.auth.Auth;
   constructor() {
-    app.initializeApp(config);
-    this.auth = app.auth();
+    firebase.initializeApp(config);
+    this.auth = firebase.auth();
   }
   // *** Auth api ***
   doCreateUserWithEmailAndPassword = (email: string, password: string) =>
     this.auth.createUserWithEmailAndPassword(email, password);
+
   doSignInWithEmailAndPassword = (email: string, password: string) =>
     this.auth.signInWithEmailAndPassword(email, password);
-  doSignOut = () => this.auth.signOut();
-  doPasswordReset = (email: string) => this.auth.sendPasswordResetEmail(email);
 
-  doPasswordUpdate = (password: string) =>
-    this.auth.currentUser.updatePassword(password);
+  doSignOut = () => this.auth.signOut();
+
+  doPasswordReset = (email: string) => this.auth.sendPasswordResetEmail(email);
 }
 
 export default Firebase;

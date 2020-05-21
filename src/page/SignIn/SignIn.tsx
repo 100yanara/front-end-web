@@ -114,7 +114,12 @@ const SignIn: React.FunctionComponent = () => {
             <Box display="flex" alignItems="center" className={classes.medium}>
               <EmailIcon fontSize="small" />
               <Box component="span" pt="1px" ml={1}>
-                이메일
+                <Link
+                  to={ROUTES.SIGN_IN_EMAIL}
+                  style={{ textDecoration: 'none', color: 'inherit' }}
+                >
+                  이메일
+                </Link>
               </Box>
             </Box>
           </Box>

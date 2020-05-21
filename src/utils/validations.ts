@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-//SignUpEmail Validations constants
+//SignUp and InEmail Validations constants
 const cantBeEmptyName = '멋진 이름이 있으시잖아요';
 const cantBeShortName = '이름은 두글자 이상 입력해주세요';
 const cantBeEmptyEmail = '꼭 필요해요';
@@ -12,7 +12,7 @@ const cantBeVariousPassword =
 const cantBeEmptyConfirmPassword = '비밀번호를 다시 한번 입력해주세요.';
 const isSamePassword = '비밀번호가 일치하지 않습니다.';
 
-//SignUpEmail Validations Schema
+//SignUp Email Validations Schema
 const validationSchemaSignUpEmail = Yup.object().shape({
   name: Yup.string()
     .min(2, cantBeShortName)
@@ -32,4 +32,14 @@ const validationSchemaSignUpEmail = Yup.object().shape({
     .required(cantBeEmptyConfirmPassword),
 });
 
-export { validationSchemaSignUpEmail };
+//SignIn Email Validations Schema
+const validationSchemaSignInEmail = Yup.object().shape({
+  email: Yup.string()
+    .email(invalidEmail)
+    .required(cantBeEmptyEmail),
+  password: Yup.string()
+    .min(6, cantBeShortPassword)
+    .required(cantBeEmptyPassword),
+});
+
+export { validationSchemaSignUpEmail, validationSchemaSignInEmail };

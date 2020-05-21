@@ -1,5 +1,5 @@
 import SignUp from './SignUp';
-import SignUpEmail from './SignUpEmail';
+import SignUpEmailContainer from './SignUpEmailContainer';
 
 export default SignUp;
-export { SignUpEmail };
+export { SignUpEmailContainer };

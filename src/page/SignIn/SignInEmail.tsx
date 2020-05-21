@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 //validation
 import { Formik } from 'formik';
-import { validationSchemaSignUpEmail } from 'utils/validations';
+import { validationSchemaSignInEmail } from 'utils/validations';
 // custom UI
 import Layout from 'components/layout';
 //TYPE
@@ -17,14 +17,15 @@ import Firebase from 'components/Firebase/firebase';
 import * as ROUTES from 'constants/routes';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { compose } from 'recompose';
+
 const useStyles = makeStyles((theme: Theme) => ({
-  'sign-up-email-box': {
+  'sign-in-email-box': {
     display: 'flex',
     justifyContent: 'center',
     paddingTop: theme.spacing(10),
     width: '100%',
   },
-  'sign-up-email-box__sign-up': {
+  'sign-in-email-box__sign-in': {
     padding: '1rem 1rem 3rem 1rem',
     color: 'grey',
     border: `1px solid ${theme.palette.grey[300]}`,
@@ -47,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginBottom: '5px',
     fontSize: '.9em',
   },
-  SignUpButton: {
+  SignInButton: {
     width: '332px',
     height: '48px',
     marginTop: '2.5rem',
@@ -62,18 +63,20 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: '#fe8e4f',
   },
 }));
-interface SignUpEmailProps extends RouteComponentProps<any> {
+
+interface SignInEmailProps extends RouteComponentProps<any> {
   firebase: Firebase | null;
 }
-const SignUpEmail: React.FunctionComponent<SignUpEmailProps> = props => {
+
+const SignInEmail: React.FunctionComponent<SignInEmailProps> = props => {
   const classes = useStyles();
   // const { t, i18n } = useTranslation();
   const [errors, setError] = React.useState('');
   return (
     <Layout footerBorderTop={true} navPosition={Position.static}>
-      <Box component="div" className={classes['sign-up-email-box']}>
+      <Box component="div" className={classes['sign-in-email-box']}>
         <Formik
-          initialValues={{ name: '', email: '', password: '', confirm: '' }}
+          initialValues={{ email: '', password: '' }}
           onSubmit={(values, { setSubmitting }) => {
             props.firebase
               ?.doCreateUserWithEmailAndPassword(values.email, values.password)
@@ -86,7 +89,7 @@ const SignUpEmail: React.FunctionComponent<SignUpEmailProps> = props => {
               });
             setSubmitting(false);
           }}
-          validationSchema={validationSchemaSignUpEmail}
+          validationSchema={validationSchemaSignInEmail}
         >
           {props => {
             const {
@@ -106,31 +109,8 @@ const SignUpEmail: React.FunctionComponent<SignUpEmailProps> = props => {
                 noValidate
                 autoComplete="off"
                 onSubmit={handleSubmit}
-                className={classes['sign-up-email-box__sign-up']}
+                className={classes['sign-in-email-box__sign-in']}
               >
-                <FormControl
-                  variant="outlined"
-                  className={classes.formControl}
-                  component="div"
-                  margin="normal"
-                >
-                  <label className={classes.label} htmlFor="sign-up-email-name">
-                    이름 *
-                  </label>
-                  <OutlinedInput
-                    required={true}
-                    id="sign-up-email-name"
-                    value={values.name}
-                    name="name"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    className={classes.inputBox}
-                    placeholder="이름을 입력해주세요."
-                  />
-                  <FormHelperText margin="dense" className={classes.formHelper}>
-                    {errors.name && touched.name && errors.name}
-                  </FormHelperText>
-                </FormControl>
                 <FormControl
                   variant="outlined"
                   className={classes.formControl}
@@ -139,15 +119,16 @@ const SignUpEmail: React.FunctionComponent<SignUpEmailProps> = props => {
                 >
                   <label
                     className={classes.label}
-                    htmlFor="sign-up-email-email"
+                    htmlFor="sign-in-email-email"
                   >
                     이메일 *
                   </label>
                   <OutlinedInput
                     required={true}
-                    id="sign-up-email-email"
+                    id="sign-in-email-email"
                     value={values.email}
                     name="email"
+                    type="email"
                     placeholder="ID@example.com"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -165,14 +146,14 @@ const SignUpEmail: React.FunctionComponent<SignUpEmailProps> = props => {
                 >
                   <label
                     className={classes.label}
-                    htmlFor="sign-up-email-password"
+                    htmlFor="sign-in-email-password"
                   >
                     비밀번호 *
                   </label>
                   <OutlinedInput
                     required={true}
-                    id="sign-up-email-password"
-                    placeholder="영문,숫자,특수문자 2가지 조합 6~15자"
+                    id="sign-in-email-password"
+                    placeholder="비밀번호를 입력해주세요."
                     name="password"
                     type="password"
                     value={values.password}
@@ -184,40 +165,13 @@ const SignUpEmail: React.FunctionComponent<SignUpEmailProps> = props => {
                     {errors.password && touched.password && errors.password}
                   </FormHelperText>
                 </FormControl>
-                <FormControl
-                  variant="outlined"
-                  className={classes.formControl}
-                  component="div"
-                  margin="normal"
-                >
-                  <label
-                    className={classes.label}
-                    htmlFor="sign-up-email-password-confirm"
-                  >
-                    비밀번호 확인 *
-                  </label>
-                  <OutlinedInput
-                    required={true}
-                    id="sign-up-email-password-confirm"
-                    placeholder="비밀번호를 한번 더 입력해주세요."
-                    name="confirm"
-                    type="password"
-                    value={values.confirm}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    className={classes.inputBox}
-                  />
-                  <FormHelperText margin="dense" className={classes.formHelper}>
-                    {errors.confirm && touched.confirm && errors.confirm}
-                  </FormHelperText>
-                </FormControl>
                 <Button
                   variant="contained"
                   disableElevation
-                  className={classes.SignUpButton}
+                  className={classes.SignInButton}
                   disabled={!isValid}
                 >
-                  회원가입
+                  이메일로 로그인
                 </Button>
               </form>
             );
@@ -228,4 +182,4 @@ const SignUpEmail: React.FunctionComponent<SignUpEmailProps> = props => {
   );
 };
 
-export default withRouter(SignUpEmail);
+export default withRouter(SignInEmail);
