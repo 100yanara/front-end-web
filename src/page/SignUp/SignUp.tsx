@@ -70,8 +70,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 const SignUp: React.FunctionComponent = () => {
   const classes = useStyles();
   // const { t, i18n } = useTranslation();
-  const preventDefault = (event: React.SyntheticEvent) =>
-    event.preventDefault();
   return (
     <Layout footerBorderTop={true} navPosition={Position.static}>
       <Box component="div" className={classes['sign-up-box']}>

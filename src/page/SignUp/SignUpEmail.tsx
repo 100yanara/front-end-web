@@ -13,10 +13,9 @@ import { validationSchemaSignUpEmail } from 'utils/validations';
 import Layout from 'components/layout';
 //TYPE
 import { Position } from 'components/Header/type';
-import Firebase from 'components/Firebase/firebase';
-import * as ROUTES from 'constants/routes';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { compose } from 'recompose';
+//Custom Hooks
+import useAuth from 'store/hooks/useAuth';
+
 const useStyles = makeStyles((theme: Theme) => ({
   'sign-up-email-box': {
     display: 'flex',
@@ -62,28 +61,22 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: '#fe8e4f',
   },
 }));
-interface SignUpEmailProps extends RouteComponentProps<any> {
-  firebase: Firebase | null;
-}
-const SignUpEmail: React.FunctionComponent<SignUpEmailProps> = props => {
+
+const SignUpEmail: React.FunctionComponent = props => {
   const classes = useStyles();
   // const { t, i18n } = useTranslation();
-  const [errors, setError] = React.useState('');
+  const signUpEmail = useAuth();
   return (
     <Layout footerBorderTop={true} navPosition={Position.static}>
       <Box component="div" className={classes['sign-up-email-box']}>
         <Formik
           initialValues={{ name: '', email: '', password: '', confirm: '' }}
           onSubmit={(values, { setSubmitting }) => {
-            props.firebase
-              ?.doCreateUserWithEmailAndPassword(values.email, values.password)
-              .then(authUser => {
-                console.log(authUser);
-                props.history.push(ROUTES.HOME);
-              })
-              .catch(error => {
-                setError(error);
-              });
+            signUpEmail.onSignUpEmail(
+              values.name,
+              values.email,
+              values.password
+            );
             setSubmitting(false);
           }}
           validationSchema={validationSchemaSignUpEmail}
@@ -216,6 +209,7 @@ const SignUpEmail: React.FunctionComponent<SignUpEmailProps> = props => {
                   disableElevation
                   className={classes.SignUpButton}
                   disabled={!isValid}
+                  type="submit"
                 >
                   회원가입
                 </Button>
@@ -228,4 +222,4 @@ const SignUpEmail: React.FunctionComponent<SignUpEmailProps> = props => {
   );
 };
 
-export default withRouter(SignUpEmail);
+export default SignUpEmail;

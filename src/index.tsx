@@ -5,18 +5,17 @@ import * as serviceWorker from './serviceWorker';
 import './i18n';
 
 import { Router } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 
-import Firebase from 'components/Firebase/firebase';
-import FirebaseContext from 'components/Firebase/context';
+import { Provider } from 'react-redux';
+import store from 'store';
+
+import browserHistory from 'utils/history';
 
 import 'index.css';
-
-const history = createBrowserHistory();
 
 // customize default Material-UI theme
 let theme = createMuiTheme({
@@ -53,16 +52,16 @@ theme.shadows[1] =
 theme = responsiveFontSizes(theme);
 
 ReactDOM.render(
-  <Router history={history}>
-    <ThemeProvider theme={theme}>
-      <Suspense fallback={<div>Lodading</div>}>
-        <FirebaseContext.Provider value={new Firebase()}>
+  <Provider store={store}>
+    <Router history={browserHistory}>
+      <ThemeProvider theme={theme}>
+        <Suspense fallback={<div>Lodading</div>}>
           <App />
           <CssBaseline />
-        </FirebaseContext.Provider>
-      </Suspense>
-    </ThemeProvider>
-  </Router>,
+        </Suspense>
+      </ThemeProvider>
+    </Router>
+  </Provider>,
   document.getElementById('root')
 );
 

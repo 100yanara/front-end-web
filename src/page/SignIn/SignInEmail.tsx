@@ -13,10 +13,6 @@ import { validationSchemaSignInEmail } from 'utils/validations';
 import Layout from 'components/layout';
 //TYPE
 import { Position } from 'components/Header/type';
-import Firebase from 'components/Firebase/firebase';
-import * as ROUTES from 'constants/routes';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { compose } from 'recompose';
 
 const useStyles = makeStyles((theme: Theme) => ({
   'sign-in-email-box': {
@@ -64,11 +60,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-interface SignInEmailProps extends RouteComponentProps<any> {
-  firebase: Firebase | null;
-}
-
-const SignInEmail: React.FunctionComponent<SignInEmailProps> = props => {
+const SignInEmail: React.FunctionComponent = props => {
   const classes = useStyles();
   // const { t, i18n } = useTranslation();
   const [errors, setError] = React.useState('');
@@ -78,15 +70,6 @@ const SignInEmail: React.FunctionComponent<SignInEmailProps> = props => {
         <Formik
           initialValues={{ email: '', password: '' }}
           onSubmit={(values, { setSubmitting }) => {
-            props.firebase
-              ?.doCreateUserWithEmailAndPassword(values.email, values.password)
-              .then(authUser => {
-                console.log(authUser);
-                props.history.push(ROUTES.HOME);
-              })
-              .catch(error => {
-                setError(error);
-              });
             setSubmitting(false);
           }}
           validationSchema={validationSchemaSignInEmail}
@@ -170,6 +153,7 @@ const SignInEmail: React.FunctionComponent<SignInEmailProps> = props => {
                   disableElevation
                   className={classes.SignInButton}
                   disabled={!isValid}
+                  type="submit"
                 >
                   이메일로 로그인
                 </Button>
@@ -182,4 +166,4 @@ const SignInEmail: React.FunctionComponent<SignInEmailProps> = props => {
   );
 };
 
-export default withRouter(SignInEmail);
+export default SignInEmail;
