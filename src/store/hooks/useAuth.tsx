@@ -1,6 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { rootState } from 'store/reducers';
-import { fetchSignUpEmailAsync, SIGNUPEMAIL } from 'store/actions/auth';
+import {
+  fetchSignUpEmailAsync,
+  fetchSignInEmailAsync,
+} from 'store/actions/auth';
 import { useCallback } from 'react';
 
 export default function useAuth() {
@@ -12,8 +15,14 @@ export default function useAuth() {
       dispatch(fetchSignUpEmailAsync.request({ name, email, password })),
     [dispatch]
   );
+  const onSignInEmail = useCallback(
+    (email: string, password: string) =>
+      dispatch(fetchSignInEmailAsync.request({ email, password })),
+    [dispatch]
+  );
   return {
     user,
     onSignUpEmail,
+    onSignInEmail,
   };
 }

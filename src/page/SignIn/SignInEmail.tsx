@@ -13,6 +13,8 @@ import { validationSchemaSignInEmail } from 'utils/validations';
 import Layout from 'components/layout';
 //TYPE
 import { Position } from 'components/Header/type';
+//Custom Hooks
+import useAuth from 'store/hooks/useAuth';
 
 const useStyles = makeStyles((theme: Theme) => ({
   'sign-in-email-box': {
@@ -63,13 +65,14 @@ const useStyles = makeStyles((theme: Theme) => ({
 const SignInEmail: React.FunctionComponent = props => {
   const classes = useStyles();
   // const { t, i18n } = useTranslation();
-  const [errors, setError] = React.useState('');
+  const signInEmail = useAuth();
   return (
     <Layout footerBorderTop={true} navPosition={Position.static}>
       <Box component="div" className={classes['sign-in-email-box']}>
         <Formik
           initialValues={{ email: '', password: '' }}
           onSubmit={(values, { setSubmitting }) => {
+            signInEmail.onSignInEmail(values.email, values.password);
             setSubmitting(false);
           }}
           validationSchema={validationSchemaSignInEmail}
