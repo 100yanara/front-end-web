@@ -1,4 +1,5 @@
 import { auth } from './firebase';
+
 // Sign Up
 export const doCreateuserWithEmailAndPassword = (
   email: string,
@@ -23,3 +24,15 @@ export const doPasswordUpdate = async (password: string) => {
   }
   throw Error('No auth.currentUser!');
 };
+
+// GETcurrentUser
+export const doCurrentuser = () => auth.currentUser;
+
+// Update Profile
+export const doUpdateUser = (
+  userCredential: firebase.auth.UserCredential,
+  displayName: string
+) =>
+  userCredential.user?.updateProfile({
+    displayName,
+  });

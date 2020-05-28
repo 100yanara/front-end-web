@@ -11,3 +11,6 @@ export const CALENDAR: string = '/calendar';
 export const ACCOUNT: string = '/account';
 export const ADMIN: string = '/admin';
 export const PASSWORD_FORGET: string = '/pw-forget';
+export const BUCKET_LIST: string = '/bucket_list';
+export const MESSEGE: string = '/messenger/rooms';
+export const TRAVELER_RESERVATION: string = '/traveler/reservations';

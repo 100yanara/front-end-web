@@ -3,26 +3,38 @@ import {
   AuthAction,
   fetchSignUpEmailAsync,
   fetchSignInEmailAsync,
+  fetchGetCurrentUserAsync,
+  fetchUpdateUserAsync,
+  fetchSignOutAsync,
+  fetchOnAuthStateChangeAsync,
 } from 'store/actions/auth';
 
 type AuthState = {
-  user: any | null;
-  userCredential: any | null;
+  authUser: firebase.auth.UserCredential | null;
+  loading: boolean;
 };
 
 const initialState: AuthState = {
-  user: null,
-  userCredential: null,
+  authUser: null,
+  loading: false,
 };
 
 const authReducer = createReducer<AuthState, AuthAction>(initialState)
-  .handleAction(fetchSignUpEmailAsync.success, (state, action) => ({
+  .handleAction(fetchGetCurrentUserAsync.success, (state, action) => ({
     ...state,
-    user: action.payload,
+    authUser: action.payload,
   }))
-  .handleAction(fetchSignInEmailAsync.success, (state, action) => ({
+  .handleAction(fetchOnAuthStateChangeAsync.success, (state, action) => ({
     ...state,
-    userCredential: action.payload,
+    authUser: action.payload,
+  }))
+  .handleAction(fetchUpdateUserAsync.success, (state, action) => ({
+    ...state,
+    authUser: action.payload,
+  }))
+  .handleAction(fetchSignOutAsync.success, (state, action) => ({
+    ...state,
+    authUser: null,
   }));
 
 export default authReducer;

@@ -15,7 +15,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import YouTubeIcon from '@material-ui/icons/YouTube';
-
+import Hidden from '@material-ui/core/Hidden';
 import { CarouselProvider, Slider, Slide, DotGroup } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 
@@ -97,6 +97,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'grid',
     gridTemplateColumns: '1fr 1fr 1fr',
     gridColumnGap: '15px',
+    [theme.breakpoints.down('sm')]: {
+      gridTemplateColumns: ' 1fr 1fr',
+    },
   },
   home__cards: {
     borderRadius: '10px',
@@ -150,17 +153,17 @@ const Home: React.FunctionComponent = () => {
                   to={ROUTES.ONLINE_EXPERIENCE}
                   style={{ textDecoration: 'none', color: 'inherit' }}
                 >
-                  온라인 체험
+                  온라인 투어
                 </Link>
               </Box>
-              <Box component="span">
+              {/* <Box component="span">
                 <Link
                   to={ROUTES.CREATE_TRIP}
                   style={{ textDecoration: 'none', color: 'inherit' }}
                 >
                   {t('createTrip')}
                 </Link>
-              </Box>
+              </Box> */}
               <Box component="span">
                 <Link
                   to={ROUTES.CALENDAR}
@@ -241,18 +244,19 @@ const Home: React.FunctionComponent = () => {
                   title="Contemplative Reptile"
                   style={{ height: 250, backgroundColor: '#a5b77f' }}
                 />
-                <CardContent>
+                <CardContent style={{ height: 125 }}>
                   <Typography gutterBottom variant="subtitle1" component="h2">
                     {t('tour')}
                   </Typography>
                   <Typography variant="body2" color="textSecondary">
-                    모스크바, 상트페테르부르크 그리고 탈린에 있는 다양한
-                    백야나라 데이 투어 상품을 즐겨보세요.
+                    러시아 지역과 발트 지역의 다양한 백야나라 데이 투어 상품을
+                    즐겨보세요.
                   </Typography>
                 </CardContent>
               </CardActionArea>
             </Card>
           </Link>
+
           <Link
             to={ROUTES.CREATE_TRIP}
             style={{ textDecoration: 'none', color: 'inherit' }}
@@ -264,49 +268,52 @@ const Home: React.FunctionComponent = () => {
                   title="Contemplative Reptile"
                   style={{ height: 250, backgroundColor: '#788193' }}
                 />
-                <CardContent>
+                <CardContent style={{ height: 125 }}>
                   <Typography gutterBottom variant="subtitle1" component="h2">
-                    {t('createTrip')}
+                    온라인 투어
                   </Typography>
                   <Typography
                     variant="body2"
                     color="textSecondary"
-                    component="p"
+                    component="div"
                   >
-                    여행을 계획하고, 견적을 작성하는게 힘드셨죠? 백야나라가
-                    도와드립니다. 원하는 여행을 계획하고, 견적을 받아보세요.
+                    멀리 있는 여행지에 있는 투어를 온라인으로 체험해보세요.
+                    역사, 먹방 등등 다양한 체험이 준비되어 있습니다.
                   </Typography>
                 </CardContent>
               </CardActionArea>
             </Card>
           </Link>
-          <Link
-            to={ROUTES.CALENDAR}
-            style={{ textDecoration: 'none', color: 'inherit' }}
-          >
-            <Card className={classes.home__cards}>
-              <CardActionArea>
-                <CardMedia
-                  image={hermitage}
-                  title="Contemplative Reptile"
-                  style={{ height: 250, backgroundColor: '#bfa386' }}
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="subtitle1" component="h2">
-                    {t('calendar')}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    백야나라 여행 달력에서 원하는 날짜의 여행을 확인하고,
-                    예약하세요.
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </Link>
+
+          <Hidden smDown>
+            <Link
+              to={ROUTES.CALENDAR}
+              style={{ textDecoration: 'none', color: 'inherit' }}
+            >
+              <Card className={classes.home__cards}>
+                <CardActionArea>
+                  <CardMedia
+                    image={hermitage}
+                    title="Contemplative Reptile"
+                    style={{ height: 250, backgroundColor: '#bfa386' }}
+                  />
+                  <CardContent style={{ height: 125 }}>
+                    <Typography gutterBottom variant="subtitle1" component="h2">
+                      {t('calendar')}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      백야나라 여행 달력에서 원하는 날짜의 여행을 확인하고,
+                      예약하세요.
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </Link>
+          </Hidden>
         </Box>
         <CarouselProvider
           totalSlides={3}

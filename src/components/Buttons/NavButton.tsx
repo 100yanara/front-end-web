@@ -16,6 +16,7 @@ export interface StyleProps {
 const NavButton = (theme: Theme) => ({
   root: {
     borderRadius: '20px',
+    borderColor: theme.palette.grey[200],
   },
 });
 

@@ -12,9 +12,12 @@ import { logo4, logo5 } from 'assets/images/logo';
 import NavButton from 'components/Buttons/NavButton';
 import ElevationScroll from 'components/Header/ElevationScroll';
 import { Position, StyleProps } from './type';
-
+import HeaderNonAuthList from 'components/Header/HeaderNonAuthList';
+import HeaderAuthList from 'components/Header/HeaderAuthList';
 //routes
 import * as ROUTES from 'constants/routes';
+//hooks
+import useAuth from 'store/hooks/useAuth';
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   logo: {
@@ -58,7 +61,10 @@ const Header: React.FunctionComponent<Props> = props => {
   const styleProps: StyleProps = { background: backgroundColor };
   const classes = useStyles(styleProps);
   const { t, i18n } = useTranslation();
-
+  const user = useAuth();
+  React.useEffect(() => {
+    user.onGetCurrentUser();
+  });
   return (
     <ElevationScroll headerDefaultElevation={headerDefaultElevation}>
       <AppBar className={classes.header} position="static">
@@ -77,37 +83,12 @@ const Header: React.FunctionComponent<Props> = props => {
                 <img src={logo4} alt="#" className={classes.logo} />
               )}
             </Link>
-            <ul className={classes.navList}>
-              <li>
-                <Link
-                  to={ROUTES.SIGN_IN}
-                  style={{ textDecoration: 'none', color: 'inherit' }}
-                >
-                  <NavButton
-                    size="large"
-                    className={clsx(theme && classes.darkThemeNavButton)}
-                  >
-                    {t('signin')}
-                  </NavButton>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to={ROUTES.SIGN_UP}
-                  style={{ textDecoration: 'none', color: 'inherit' }}
-                >
-                  <NavButton
-                    variant={theme === 1 ? 'contained' : 'outlined'}
-                    size="large"
-                    className={
-                      theme === 1 ? classes.signUpDark : classes.signUp
-                    }
-                  >
-                    {t('signup')}
-                  </NavButton>
-                </Link>
-              </li>
-            </ul>
+            {/* {user.user ? (
+              <HeaderAuthList theme={theme} />
+            ) : (
+              <HeaderNonAuthList theme={theme} />
+            )} */}
+            <HeaderAuthList theme={theme} />
           </Box>
         </Container>
       </AppBar>
